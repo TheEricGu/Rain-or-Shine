@@ -31,14 +31,14 @@ def failure_response(message, code=404):
 @app.route("/")
 @app.route("/api/outfits/")
 def get_outfits():
-    return success_response( [t.serialize() for t in Outfit.query.all()] )
+    return success_response( [o.serialize() for o in Outfit.query.all()] )
 
 @app.route("/api/outfits/<string:gender>/<string:weather>/<string:temp>/")
 def get_outfit(gender, weather, temp):
-    outfit = Outfit.query.filter_by(gender=gender, weather=weather, temp=temp).first()
-    if outfit is None:
+    outfits = Outfit.query.filter_by(gender=gender, weather=weather, temp=temp)
+    if outfits is None:
         return failure_response('Outfit not found')
-    return success_response(outfit.serialize())
+    return success_response( [o.serialize() for o in outfits] )
 
 @app.route("/api/outfits/", methods=["POST"])
 def create_outfit():
