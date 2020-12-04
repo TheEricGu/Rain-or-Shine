@@ -33,12 +33,12 @@ def failure_response(message, code=404):
 def get_outfits():
     return success_response( [t.serialize() for t in Outfit.query.all()] )
 
-@app.route("/api/outfits/<int:course_id>/")
-def get_outfit(course_id):
-    course = Course.query.filter_by(id=course_id).first()
-    if course is None:
-        return failure_response('Course not found')
-    return success_response(course.serialize())
+@app.route("/api/outfits/<string:gender>/<string:weather>/<string:temp>/")
+def get_outfit(gender, weather, temp):
+    outfit = Outfit.query.filter_by(gender=gender, weather=weather, temp=temp).first()
+    if outfit is None:
+        return failure_response('Outfit not found')
+    return success_response(outfit.serialize())
 
 @app.route("/api/outfits/", methods=["POST"])
 def create_outfit():
@@ -49,12 +49,10 @@ def create_outfit():
         return failure_response('Gender not found')
     elif body.get("weather") is None:
         return failure_response('Weather not found')
-    elif body.get("min_temp") is None:
-        return failure_response('Minimum temperature not found')
-    elif body.get("max_temp") is None:
-        return failure_response('Maximum temperature not found')
+    elif body.get("temp") is None:
+        return failure_response('Temperature not found')
     else:
-        new_outfit = Outfit(name=body.get ("name"), gender=body.get("gender"), weather=body.get("weather"), min_temp=body.get("min_temp"), max_temp=body.get("max_temp"))
+        new_outfit = Outfit(name=body.get ("name"), gender=body.get("gender"), weather=body.get("weather"), temp=body.get("temp"))
         db.session.add(new_outfit)
         db.session.commit()
         return success_response(new_outfit.serialize(), 201)
