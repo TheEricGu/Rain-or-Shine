@@ -26,7 +26,7 @@ class Outfit(db.Model):
   gender = db.Column(db.String, nullable=False)
   weather = db.Column(db.String, nullable=False)
   temp = db.Column(db.String, nullable=False)
-  image_data = db.Column(db.String, nullable=False)
+
   base_url = db.Column(db.String, nullable=True)
   salt = db.Column(db.String, nullable=False)
   extension = db.Column(db.String, nullable=False)
@@ -34,12 +34,14 @@ class Outfit(db.Model):
   height = db.Column(db.Integer, nullable=False)
   created_at = db.Column(db.DateTime, nullable=False)
  
+  # image_data = db.Column(db.String, nullable=False)
+
   def __init__(self, **kwargs):
     self.name = kwargs.get('name')
     self.gender = kwargs.get('gender')
     self.weather = kwargs.get('weather')
     self.temp = kwargs.get('temp')
-    self.image_data = kwargs.get('image_data')
+    self.create(kwargs.get("image_data"))
 
   def serialize(self):
     return {
@@ -48,19 +50,18 @@ class Outfit(db.Model):
       'gender': self.gender,
       'weather': self.weather,
       'temp': self.temp,
-      "image_data": self.temp,
       "url": f"{self.base_url}/{self.salt}.{self.extension}",
       "created_at": str(self.created_at),
     }
 
   def create(self, image_data):
     try:
-      #base64 string --> .png --> png
+      # base64 string --> .png --> png
       ext = guess_extension(guess_type(image_data)[0])[1:]
       if ext not in EXTENSIONS:
-        raise Exception(f"Etension {ext} not supported")
+        raise Exception(f"Extension {ext} not supported")
 
-      #generate secure random string for image name
+      # generate secure random string for image name
       salt = "".join(
         random.SystemRandom().choice(
           string.ascii_uppercase + string.digits
@@ -68,7 +69,7 @@ class Outfit(db.Model):
         for _ in range(16)
       )
       
-      #remove header of base64 string and open image
+      # remove header of base64 string and open image
       img_str = re.sub("^data:image/.+;base64,",  "", image_data)
       image_data = base64.b64decode(img_str)
       img = Image.open(BytesIO(image_data))
@@ -76,7 +77,7 @@ class Outfit(db.Model):
       self.base_url = S3_BASE_URL
       self.salt = salt
       self.extension = ext
-      self.width = image.width
+      self.width = img.width
       self.height = img.height
       self.created_at = datetime.datetime.now()
 
