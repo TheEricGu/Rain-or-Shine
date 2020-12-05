@@ -98,7 +98,7 @@ class Outfit(db.Model):
       s3_client.upload_file(img_temploc, S3_BUCKET, img_filename)
 
       # make s3 img url public
-      s3_resource = boto3.resouce("s3")
+      s3_resource = boto3.resource("s3")
       object_acl = s3_resource.ObjectAcl(S3_BUCKET, img_filename)
       object_acl.put(ACL="public-read")
 
