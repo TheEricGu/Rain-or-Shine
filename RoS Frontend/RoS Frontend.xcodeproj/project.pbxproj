@@ -13,6 +13,11 @@
 		EEC3E124257B4586009D2271 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EEC3E123257B4586009D2271 /* Assets.xcassets */; };
 		EEC3E132257B4586009D2271 /* RoS_FrontendTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC3E131257B4586009D2271 /* RoS_FrontendTests.swift */; };
 		EEC3E13D257B4587009D2271 /* RoS_FrontendUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC3E13C257B4587009D2271 /* RoS_FrontendUITests.swift */; };
+		EEC3E155257B4B4F009D2271 /* TabItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC3E154257B4B4F009D2271 /* TabItem.swift */; };
+		EEC3E15A257B4C88009D2271 /* LikedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC3E159257B4C88009D2271 /* LikedViewController.swift */; };
+		EEC3E15F257B4C99009D2271 /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC3E15E257B4C99009D2271 /* WeatherViewController.swift */; };
+		EEC3E164257B4CA7009D2271 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC3E163257B4CA7009D2271 /* ProfileViewController.swift */; };
+		EEC3E169257B4D9A009D2271 /* TabNavigationMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC3E168257B4D9A009D2271 /* TabNavigationMenu.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +50,11 @@
 		EEC3E138257B4587009D2271 /* RoS FrontendUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "RoS FrontendUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EEC3E13C257B4587009D2271 /* RoS_FrontendUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoS_FrontendUITests.swift; sourceTree = "<group>"; };
 		EEC3E13E257B4587009D2271 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EEC3E154257B4B4F009D2271 /* TabItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabItem.swift; sourceTree = "<group>"; };
+		EEC3E159257B4C88009D2271 /* LikedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikedViewController.swift; sourceTree = "<group>"; };
+		EEC3E15E257B4C99009D2271 /* WeatherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewController.swift; sourceTree = "<group>"; };
+		EEC3E163257B4CA7009D2271 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		EEC3E168257B4D9A009D2271 /* TabNavigationMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabNavigationMenu.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,8 +108,13 @@
 				EEC3E11A257B4584009D2271 /* AppDelegate.swift */,
 				EEC3E11C257B4584009D2271 /* SceneDelegate.swift */,
 				EEC3E11E257B4584009D2271 /* ViewController.swift */,
+				EEC3E168257B4D9A009D2271 /* TabNavigationMenu.swift */,
+				EEC3E154257B4B4F009D2271 /* TabItem.swift */,
 				EEC3E123257B4586009D2271 /* Assets.xcassets */,
 				EEC3E128257B4586009D2271 /* Info.plist */,
+				EEC3E159257B4C88009D2271 /* LikedViewController.swift */,
+				EEC3E15E257B4C99009D2271 /* WeatherViewController.swift */,
+				EEC3E163257B4CA7009D2271 /* ProfileViewController.swift */,
 			);
 			path = "RoS Frontend";
 			sourceTree = "<group>";
@@ -251,8 +266,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				EEC3E11F257B4584009D2271 /* ViewController.swift in Sources */,
+				EEC3E15F257B4C99009D2271 /* WeatherViewController.swift in Sources */,
 				EEC3E11B257B4584009D2271 /* AppDelegate.swift in Sources */,
+				EEC3E155257B4B4F009D2271 /* TabItem.swift in Sources */,
+				EEC3E164257B4CA7009D2271 /* ProfileViewController.swift in Sources */,
 				EEC3E11D257B4584009D2271 /* SceneDelegate.swift in Sources */,
+				EEC3E169257B4D9A009D2271 /* TabNavigationMenu.swift in Sources */,
+				EEC3E15A257B4C88009D2271 /* LikedViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

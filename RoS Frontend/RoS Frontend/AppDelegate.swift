@@ -16,6 +16,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         return true
     }
+    
+//    func SettingTabbar()->(UITabBarController)
+//    {
+//        //Setting TabBar
+//        let tabbar = UITabBarController()
+//
+//        //Designing Tabbar Item Images
+//        let table = UITabBarItem(title: nil, image:UIImage(named: "Heart icon.png") , tag: 0)
+//        let collection = UITabBarItem(title: nil, image: UIImage(named: "Heart icon.png"), tag: 1)
+//        let insert = UITabBarItem(title: nil, image: UIImage(named: "Heart icon.png"), tag: 2)
+//
+//        //Getting TabBar ViewControllers
+//        let LikedVC = LikedViewController()
+//        let WeatherVC = WeatherViewController()
+//        let ProfileVC = ProfileViewController()
+//        //Setting ViewControllers on TabBar Items
+//        LikedVC.tabBarItem = table
+//        WeatherVC.tabBarItem = collection
+//        ProfileVC.tabBarItem = insert
+//        let controllers = [LikedVC,WeatherVC,ProfileVC]
+//        tabbar.viewControllers = controllers
+//        tabbar.viewControllers = controllers.map{UINavigationController(rootViewController: $0)}
+//        //Setting Title
+//        tabbar.navigationItem.title = "pooopypants"
+//        return tabbar
+//
+//    }
 
     // MARK: UISceneSession Lifecycle
 
