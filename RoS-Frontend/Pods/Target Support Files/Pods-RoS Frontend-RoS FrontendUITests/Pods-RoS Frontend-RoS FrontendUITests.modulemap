@@ -1,0 +1,6 @@
+framework module Pods_RoS_Frontend_RoS_FrontendUITests {
+  umbrella header "Pods-RoS Frontend-RoS FrontendUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}
