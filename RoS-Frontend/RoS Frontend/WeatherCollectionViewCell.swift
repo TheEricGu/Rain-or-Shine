@@ -11,6 +11,17 @@ class WeatherCollectionViewCell: UICollectionViewCell {
     var weatherImageView: UIImageView!
     var timeLabel: UILabel!
     var degreeLabel: UILabel!
+ 
+//    func scaleUIImageToSize(image: UIImage, size: CGSize) -> UIImage! {
+//        let hasAlpha = false
+//        let scale: CGFloat = 0.0 // Automatically use scale factor of main screen
+//
+//        UIGraphicsBeginImageContextWithOptions(size, !hasAlpha, scale)
+//        image.draw(in: (CG(origin: CGPoint.zero, size: size)))
+//        let scaledImage = UIGraphicsGetImageFromCurrentImageContext()
+//        UIGraphicsEndImageContext()
+//        return scaledImage!
+//    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -37,7 +48,8 @@ class WeatherCollectionViewCell: UICollectionViewCell {
     func setupConstraints() {
         // time label constraints
         NSLayoutConstraint.activate([timeLabel.topAnchor.constraint(equalTo: contentView.topAnchor), timeLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor), timeLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            timeLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor)])
+            timeLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            timeLabel.topAnchor.constraint(equalTo: contentView.topAnchor)])
         
         // image view constraints
         NSLayoutConstraint.activate([
@@ -52,10 +64,13 @@ class WeatherCollectionViewCell: UICollectionViewCell {
             degreeLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor)])
     }
     
-    func configure(hourly: Hourly) {
-        weatherImageView.image = UIImage(named: hourly.imageName)
-        timeLabel.text = hourly.time
-        degreeLabel.text = hourly.degrees
+    func configure(hourly: RealHourly) {
+        let image = UIImage(named: hourly.weather[0].icon)!
+//        let scaled = scaleUIImageToSize(image: image, size: CGSize(width: 20, height: 40))
+        weatherImageView.image = image
+        timeLabel.text = String(hourly.dt)
+        // rounds float to nearest int and makes into string
+        degreeLabel.text = String(format:"%.0f", hourly.temp)
     }
     
     func filterBy(tag: String) {

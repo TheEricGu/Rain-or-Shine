@@ -43,8 +43,9 @@ class OutfitsCollectionViewCell: UICollectionViewCell {
             outfitImageView.topAnchor.constraint(equalTo: contentView.topAnchor),
             outfitImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             outfitImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            outfitImageView.heightAnchor.constraint(equalToConstant: 150),
-            outfitImageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor)])
+            outfitImageView.heightAnchor.constraint(equalToConstant: 160),
+            outfitImageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+        ])
         
         // weather tags label constraints
         NSLayoutConstraint.activate([weatherTags.topAnchor.constraint(equalTo: outfitImageView.bottomAnchor),

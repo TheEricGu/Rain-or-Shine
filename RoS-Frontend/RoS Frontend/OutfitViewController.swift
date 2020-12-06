@@ -84,7 +84,7 @@ class OutfitViewController: UIViewController {
 
     private func setupConstraints() {
         
-        let padding: CGFloat = 30
+        let padding: CGFloat = 10
         
         // outfit image
         NSLayoutConstraint.activate([
@@ -92,7 +92,7 @@ class OutfitViewController: UIViewController {
             outfitImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
             outfitImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
             outfitImageView.heightAnchor.constraint(equalToConstant: 400),
-            outfitImageView.widthAnchor.constraint(equalToConstant: 340)
+            outfitImageView.widthAnchor.constraint(equalToConstant: 340),
         ])
         
         // weather tags

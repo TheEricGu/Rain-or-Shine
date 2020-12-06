@@ -13,20 +13,37 @@ class OpenWeatherManager {
 
     private static let endpoint = "https://api.openweathermap.org/data/2.5/onecall?lat=42.440632&lon=-76.496613&exclude=minutely,daily,alerts&units=imperial&appid=31bdcbb61617fe23262f9f4d8cec3e09"
     
-    static func getHourly() {
-        // completion: @escaping ([RealHourly]) -> Void) {
-        // ^ should replace empty parameters
+    static func getCurrent(completion: @escaping (Current) -> Void) {
         AF.request(endpoint, method: .get).validate().responseData { response in
             switch response.result {
             case .success(let data):
-                let convertedString : String! = String(data: data, encoding: String.Encoding.utf8)
-                print(convertedString)
-//                let jsonDecoder = JSONDecoder()
+//                let convertedString : String! = String(data: data, encoding: String.Encoding.utf8)
+//                print(convertedString)
+                let jsonDecoder = JSONDecoder()
 //                jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
-//                if let coursesData = try? jsonDecoder.decode(Response<CourseDataResponse>.self, from: data) {
-//                    let classes = coursesData.data.courses
-//                    completion(classes)
-//                }
+                if let OWData = try? jsonDecoder.decode(Data.self, from: data) {
+                    let currentData = OWData.current
+                    completion(currentData)
+                }
+                
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    static func getHourly(completion: @escaping ([RealHourly]) -> Void) {
+        AF.request(endpoint, method: .get).validate().responseData { response in
+            switch response.result {
+            case .success(let data):
+//                let convertedString : String! = String(data: data, encoding: String.Encoding.utf8)
+//                print(convertedString)
+                let jsonDecoder = JSONDecoder()
+//                jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
+                if let OWData = try? jsonDecoder.decode(Data.self, from: data) {
+                    let hourlyData = OWData.hourly
+                    completion(hourlyData)
+                }
                 
             case .failure(let error):
                 print(error)

@@ -27,23 +27,31 @@ class WeatherViewController: UIViewController, UICollectionViewDelegate {
     
     // set up weather
     let noon = Hourly(time: "12pm", imageName: "cloudytest.png", degrees: "32°")
-    var hourly: [Hourly] = []
+    var hourly: [RealHourly] = []
     
     // set up outfits
     let outfit1 = Outfit(imageName: "clothes1.jpeg", weatherTags: ["winter", "cloudy"], didLike: false)
     var outfits: [Outfit] = []
-
+    
+    func getHourly() {
+        OpenWeatherManager.getHourly { hourlyData in
+            self.hourly = hourlyData
+            DispatchQueue.main.async {
+                self.weatherCollectionView.reloadData()
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        getHourly()
         self.view.backgroundColor = UIColor.white
-        title = "weather"
+        navigationItem.title = "weather"
         headerView.backgroundColor = .gray
         headerView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(headerView)
         
         // weather
-        hourly = [noon, noon, noon, noon, noon, noon, noon, noon, noon, noon, noon, noon, noon]
         let weatherLayout = UICollectionViewFlowLayout()
         weatherLayout.scrollDirection = .horizontal
         weatherLayout.minimumInteritemSpacing = padding

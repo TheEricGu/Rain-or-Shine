@@ -13,12 +13,14 @@ class NavigationMenuBaseController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Ithaca" // how to change this to view that user is in?
+//        title = "Ithaca" // how to change this to view that user is in?
         navigationController?.navigationBar.barTintColor = UIColor(red: 102/255, green: 204/255, blue: 255/255, alpha: 1)
         navigationController?.navigationBar.tintColor = .white
         view.backgroundColor = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1)
         self.loadTabBar()
-        getHourly()
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        getCurrent()
     }
     
     func loadTabBar() {
@@ -28,8 +30,10 @@ class NavigationMenuBaseController: UITabBarController {
         self.selectedIndex = 1 // default our selected index to the first item
     }
     
-    func getHourly() {
-        OpenWeatherManager.getHourly()
+    func getCurrent() {
+        OpenWeatherManager.getCurrent { currentData in
+            print(currentData)
+        }
     }
     
     func setupCustomTabBar(_ menuItems: [TabItem], completion: @escaping ([UIViewController]) -> Void) {
