@@ -13,7 +13,7 @@ class NavigationMenuBaseController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Ithaca" // change later to the actual city theyre in
+        title = "Ithaca" // how to change this to view that user is in?
         navigationController?.navigationBar.barTintColor = UIColor(red: 102/255, green: 204/255, blue: 255/255, alpha: 1)
         navigationController?.navigationBar.tintColor = .white
         view.backgroundColor = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1)

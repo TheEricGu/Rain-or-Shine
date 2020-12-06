@@ -19,6 +19,7 @@ class OutfitsCollectionViewCell: UICollectionViewCell {
         outfitImageView.translatesAutoresizingMaskIntoConstraints = false
         outfitImageView.contentMode = .scaleAspectFill
         outfitImageView.layer.masksToBounds = true
+        outfitImageView.layer.cornerRadius = 10
         contentView.addSubview(outfitImageView)
         
         weatherTags = UILabel()

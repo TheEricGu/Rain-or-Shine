@@ -7,10 +7,10 @@
 
 import UIKit
 
-protocol outfitDelegate: class {
-//    func saveNewNameModal(newName: String?)
-//    func saveNewNameNav(newName: String?)
-}
+//protocol outfitDelegate: class {
+////    func saveNewNameModal(newName: String?)
+////    func saveNewNameNav(newName: String?)
+//}
 
 
 class WeatherViewController: UIViewController, UICollectionViewDelegate {
@@ -140,30 +140,10 @@ extension WeatherViewController: UICollectionViewDelegateFlowLayout {
 }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        if collectionView == self.fcollectionView {
-//            let tag = tags[indexPath.row]
-//            let cell = collectionView.cellForItem(at: indexPath) as! FilterCollectionViewCell
-//
-//            if !tag.pressed {
-//                tag.pressed.toggle()
-//                cell.pressFilter()
-//                filterPressed.append(tag)
-//                for resta in restaurants {
-//                    for filt in filterPressed {
-//                        if resta.tags.contains(filt.name) {
-//                            // if !showResta.contains(resta) {
-//                                showResta.append(resta)
-//                            }
-//                        }
-//                    }
-//                rcollectionView.reloadData()
-//                }
-//            else {
-//                tag.pressed.toggle()
-//                cell.unpressFilter()
-//                showResta.remove(at: indexPath.row)
-//                filterPressed.remove(at: indexPath.row)
-//            }
-            
+        if collectionView == self.outfitsCollectionView{
+            let outfit = outfits[indexPath.row]
+            let outfitViewController = OutfitViewController(outfit: outfit)
+            navigationController?.pushViewController(outfitViewController, animated: true)
         }
+    }
 }
