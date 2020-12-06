@@ -52,10 +52,10 @@ class WeatherCollectionViewCell: UICollectionViewCell {
             degreeLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor)])
     }
     
-    func configure(weather: Weather) {
-        weatherImageView.image = UIImage(named: weather.imageName)
-        timeLabel.text = weather.time
-        degreeLabel.text = weather.degrees
+    func configure(hourly: Hourly) {
+        weatherImageView.image = UIImage(named: hourly.imageName)
+        timeLabel.text = hourly.time
+        degreeLabel.text = hourly.degrees
     }
     
     func filterBy(tag: String) {

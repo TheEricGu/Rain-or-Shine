@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Weather: Equatable {
+struct Hourly: Codable {
     var time: String
     var imageName: String
     var degrees: String

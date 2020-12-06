@@ -3,13 +3,14 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		6703C7F3C497C74542BF7052 /* Pods_RoS_Frontend_RoS_FrontendUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97C0AFECB5E2B1619E0362E1 /* Pods_RoS_Frontend_RoS_FrontendUITests.framework */; };
 		737E856D61A607A922B30C37 /* Pods_RoS_Frontend.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 608236572328601FE5E772EF /* Pods_RoS_Frontend.framework */; };
 		A89A71E66F9DBCE6227FA02E /* Pods_RoS_FrontendTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 720926D1936716F9DD3025E5 /* Pods_RoS_FrontendTests.framework */; };
+		EE35B198257C7C3800796489 /* OutfitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE35B197257C7C3800796489 /* OutfitViewController.swift */; };
 		EEC3E11B257B4584009D2271 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC3E11A257B4584009D2271 /* AppDelegate.swift */; };
 		EEC3E11D257B4584009D2271 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC3E11C257B4584009D2271 /* SceneDelegate.swift */; };
 		EEC3E11F257B4584009D2271 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC3E11E257B4584009D2271 /* ViewController.swift */; };
@@ -54,6 +55,7 @@
 		92E5B1018302A34B7A9BCF70 /* Pods-RoS FrontendTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RoS FrontendTests.release.xcconfig"; path = "Target Support Files/Pods-RoS FrontendTests/Pods-RoS FrontendTests.release.xcconfig"; sourceTree = "<group>"; };
 		97C0AFECB5E2B1619E0362E1 /* Pods_RoS_Frontend_RoS_FrontendUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RoS_Frontend_RoS_FrontendUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2282A77D893F036FD4F30D1 /* Pods-RoS FrontendTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RoS FrontendTests.debug.xcconfig"; path = "Target Support Files/Pods-RoS FrontendTests/Pods-RoS FrontendTests.debug.xcconfig"; sourceTree = "<group>"; };
+		EE35B197257C7C3800796489 /* OutfitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutfitViewController.swift; sourceTree = "<group>"; };
 		EEC3E117257B4584009D2271 /* RoS Frontend.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "RoS Frontend.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EEC3E11A257B4584009D2271 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EEC3E11C257B4584009D2271 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -125,7 +127,6 @@
 				A2282A77D893F036FD4F30D1 /* Pods-RoS FrontendTests.debug.xcconfig */,
 				92E5B1018302A34B7A9BCF70 /* Pods-RoS FrontendTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -163,6 +164,7 @@
 				EEC3E128257B4586009D2271 /* Info.plist */,
 				EEC3E159257B4C88009D2271 /* LikedViewController.swift */,
 				EEC3E15E257B4C99009D2271 /* WeatherViewController.swift */,
+				EE35B197257C7C3800796489 /* OutfitViewController.swift */,
 				EEC3E1B6257C3457009D2271 /* OutfitsCollectionViewCell.swift */,
 				EEC3E1BB257C384F009D2271 /* Outfit.swift */,
 				EEC3E1AC257C2864009D2271 /* WeatherCollectionViewCell.swift */,
@@ -426,6 +428,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EE35B198257C7C3800796489 /* OutfitViewController.swift in Sources */,
 				EEC3E1AD257C2865009D2271 /* WeatherCollectionViewCell.swift in Sources */,
 				EEC3E11F257B4584009D2271 /* ViewController.swift in Sources */,
 				EEC3E1BC257C384F009D2271 /* Outfit.swift in Sources */,

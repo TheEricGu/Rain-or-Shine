@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Outfit: Equatable {
+struct Outfit: Codable {
     var imageName: String
     var weatherTags: [String]
     var didLike: Bool

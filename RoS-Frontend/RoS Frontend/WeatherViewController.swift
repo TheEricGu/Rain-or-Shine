@@ -7,6 +7,12 @@
 
 import UIKit
 
+protocol outfitDelegate: class {
+//    func saveNewNameModal(newName: String?)
+//    func saveNewNameNav(newName: String?)
+}
+
+
 class WeatherViewController: UIViewController, UICollectionViewDelegate {
     
     private let headerView = UIView()
@@ -20,8 +26,8 @@ class WeatherViewController: UIViewController, UICollectionViewDelegate {
     let headerHeight: CGFloat = 50
     
     // set up weather
-    let noon = Weather(time: "12pm", imageName: "cloudytest.png", degrees: "32°")
-    var weather: [Weather] = []
+    let noon = Hourly(time: "12pm", imageName: "cloudytest.png", degrees: "32°")
+    var hourly: [Hourly] = []
     
     // set up outfits
     let outfit1 = Outfit(imageName: "clothes1.jpeg", weatherTags: ["winter", "cloudy"], didLike: false)
@@ -37,7 +43,7 @@ class WeatherViewController: UIViewController, UICollectionViewDelegate {
         view.addSubview(headerView)
         
         // weather
-        weather = [noon, noon, noon, noon, noon, noon, noon, noon, noon, noon, noon, noon, noon]
+        hourly = [noon, noon, noon, noon, noon, noon, noon, noon, noon, noon, noon, noon, noon]
         let weatherLayout = UICollectionViewFlowLayout()
         weatherLayout.scrollDirection = .horizontal
         weatherLayout.minimumInteritemSpacing = padding
@@ -98,7 +104,7 @@ class WeatherViewController: UIViewController, UICollectionViewDelegate {
 extension WeatherViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == self.weatherCollectionView {
-            return weather.count
+            return hourly.count
         }
         else {
             return outfits.count
@@ -108,7 +114,7 @@ extension WeatherViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == self.weatherCollectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: weatherCellReuseIdentifier, for: indexPath) as! WeatherCollectionViewCell
-            cell.configure(weather: weather[indexPath.item])
+            cell.configure(hourly: hourly[indexPath.item])
             return cell
         }
         else {
