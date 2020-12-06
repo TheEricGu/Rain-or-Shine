@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:/Users/seanyu/Desktop/Rain-or-Shine/RoS-Frontend/RoS Frontend/OpenWeatherManager.swift">
+   </FileRef>
+   <FileRef
       location = "group:RoS Frontend.xcodeproj">
    </FileRef>
    <FileRef

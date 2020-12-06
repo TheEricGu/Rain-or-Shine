@@ -18,6 +18,7 @@ class NavigationMenuBaseController: UITabBarController {
         navigationController?.navigationBar.tintColor = .white
         view.backgroundColor = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1)
         self.loadTabBar()
+        getHourly()
     }
     
     func loadTabBar() {
@@ -25,6 +26,10 @@ class NavigationMenuBaseController: UITabBarController {
         self.setupCustomTabBar(tabItems) { (controllers) in self.viewControllers = controllers
         }
         self.selectedIndex = 1 // default our selected index to the first item
+    }
+    
+    func getHourly() {
+        OpenWeatherManager.getHourly()
     }
     
     func setupCustomTabBar(_ menuItems: [TabItem], completion: @escaping ([UIViewController]) -> Void) {
