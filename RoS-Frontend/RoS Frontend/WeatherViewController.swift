@@ -82,6 +82,7 @@ class WeatherViewController: UIViewController, UICollectionViewDelegate {
         weatherCollectionView.delegate = self
         weatherCollectionView.translatesAutoresizingMaskIntoConstraints = false
         weatherCollectionView.backgroundColor = .white
+        weatherCollectionView.showsHorizontalScrollIndicator = false
         view.addSubview(weatherCollectionView)
         
         // outfits
@@ -97,6 +98,9 @@ class WeatherViewController: UIViewController, UICollectionViewDelegate {
         outfitsCollectionView.delegate = self
         outfitsCollectionView.translatesAutoresizingMaskIntoConstraints = false
         outfitsCollectionView.backgroundColor = .white
+        outfitsCollectionView.showsHorizontalScrollIndicator = false
+        outfitsCollectionView.showsVerticalScrollIndicator = false
+
         view.addSubview(outfitsCollectionView)
         
         // for section header

@@ -61,6 +61,8 @@ class LikedViewController: UIViewController, UICollectionViewDelegate {
         filterCollectionView.delegate = self
         filterCollectionView.translatesAutoresizingMaskIntoConstraints = false
         filterCollectionView.backgroundColor = .white
+        filterCollectionView.showsVerticalScrollIndicator = false
+        filterCollectionView.showsHorizontalScrollIndicator = false
         view.addSubview(filterCollectionView)
 
         // outfits
@@ -76,6 +78,8 @@ class LikedViewController: UIViewController, UICollectionViewDelegate {
         outfitsCollectionView.delegate = self
         outfitsCollectionView.translatesAutoresizingMaskIntoConstraints = false
         outfitsCollectionView.backgroundColor = .white
+        outfitsCollectionView.showsVerticalScrollIndicator = false
+        outfitsCollectionView.showsHorizontalScrollIndicator = false
         view.addSubview(outfitsCollectionView)
         
         setupConstraints()

@@ -46,6 +46,7 @@ class ProfileViewController: UIViewController {
         outfitsCollectionView.delegate = self
         outfitsCollectionView.translatesAutoresizingMaskIntoConstraints = false
         outfitsCollectionView.backgroundColor = .white
+        outfitsCollectionView.showsVerticalScrollIndicator = false
         view.addSubview(outfitsCollectionView)
         
         // for section header
