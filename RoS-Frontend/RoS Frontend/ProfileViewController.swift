@@ -11,7 +11,8 @@ class ProfileViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "profile"
+        navigationItem.title = "profile"
+
 
         self.view.backgroundColor = UIColor.white
         let label = UILabel(frame: CGRect.zero)
