@@ -13,6 +13,8 @@
 		BD56497C257D6A0500460B8D /* OpenWeatherManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD56497B257D6A0500460B8D /* OpenWeatherManager.swift */; };
 		EE35B198257C7C3800796489 /* OutfitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE35B197257C7C3800796489 /* OutfitViewController.swift */; };
 		EE35B1B9257DBB3800796489 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE35B1B8257DBB3800796489 /* MainTabBarController.swift */; };
+		EE35B1C7257DE10F00796489 /* FilterCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE35B1C6257DE10F00796489 /* FilterCollectionViewCell.swift */; };
+		EE35B1DA257DE81A00796489 /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE35B1D9257DE81A00796489 /* Filter.swift */; };
 		EEC3E11B257B4584009D2271 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC3E11A257B4584009D2271 /* AppDelegate.swift */; };
 		EEC3E11D257B4584009D2271 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC3E11C257B4584009D2271 /* SceneDelegate.swift */; };
 		EEC3E124257B4586009D2271 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EEC3E123257B4586009D2271 /* Assets.xcassets */; };
@@ -57,6 +59,8 @@
 		BD56497B257D6A0500460B8D /* OpenWeatherManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpenWeatherManager.swift; sourceTree = "<group>"; };
 		EE35B197257C7C3800796489 /* OutfitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutfitViewController.swift; sourceTree = "<group>"; };
 		EE35B1B8257DBB3800796489 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
+		EE35B1C6257DE10F00796489 /* FilterCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterCollectionViewCell.swift; sourceTree = "<group>"; };
+		EE35B1D9257DE81A00796489 /* Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
 		EEC3E117257B4584009D2271 /* RoS Frontend.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "RoS Frontend.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EEC3E11A257B4584009D2271 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EEC3E11C257B4584009D2271 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -160,6 +164,8 @@
 				EEC3E123257B4586009D2271 /* Assets.xcassets */,
 				EEC3E128257B4586009D2271 /* Info.plist */,
 				EEC3E159257B4C88009D2271 /* LikedViewController.swift */,
+				EE35B1D9257DE81A00796489 /* Filter.swift */,
+				EE35B1C6257DE10F00796489 /* FilterCollectionViewCell.swift */,
 				EEC3E15E257B4C99009D2271 /* WeatherViewController.swift */,
 				EE35B197257C7C3800796489 /* OutfitViewController.swift */,
 				EEC3E1B6257C3457009D2271 /* OutfitsCollectionViewCell.swift */,
@@ -432,10 +438,12 @@
 				EEC3E15F257B4C99009D2271 /* WeatherViewController.swift in Sources */,
 				EEC3E11B257B4584009D2271 /* AppDelegate.swift in Sources */,
 				EEC3E1B2257C2AC1009D2271 /* Weather.swift in Sources */,
+				EE35B1DA257DE81A00796489 /* Filter.swift in Sources */,
 				EEC3E164257B4CA7009D2271 /* ProfileViewController.swift in Sources */,
 				EEC3E11D257B4584009D2271 /* SceneDelegate.swift in Sources */,
 				EEC3E1B7257C3457009D2271 /* OutfitsCollectionViewCell.swift in Sources */,
 				BD56497C257D6A0500460B8D /* OpenWeatherManager.swift in Sources */,
+				EE35B1C7257DE10F00796489 /* FilterCollectionViewCell.swift in Sources */,
 				EEC3E15A257B4C88009D2271 /* LikedViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
