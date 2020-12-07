@@ -65,13 +65,28 @@ class WeatherCollectionViewCell: UICollectionViewCell {
     }
     
     func configure(hourly: RealHourly, data: Data) {
-        let date = unixToDate(unix: Double(hourly.dt + data.timezone_offset))
-        print(date)
         let image = UIImage(named: hourly.weather[0].icon)!
 //        let scaled = scaleUIImageToSize(image: image, size: CGSize(width: 20, height: 40))
         weatherImageView.image = image
-        timeLabel.text = String(date)
+        
+        let date = unixToDate(unix: Double(hourly.dt + data.timezone_offset))
+        let formatter = DateFormatter()
+        formatter.timeZone = TimeZone(abbreviation: "UTC")
+        formatter.dateFormat = "H"
+        let intTime : Int! = Int(formatter.string(from: date))
+        var finalTime = "you messed up"
+        if intTime > 12 {
+            finalTime = String(intTime - 12) + " PM"
+        }
+        else if intTime == 0 {
+            finalTime = "12 AM"
+        }
+        else {
+            finalTime = String(intTime) + " AM"
+        }
+        timeLabel.text = String(finalTime)
         // rounds float to nearest int and makes into string
+        
         degreeLabel.text = String(format:"%.0f", hourly.temp) + "°"
     }
     
