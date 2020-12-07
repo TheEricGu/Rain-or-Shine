@@ -7,12 +7,6 @@
 
 import UIKit
 
-//protocol outfitDelegate: class {
-////    func saveNewNameModal(newName: String?)
-////    func saveNewNameNav(newName: String?)
-//}
-
-
 class WeatherViewController: UIViewController, UICollectionViewDelegate {
     
     private let headerView = UIView()
@@ -24,6 +18,8 @@ class WeatherViewController: UIViewController, UICollectionViewDelegate {
     
     let padding: CGFloat = 4
     let headerHeight: CGFloat = 50
+    
+    let headerID = "Header" // section header for outfits
     
     // set up weather
     var hourly: [RealHourly] = []
@@ -69,7 +65,7 @@ class WeatherViewController: UIViewController, UICollectionViewDelegate {
         getCurrent()
         getData()
         self.view.backgroundColor = UIColor.white
-        navigationItem.title = "weather"
+        navigationItem.title = "Weather" // TODO: Change to user's location
         headerView.backgroundColor = .gray
         headerView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(headerView)
@@ -103,6 +99,11 @@ class WeatherViewController: UIViewController, UICollectionViewDelegate {
         outfitsCollectionView.backgroundColor = .white
         view.addSubview(outfitsCollectionView)
         
+        // for section header
+        outfitsCollectionView.register(UICollectionReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: self.headerID)
+        let flow = outfitsCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
+        flow.headerReferenceSize = CGSize(width: 30,height: 30)
+        
         setupConstraints()
         
     }
@@ -130,6 +131,21 @@ class WeatherViewController: UIViewController, UICollectionViewDelegate {
             outfitsCollectionView.heightAnchor.constraint(equalToConstant: 500),
             outfitsCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding)])
     }
+    
+    // for section header
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+            var v : UICollectionReusableView! = nil
+            if kind == UICollectionView.elementKindSectionHeader {
+                v = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: self.headerID, for: indexPath)
+                if v.subviews.count == 0 {
+                    v.addSubview(UILabel(frame:CGRect(x: 0,y: 0,width: 150,height: 30)))
+                }
+                let lab = v.subviews[0] as! UILabel
+                lab.text = "Explore outfits"
+                lab.textAlignment = .center
+            }
+            return v
+}
 }
 
 extension WeatherViewController: UICollectionViewDataSource {

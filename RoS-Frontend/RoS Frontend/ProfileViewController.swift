@@ -48,15 +48,10 @@ class ProfileViewController: UIViewController {
         outfitsCollectionView.backgroundColor = .white
         view.addSubview(outfitsCollectionView)
         
+        // for section header
         outfitsCollectionView.register(UICollectionReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: self.headerID)
-                // if you don't do something about header size...
-                // ...you won't see any headers
         let flow = outfitsCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
         flow.headerReferenceSize = CGSize(width: 30,height: 30)
-                // self-sizing still not working, layout is wrong
-        //        flow.estimatedItemSize = CGSize(30,100)
-        //        flow.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
-        //        flow.itemSize = UICollectionViewFlowLayout.automaticSize
         
         setupConstraints()
     }
@@ -78,7 +73,7 @@ class ProfileViewController: UIViewController {
             outfitsCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding)])
     }
     
-    
+    // for section header
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
             var v : UICollectionReusableView! = nil
             if kind == UICollectionView.elementKindSectionHeader {

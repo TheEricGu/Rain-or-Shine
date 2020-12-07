@@ -30,8 +30,9 @@ class LikedViewController: UIViewController, UICollectionViewDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.title = "Liked Outfits"
+        //self.title = "Liked Outfits"
         self.view.backgroundColor = UIColor.white
+        //self.navigationController?.isNavigationBarHidden = true
         
         // search bar
         searchBar.backgroundColor = .white

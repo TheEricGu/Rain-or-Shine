@@ -66,7 +66,6 @@ class WeatherCollectionViewCell: UICollectionViewCell {
     
     func configure(hourly: RealHourly, data: Data) {
         let image = UIImage(named: hourly.weather[0].icon)!
-//        let scaled = scaleUIImageToSize(image: image, size: CGSize(width: 20, height: 40))
         weatherImageView.image = image
         
         let date = unixToDate(unix: Double(hourly.dt + data.timezone_offset))
