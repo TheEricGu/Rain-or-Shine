@@ -12,8 +12,7 @@ class LikedViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "liked"
-        
+        navigationItem.title = "liked"
         self.view.backgroundColor = UIColor.white
         
         //label
