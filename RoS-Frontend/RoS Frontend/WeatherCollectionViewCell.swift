@@ -70,7 +70,7 @@ class WeatherCollectionViewCell: UICollectionViewCell {
         weatherImageView.image = image
         timeLabel.text = String(hourly.dt)
         // rounds float to nearest int and makes into string
-        degreeLabel.text = String(format:"%.0f", hourly.temp)
+        degreeLabel.text = String(format:"%.0f", hourly.temp) + "°"
     }
     
     func filterBy(tag: String) {
