@@ -106,7 +106,8 @@ class LikedViewController: UIViewController, UICollectionViewDelegate {
             outfitsCollectionView.topAnchor.constraint(equalTo: filterCollectionView.bottomAnchor, constant: padding),
             outfitsCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
             outfitsCollectionView.heightAnchor.constraint(equalToConstant: 650),
-            outfitsCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding)
+            outfitsCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
+            outfitsCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
 }

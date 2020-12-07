@@ -126,14 +126,16 @@ class WeatherViewController: UIViewController, UICollectionViewDelegate {
             weatherCollectionView.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: padding),
             weatherCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
             weatherCollectionView.heightAnchor.constraint(equalToConstant: 100),
-            weatherCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding)])
+            weatherCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
+        ])
         
         // outfits collection view
         NSLayoutConstraint.activate([
             outfitsCollectionView.topAnchor.constraint(equalTo: weatherCollectionView.bottomAnchor, constant: padding),
             outfitsCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
             outfitsCollectionView.heightAnchor.constraint(equalToConstant: 500),
-            outfitsCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding)])
+            outfitsCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
+            outfitsCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)])
     }
     
     // for section header

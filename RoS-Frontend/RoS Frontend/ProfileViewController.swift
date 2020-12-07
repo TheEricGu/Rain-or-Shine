@@ -71,7 +71,8 @@ class ProfileViewController: UIViewController {
             outfitsCollectionView.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: padding),
             outfitsCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
             outfitsCollectionView.heightAnchor.constraint(equalToConstant: 650),
-            outfitsCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding)])
+            outfitsCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
+            outfitsCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)])
     }
     
     // for section header
