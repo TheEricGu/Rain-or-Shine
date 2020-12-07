@@ -64,11 +64,13 @@ class WeatherCollectionViewCell: UICollectionViewCell {
             degreeLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor)])
     }
     
-    func configure(hourly: RealHourly) {
+    func configure(hourly: RealHourly, data: Data) {
+        let date = unixToDate(unix: Double(hourly.dt + data.timezone_offset))
+        print(date)
         let image = UIImage(named: hourly.weather[0].icon)!
 //        let scaled = scaleUIImageToSize(image: image, size: CGSize(width: 20, height: 40))
         weatherImageView.image = image
-        timeLabel.text = String(hourly.dt)
+        timeLabel.text = String(date)
         // rounds float to nearest int and makes into string
         degreeLabel.text = String(format:"%.0f", hourly.temp) + "°"
     }

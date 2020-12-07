@@ -26,8 +26,9 @@ class WeatherViewController: UIViewController, UICollectionViewDelegate {
     let headerHeight: CGFloat = 50
     
     // set up weather
-    let noon = Hourly(time: "12pm", imageName: "cloudytest.png", degrees: "32°")
     var hourly: [RealHourly] = []
+    var current: [Current] = []
+    var data: [Data] = []
     
     // set up outfits
     let outfit1 = Outfit(imageName: "clothes1.jpeg", weatherTags: ["winter", "cloudy"], didLike: false)
@@ -35,7 +36,27 @@ class WeatherViewController: UIViewController, UICollectionViewDelegate {
     
     func getHourly() {
         OpenWeatherManager.getHourly { hourlyData in
-            self.hourly = hourlyData
+            let sliced = hourlyData[0...12]
+            let data = Array(sliced)
+            self.hourly = data
+            DispatchQueue.main.async {
+                self.weatherCollectionView.reloadData()
+            }
+        }
+    }
+    
+    func getCurrent() {
+        OpenWeatherManager.getCurrent { currentData in
+            self.current = [currentData]
+            DispatchQueue.main.async {
+                self.weatherCollectionView.reloadData()
+            }
+        }
+    }
+    
+    func getData() {
+        OpenWeatherManager.getData { data in
+            self.data = [data]
             DispatchQueue.main.async {
                 self.weatherCollectionView.reloadData()
             }
@@ -45,6 +66,8 @@ class WeatherViewController: UIViewController, UICollectionViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         getHourly()
+        getCurrent()
+        getData()
         self.view.backgroundColor = UIColor.white
         navigationItem.title = "weather"
         headerView.backgroundColor = .gray
@@ -122,7 +145,7 @@ extension WeatherViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == self.weatherCollectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: weatherCellReuseIdentifier, for: indexPath) as! WeatherCollectionViewCell
-            cell.configure(hourly: hourly[indexPath.item])
+            cell.configure(hourly: hourly[indexPath.item], data: data[0])
             return cell
         }
         else {

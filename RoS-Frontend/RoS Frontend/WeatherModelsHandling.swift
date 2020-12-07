@@ -10,6 +10,7 @@ import Foundation
 // outermost data
 struct Data: Codable {
     let current: Current
+    let timezone_offset: Int
     var hourly: [RealHourly]
 }
 
@@ -44,4 +45,9 @@ struct Hourly: Codable {
     var time: String
     var imageName: String
     var degrees: String
+}
+
+func unixToDate(unix: Double) -> Date {
+    let date = Date(timeIntervalSince1970: unix)
+    return date
 }

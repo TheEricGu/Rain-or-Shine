@@ -24,7 +24,7 @@
 		EEC3E164257B4CA7009D2271 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC3E163257B4CA7009D2271 /* ProfileViewController.swift */; };
 		EEC3E169257B4D9A009D2271 /* TabNavigationMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC3E168257B4D9A009D2271 /* TabNavigationMenu.swift */; };
 		EEC3E1AD257C2865009D2271 /* WeatherCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC3E1AC257C2864009D2271 /* WeatherCollectionViewCell.swift */; };
-		EEC3E1B2257C2AC1009D2271 /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC3E1B1257C2AC1009D2271 /* Weather.swift */; };
+		EEC3E1B2257C2AC1009D2271 /* WeatherModelsHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC3E1B1257C2AC1009D2271 /* WeatherModelsHandling.swift */; };
 		EEC3E1B7257C3457009D2271 /* OutfitsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC3E1B6257C3457009D2271 /* OutfitsCollectionViewCell.swift */; };
 		EEC3E1BC257C384F009D2271 /* Outfit.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC3E1BB257C384F009D2271 /* Outfit.swift */; };
 /* End PBXBuildFile section */
@@ -76,7 +76,7 @@
 		EEC3E163257B4CA7009D2271 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		EEC3E168257B4D9A009D2271 /* TabNavigationMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabNavigationMenu.swift; sourceTree = "<group>"; };
 		EEC3E1AC257C2864009D2271 /* WeatherCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherCollectionViewCell.swift; sourceTree = "<group>"; };
-		EEC3E1B1257C2AC1009D2271 /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
+		EEC3E1B1257C2AC1009D2271 /* WeatherModelsHandling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherModelsHandling.swift; sourceTree = "<group>"; };
 		EEC3E1B6257C3457009D2271 /* OutfitsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutfitsCollectionViewCell.swift; sourceTree = "<group>"; };
 		EEC3E1BB257C384F009D2271 /* Outfit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Outfit.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -157,22 +157,22 @@
 		EEC3E119257B4584009D2271 /* RoS Frontend */ = {
 			isa = PBXGroup;
 			children = (
+				EEC3E123257B4586009D2271 /* Assets.xcassets */,
+				EEC3E128257B4586009D2271 /* Info.plist */,
 				EEC3E11A257B4584009D2271 /* AppDelegate.swift */,
 				EEC3E11C257B4584009D2271 /* SceneDelegate.swift */,
 				EEC3E11E257B4584009D2271 /* ViewController.swift */,
 				EEC3E168257B4D9A009D2271 /* TabNavigationMenu.swift */,
-				BD56497B257D6A0500460B8D /* OpenWeatherManager.swift */,
 				EEC3E154257B4B4F009D2271 /* TabItem.swift */,
-				EEC3E123257B4586009D2271 /* Assets.xcassets */,
-				EEC3E128257B4586009D2271 /* Info.plist */,
 				EEC3E159257B4C88009D2271 /* LikedViewController.swift */,
-				EEC3E15E257B4C99009D2271 /* WeatherViewController.swift */,
 				EE35B197257C7C3800796489 /* OutfitViewController.swift */,
 				EEC3E1B6257C3457009D2271 /* OutfitsCollectionViewCell.swift */,
 				EEC3E1BB257C384F009D2271 /* Outfit.swift */,
-				EEC3E1AC257C2864009D2271 /* WeatherCollectionViewCell.swift */,
-				EEC3E1B1257C2AC1009D2271 /* Weather.swift */,
 				EEC3E163257B4CA7009D2271 /* ProfileViewController.swift */,
+				EEC3E15E257B4C99009D2271 /* WeatherViewController.swift */,
+				EEC3E1AC257C2864009D2271 /* WeatherCollectionViewCell.swift */,
+				EEC3E1B1257C2AC1009D2271 /* WeatherModelsHandling.swift */,
+				BD56497B257D6A0500460B8D /* OpenWeatherManager.swift */,
 			);
 			path = "RoS Frontend";
 			sourceTree = "<group>";
@@ -437,7 +437,7 @@
 				EEC3E1BC257C384F009D2271 /* Outfit.swift in Sources */,
 				EEC3E15F257B4C99009D2271 /* WeatherViewController.swift in Sources */,
 				EEC3E11B257B4584009D2271 /* AppDelegate.swift in Sources */,
-				EEC3E1B2257C2AC1009D2271 /* Weather.swift in Sources */,
+				EEC3E1B2257C2AC1009D2271 /* WeatherModelsHandling.swift in Sources */,
 				EEC3E155257B4B4F009D2271 /* TabItem.swift in Sources */,
 				EEC3E164257B4CA7009D2271 /* ProfileViewController.swift in Sources */,
 				EEC3E11D257B4584009D2271 /* SceneDelegate.swift in Sources */,
