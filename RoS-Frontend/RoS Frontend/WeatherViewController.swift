@@ -60,10 +60,10 @@ class WeatherViewController: UIViewController, UICollectionViewDelegate {
     }
     
     override func viewDidLoad() {
-        super.viewDidLoad()
+        getData()
         getHourly()
         getCurrent()
-        getData()
+        super.viewDidLoad()
         self.view.backgroundColor = UIColor.white
         navigationItem.title = "Weather" // TODO: Change to user's location
         headerView.backgroundColor = .gray
