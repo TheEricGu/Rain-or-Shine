@@ -50,7 +50,6 @@ extension UITabBarController {
         let navController = UINavigationController(rootViewController: viewContoller)
         navController.tabBarItem.image = unselectedImage
         navController.tabBarItem.selectedImage = selectedImage
-        
         return navController
     }
 }

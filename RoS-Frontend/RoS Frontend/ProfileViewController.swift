@@ -23,10 +23,21 @@ class ProfileViewController: UIViewController {
     var outfits: [Outfit] = []
 
     override func viewDidLoad() {
+        self.view.backgroundColor = UIColor.white
         super.viewDidLoad()
+        
+        // nav bar
         navigationItem.title = "[Put user's name here]"
 
-        self.view.backgroundColor = UIColor.white
+        let rightBarButton = UIBarButtonItem(title: "Add Post", style: UIBarButtonItem.Style.plain, target: self, action: #selector(ProfileViewController.myRightSideBarButtonItemTapped(_:)))
+                self.navigationItem.rightBarButtonItem = rightBarButton
+        rightBarButton.image = UIImage(named: "addicon.png")
+        rightBarButton.tintColor = UIColor(red: 0.04, green: 0.492, blue: 0.746, alpha: 1)
+        
+        let leftBarButton = UIBarButtonItem(title: "Settings", style: UIBarButtonItem.Style.done, target: self, action: #selector(ProfileViewController.myLeftSideBarButtonItemTapped(_:)))
+                self.navigationItem.leftBarButtonItem = leftBarButton
+        leftBarButton.image = UIImage(named: "settings.png")
+        leftBarButton.tintColor = UIColor(red: 0.04, green: 0.492, blue: 0.746, alpha: 1)
         
         // header
         headerView.backgroundColor = .gray
@@ -74,6 +85,17 @@ class ProfileViewController: UIViewController {
             outfitsCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
             outfitsCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)])
     }
+    
+    // for nav bar
+    @objc func myRightSideBarButtonItemTapped(_ sender:UIBarButtonItem!){
+        let postingViewController = PostingViewController()
+        present(postingViewController, animated: true, completion: nil)
+        }
+    
+    @objc func myLeftSideBarButtonItemTapped(_ sender:UIBarButtonItem!){
+        let settingsViewController = SettingsViewController()
+        navigationController?.pushViewController(settingsViewController, animated: true)
+        }
     
     // for section header
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
