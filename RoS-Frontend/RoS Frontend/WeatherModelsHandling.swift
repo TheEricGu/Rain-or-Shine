@@ -19,7 +19,7 @@ struct Current: Codable {
     let dt: Int
     let temp: Float
     let feels_like: Float
-    let uvi: Int
+    let uvi: Float
     let clouds: Int
     let wind_speed: Float
     let weather: [Weather]
@@ -37,14 +37,6 @@ struct RealHourly: Codable {
     let dt: Int
     let temp: Float
     let weather: [Weather]
-}
-
-//
-// hard-coded hourly
-struct Hourly: Codable {
-    var time: String
-    var imageName: String
-    var degrees: String
 }
 
 func unixToDate(unix: Double) -> Date {

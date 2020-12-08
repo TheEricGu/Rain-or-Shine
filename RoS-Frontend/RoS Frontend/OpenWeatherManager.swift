@@ -17,10 +17,7 @@ class OpenWeatherManager {
         AF.request(endpoint, method: .get).validate().responseData { response in
             switch response.result {
             case .success(let data):
-//                let convertedString : String! = String(data: data, encoding: String.Encoding.utf8)
-//                print(convertedString)
                 let jsonDecoder = JSONDecoder()
-//                jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
                 if let OWData = try? jsonDecoder.decode(Data.self, from: data) {
                     let currentData = OWData.current
                     completion(currentData)
