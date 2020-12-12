@@ -43,21 +43,19 @@ def get_outfit(gender, weather, temp):
 @app.route("/api/outfits/", methods=["POST"])
 def create_outfit():
     body = json.loads(request.data)
-    if body.get("name") is None:
-        return failure_response('Name not found')
-    if body.get("gender") is None:
-        return failure_response('Gender not found')
-    elif body.get("weather") is None:
-        return failure_response('Weather not found')
-    elif body.get("temp") is None:
-        return failure_response('Temperature not found')
-    elif body.get("image_data") is None:
-        return failure_response('Base64 URL not found')
-    else:
-        new_outfit = Outfit(name=body.get("name"), gender=body.get("gender"), weather=body.get("weather"), temp=body.get("temp"), image_data=body.get("image_data"))
-        db.session.add(new_outfit)
-        db.session.commit()
-        return success_response(new_outfit.serialize(), 201)
+    body_arr = ["name", "gender", "weather", "temp", "image_data"]
+    for x in body_arr:
+        if body.get(x) is None:
+            return failure_response(f'{x} not found')
+    new_outfit = Outfit(
+        name=body.get("name"), 
+        gender=body.get("gender"), 
+        weather=body.get("weather"), 
+        temp=body.get("temp"), 
+        image_data=body.get("image_data"))
+    db.session.add(new_outfit)
+    db.session.commit()
+    return success_response(new_outfit.serialize(), 201)
 
 @app.route("/api/outfits/<int:course_id>/", methods=["DELETE"])
 def delete_outfit(course_id):
