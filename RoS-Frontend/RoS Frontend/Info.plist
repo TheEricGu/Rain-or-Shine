@@ -51,6 +51,10 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSCameraUsageDescription</key>
+	<string>&quot;Rain or Shine&quot; would like to access your camera</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>&quot;Rain or Shine&quot; would like to access your photo</string>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

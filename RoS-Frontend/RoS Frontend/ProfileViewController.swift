@@ -88,8 +88,10 @@ class ProfileViewController: UIViewController {
     
     // for nav bar
     @objc func myRightSideBarButtonItemTapped(_ sender:UIBarButtonItem!){
-        let postingViewController = PostingViewController()
-        present(postingViewController, animated: true, completion: nil)
+//        let postingViewController = PostingViewController()
+//        present(postingViewController, animated: true, completion: nil)
+        // TO DO: HANDLE POSTING HERE????
+        PostingHandler.shared.showPostingActionSheet(vc: self)
         }
     
     @objc func myLeftSideBarButtonItemTapped(_ sender:UIBarButtonItem!){

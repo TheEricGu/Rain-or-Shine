@@ -46,7 +46,6 @@ class LikedViewController: UIViewController, UICollectionViewDelegate {
         searchBar.layer.masksToBounds = true
         view.addSubview(searchBar)
         
-        
         // filter
         filters = [filter1,filter1,filter1,filter1,filter1,filter1,filter1]
         let filterLayout = UICollectionViewFlowLayout()
