@@ -60,10 +60,6 @@ class ProfileViewController: UIViewController {
         outfitsCollectionView.showsVerticalScrollIndicator = false
         view.addSubview(outfitsCollectionView)
         
-        // for section header
-//        outfitsCollectionView.register(UICollectionReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: self.headerID)
-//        let flow = outfitsCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
-//        flow.headerReferenceSize = CGSize(width: 30,height: 30)
         
         setupConstraints()
     }

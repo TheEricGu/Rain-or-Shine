@@ -22,7 +22,9 @@ class MainTabBarController: UITabBarController {
         tabBar.selectedImageTintColor = UIColor(red: 0.925, green: 0.431, blue: 0.298, alpha: 1)
         
         setUpTabBar()
+        self.selectedIndex = 1
     }
+    
     
     func setUpTabBar() {
         

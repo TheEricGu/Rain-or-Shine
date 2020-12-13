@@ -15,6 +15,7 @@ class FilterCollectionViewCell: UICollectionViewCell {
         filterLabel = UILabel()
         filterLabel.translatesAutoresizingMaskIntoConstraints = false
         filterLabel.font = .systemFont(ofSize: 14)
+        filterLabel.textAlignment = .center
         contentView.addSubview(filterLabel)
         
         setupConstraints()
@@ -22,17 +23,28 @@ class FilterCollectionViewCell: UICollectionViewCell {
     
     func setupConstraints() {
         // filter label constraints
-        NSLayoutConstraint.activate([filterLabel.topAnchor.constraint(equalTo: contentView.topAnchor), filterLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor), filterLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+        NSLayoutConstraint.activate([filterLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 15),
             filterLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor)])
     }
     
     func configure(filter: Filter) {
         filterLabel.text = filter.filterName
-        // probably something about toggling filter selection here later
+        // TODO: probably something about toggling filter selection here
     }
     
     func filterBy(tag: String) {
-        
+        // TODO? 
+    }
+    
+    func pressFilter(){
+        filterLabel.backgroundColor = UIColor(red: 0.925, green: 0.431, blue: 0.298, alpha: 1)
+        // filterLabel.layer.cornerRadius = 10
+    }
+    
+    func unpressFilter(){
+        filterLabel.backgroundColor = .white
+//        self.layer.borderWidth = 1
+//        self.layer.cornerRadius = 10
     }
     
     required init?(coder: NSCoder) {
