@@ -10,14 +10,26 @@ import UIKit
 // how to put user selected image in?? idk set up constraints first
 
 class PostingViewController: UIViewController {
+    weak var delegate: PostingHandler?
     var vcTitle: UILabel!
     var instructions: UILabel!
     var filterCollectionView: UICollectionView!
     var closeButton: UIButton!
     var postButton: UIButton!
-    var imageName: String?
+    var image: UIImage!
     var outfitImage: UIImageView!
 
+    init(delegate: PostingHandler?, image: UIImage!) {
+        super.init(nibName: nil, bundle: nil)
+        
+        self.delegate = delegate
+        self.image = image
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -29,8 +41,9 @@ class PostingViewController: UIViewController {
         vcTitle.font = .boldSystemFont(ofSize: 20)
         view.addSubview(vcTitle)
         
-        // outfitImage = UIImageView(image: UIImage(named: imageName!))
-        outfitImage = UIImageView(image: UIImage(named: "clothes1.png"))
+        // put in image from photo library or camera here
+        outfitImage = UIImageView(image: image)
+//        outfitImage = UIImageView(image: UIImage(named: "clothes1.png"))
         outfitImage.translatesAutoresizingMaskIntoConstraints = false
         outfitImage.contentMode = .scaleAspectFit
         outfitImage.isHidden = false
