@@ -179,7 +179,7 @@ class WeatherViewController: UIViewController, UICollectionViewDelegate {
                     .font: UIFont.systemFont(ofSize: 24.0, weight: .bold),
                     .foregroundColor: UIColor.white,
                 ]
-                cityLabelLayer.string = NSAttributedString(string: "Ithaca", attributes: cityLabelAttributes)
+                cityLabelLayer.string = NSAttributedString(string: UserDefaults.standard.string(forKey: "Location")!, attributes: cityLabelAttributes)
                 cityLabelLayer.alignmentMode = .center
                 cityLabelLayer.alignmentMode = CATextLayerAlignmentMode.center;
                 cityLabelLayer.frame = CGRect(x: 0, y: 0, width: 350, height: 50)
