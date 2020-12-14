@@ -22,6 +22,7 @@ class OutfitsCollectionViewCell: UICollectionViewCell {
         outfitImageView.layer.cornerRadius = 10
         contentView.addSubview(outfitImageView)
         
+        // do not display weather tags in collection view cells 
 //        weatherTags = UILabel()
 //        weatherTags.translatesAutoresizingMaskIntoConstraints = false
 //        weatherTags.font = .systemFont(ofSize: 10)

@@ -176,7 +176,8 @@ class WeatherViewController: UIViewController, UICollectionViewDelegate {
         let defaults = UserDefaults.standard
         defaults.set("Mathew Scullin", forKey: "Name")
         defaults.set("female", forKey: "Gender")
-        defaults.set([], forKey: "Liked outfits")
+        var likedArray: [Outfit] = []
+        defaults.setStructArray(likedArray, forKey: "Liked outfits")
         defaults.set("Ithaca, NY", forKey: "Location")
         // defaults.string(forKey: "Gender") THIS IS HOW YOU ACCESS USER DEFAULTS
         

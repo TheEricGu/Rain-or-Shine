@@ -8,12 +8,13 @@
 import UIKit
 
 class OutfitViewController: UIViewController {
-    private var outfit: Outfit!
-    private let outfitImageView = UIImageView()
-    private let weatherTags = UILabel()
-    private let saveIcon = UIImageView()
-    private let shareIcon = UIImageView()
-    private let likedHeart = UIImageView() // TODO: GET LIKED PHOTOS ONLY AND STORE THEM SOMEWHERE
+    var outfit: Outfit!
+    let outfitImageView = UIImageView()
+    let weatherTags = UILabel()
+    let saveIcon = UIImageView()
+    let shareIcon = UIImageView()
+    let likeButton = UIButton()
+    var likedArray : [Outfit] = []
     
     init(outfit: Outfit) {
         super.init(nibName: nil, bundle: nil)
@@ -62,15 +63,17 @@ class OutfitViewController: UIViewController {
         
         // liked heart
         if outfit.didLike {
-            likedHeart.image = UIImage(named: "biglikedheart.png")
+            likeButton.setImage(UIImage(named: "biglikedheart.png"), for: .normal)
         }
         else {
-            likedHeart.image = UIImage(named: "bigunlikedheart.png")
+            likeButton.setImage(UIImage(named: "bigunlikedheart.png"), for: .normal)
         }
-        likedHeart.translatesAutoresizingMaskIntoConstraints = false
-        likedHeart.contentMode = .scaleAspectFill
-        likedHeart.layer.masksToBounds = true
-        view.addSubview(likedHeart)
+        likeButton.translatesAutoresizingMaskIntoConstraints = false
+        likeButton.contentMode = .scaleAspectFill
+        likeButton.layer.masksToBounds = true
+        // when like button is pressed
+        likeButton.addTarget(self, action: #selector(toggleLike), for: .touchUpInside)
+        view.addSubview(likeButton)
         
         // share icon
         shareIcon.image = UIImage(named: "share.png")
@@ -85,10 +88,14 @@ class OutfitViewController: UIViewController {
         saveIcon.contentMode = .scaleAspectFill
         saveIcon.layer.masksToBounds = true
         view.addSubview(saveIcon)
-
         
         // getOutfit()
         setupConstraints()
+        
+        // RESET USER DEFAULTS TO TEST
+        let domain = Bundle.main.bundleIdentifier!
+        UserDefaults.standard.removePersistentDomain(forName: domain)
+        UserDefaults.standard.synchronize()
         
     }
 
@@ -112,13 +119,13 @@ class OutfitViewController: UIViewController {
         ])
         
         // liked heart
-        NSLayoutConstraint.activate([likedHeart.topAnchor.constraint(equalTo: outfitImageView.bottomAnchor, constant: padding),
-            likedHeart.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding)
+        NSLayoutConstraint.activate([likeButton.topAnchor.constraint(equalTo: outfitImageView.bottomAnchor, constant: padding),
+            likeButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding)
         ])
         
         // share icon
         NSLayoutConstraint.activate([shareIcon.topAnchor.constraint(equalTo: outfitImageView.bottomAnchor, constant: padding),
-            shareIcon.trailingAnchor.constraint(equalTo: likedHeart.leadingAnchor, constant: -20)
+            shareIcon.trailingAnchor.constraint(equalTo: likeButton.leadingAnchor, constant: -20)
         ])
         
         // save icon
@@ -126,6 +133,31 @@ class OutfitViewController: UIViewController {
             saveIcon.trailingAnchor.constraint(equalTo: shareIcon.leadingAnchor, constant: -20)
         ])
         
+    }
+    
+    @objc func toggleLike() {
+        // if liking outfit
+        if !outfit.didLike {
+            self.outfit.didLike = true
+            let likedArray = UserDefaults.standard.structArrayData(Outfit.self, forKey: "LikedOutfits")
+            
+            var newArray: [Outfit] = []
+            newArray = likedArray
+            newArray.append(outfit)
+            
+            UserDefaults.standard.setStructArray(newArray, forKey: "LikedOutfits")
+            print(UserDefaults.standard.structArrayData(Outfit.self, forKey: "LikedOutfits"))
+        }
+        
+        // if unliking outfit
+        else {
+            self.outfit.didLike = false
+            var likedArray = UserDefaults.standard.structArrayData(Outfit.self, forKey: "LikedOutfits")
+            likedArray.removeAll { $0 == self.outfit }
+            UserDefaults.standard.setStructArray(likedArray, forKey: "LikedOutfits")
+            print(UserDefaults.standard.structArrayData(Outfit.self, forKey: "LikedOutfits"))
+        }
+        viewDidLoad()
     }
     
     // for post deletion

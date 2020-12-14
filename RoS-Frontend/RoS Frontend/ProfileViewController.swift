@@ -27,7 +27,7 @@ class ProfileViewController: UIViewController {
         super.viewDidLoad()
         
         // nav bar
-        navigationItem.title = "[Put user's name here]" // TODO!
+        navigationItem.title = UserDefaults.standard.string(forKey: "Name")
 
         let rightBarButton = UIBarButtonItem(title: "Add Post", style: UIBarButtonItem.Style.plain, target: self, action: #selector(ProfileViewController.myRightSideBarButtonItemTapped(_:)))
                 self.navigationItem.rightBarButtonItem = rightBarButton
@@ -52,7 +52,7 @@ class ProfileViewController: UIViewController {
             .font: UIFont.systemFont(ofSize: 16.0, weight: .semibold),
             .foregroundColor: UIColor(red: 0.04, green: 0.492, blue: 0.746, alpha: 1)
         ]
-        locLabelLayer.string = NSAttributedString(string: "Ithaca, NY") // PUT LOCATION HERE
+        locLabelLayer.string = NSAttributedString(string: UserDefaults.standard.string(forKey: "Location")!) 
         locLabelLayer.alignmentMode = .center
         locLabelLayer.alignmentMode = CATextLayerAlignmentMode.center;
         locLabelLayer.frame = CGRect(x: 0, y: 0, width: 350, height: 50)
@@ -68,7 +68,7 @@ class ProfileViewController: UIViewController {
         outfitsLayout.scrollDirection = .vertical
         outfitsLayout.minimumInteritemSpacing = padding
         outfitsLayout.minimumLineSpacing = padding
-        // outfitsLayout.headerReferenceSize = CGSize(CGSize(width: self.outfitsCollectionView.frame.size.width, height: 100))
+ 
         
         outfitsCollectionView = UICollectionView(frame: .zero, collectionViewLayout: outfitsLayout)
         outfitsCollectionView.register(OutfitsCollectionViewCell.self, forCellWithReuseIdentifier: outfitsCellReuseIdentifier)
