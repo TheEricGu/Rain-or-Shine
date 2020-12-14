@@ -30,6 +30,10 @@ def failure_response(message, code=404):
 # -- ROUTES ------------------------------------------------------
 
 @app.route("/")
+@app.route("/api/test/")
+def hello_world():
+    return "Hello world"
+
 @app.route("/api/outfits/")
 def get_outfits():
     return success_response( [o.serialize() for o in Outfit.query.all()] )
@@ -69,4 +73,4 @@ def delete_outfit(course_id):
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
-    app.run(host="127.0.0.1", port=port)
+    app.run(host="0.0.0.0", port=port)
