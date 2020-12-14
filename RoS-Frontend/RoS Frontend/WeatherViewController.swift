@@ -35,6 +35,7 @@ class WeatherViewController: UIViewController, UICollectionViewDelegate {
     // set up outfits
     let outfit1 = Outfit(imageName: "clothes1.jpeg", weatherTags: ["winter", "cloudy"], didLike: false, userPosted: false)
     var outfits: [Outfit] = []
+    var realOutfits: [RealOutfit] = []
     
     func getHourly() {
         OpenWeatherManager.getHourly { hourlyData in
@@ -47,16 +48,21 @@ class WeatherViewController: UIViewController, UICollectionViewDelegate {
                 self.weatherCollectionView.reloadData()
                 let rainLabelLayer = CATextLayer()
                 let rainLabelAttributes: [NSAttributedString.Key: Any] = [
-                    .font: UIFont.systemFont(ofSize: 10.0, weight: .regular),
+                    .font: UIFont.systemFont(ofSize: 10.5, weight: .semibold),
                     .foregroundColor: UIColor.white,
                 ]
                 rainLabelLayer.string = NSAttributedString(string: (self.rainChance + " | " + self.windSpeed), attributes: rainLabelAttributes)
                 rainLabelLayer.alignmentMode = .center
                 rainLabelLayer.alignmentMode = CATextLayerAlignmentMode.center;
                 rainLabelLayer.frame = CGRect(x: 69, y: 69, width: 350, height: 50)
-                rainLabelLayer.position = CGPoint(x: self.headerView.frame.maxX / 3, y: self.headerView.frame.maxY / 4 + 69)
+                rainLabelLayer.position = CGPoint(x: self.headerView.frame.maxX / 3, y: self.headerView.frame.maxY / 4 + 71)
                 self.headerView.layer.addSublayer(rainLabelLayer)
             }
+        }
+    }
+    func getOutfits() {
+        OutfitsManager.getWeatherOutfits(gender: "male", season: "fall", weather: "sunny", temperatureWord: "hot") { weatherOutfitData in
+            self.realOutfits = weatherOutfitData
         }
     }
     
@@ -67,17 +73,18 @@ class WeatherViewController: UIViewController, UICollectionViewDelegate {
             self.iconDescriptionText = currentData.weather[0].description
             self.currentTemp = String(format:"%.0f", currentData.temp)
             self.feelsLike = self.feelsLike + String(format:"%.0f", currentData.feels_like)
+            self.getOutfits()
             DispatchQueue.main.async {
                 self.headerView.backgroundColor = .white
                 let backgroundLayer1 = CAShapeLayer()
-                backgroundLayer1.path = UIBezierPath(roundedRect: CGRect(x: 12, y: 12, width: self.headerView.frame.maxX - 24, height: 125), cornerRadius: 20).cgPath
+                backgroundLayer1.path = UIBezierPath(roundedRect: CGRect(x: 12, y: 12, width: self.headerView.frame.maxX - 24, height: self.headerView.frame.maxY/2), cornerRadius: 20).cgPath
                 backgroundLayer1.fillColor = UIColor(red: 0.608, green: 0.813, blue: 0.929, alpha: 1).cgColor
                 self.headerView.layer.addSublayer(backgroundLayer1)
                 
-                let backgroundLayer2 = CAShapeLayer()
-                backgroundLayer2.path = UIBezierPath(roundedRect: CGRect(x: 12, y: 12, width: self.headerView.frame.maxX - 24, height: 125), cornerRadius: 20).cgPath
-                backgroundLayer2.fillColor = UIColor(red: 0.608, green: 0.813, blue: 0.929, alpha: 1).cgColor
-                self.headerView.layer.addSublayer(backgroundLayer2)
+//                let backgroundLayer2 = CAShapeLayer()
+//                backgroundLayer2.path = UIBezierPath(roundedRect: CGRect(x: 12, y: 12, width: self.headerView.frame.maxX - 24, height: 125), cornerRadius: 20).cgPath
+//                backgroundLayer2.fillColor = UIColor(red: 0.608, green: 0.813, blue: 0.929, alpha: 1).cgColor
+//                self.headerView.layer.addSublayer(backgroundLayer2)
                 
                 let iconLayer = CALayer()
                 let iconImage = UIImage(named: (self.iconName + "med"))?.cgImage
@@ -95,7 +102,7 @@ class WeatherViewController: UIViewController, UICollectionViewDelegate {
                 iconLabelLayer.alignmentMode = .center
                 iconLabelLayer.alignmentMode = CATextLayerAlignmentMode.center;
                 iconLabelLayer.frame = CGRect(x: 0, y: 0, width: 350, height: 50)
-                iconLabelLayer.position = CGPoint(x: self.headerView.frame.maxX / 3 * 2, y: self.headerView.frame.maxY / 4 + 54)
+                iconLabelLayer.position = CGPoint(x: self.headerView.frame.maxX / 3 * 2, y: self.headerView.frame.maxY / 4 + 52)
                 self.headerView.layer.addSublayer(iconLabelLayer)
                 
                 let tempLabelLayer = CATextLayer()
@@ -133,7 +140,7 @@ class WeatherViewController: UIViewController, UICollectionViewDelegate {
                 cityLabelLayer.frame = CGRect(x: 0, y: 0, width: 350, height: 50)
                 cityLabelLayer.position = CGPoint(x: self.headerView.frame.maxX / 3, y: self.headerView.frame.maxY / 4 - 7)
                 self.headerView.layer.addSublayer(cityLabelLayer)
-                
+                self.weatherCollectionView.reloadData()
                 
                 
             }

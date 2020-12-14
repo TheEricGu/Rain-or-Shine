@@ -67,3 +67,30 @@ class OpenWeatherManager {
         }
     }
 }
+
+
+class OutfitsManager {
+
+    private static let header = "https://cornell-rain-or-shine.herokuapp.com/api"
+    
+    static func getWeatherOutfits(gender: String, season: String, weather: String, temperatureWord: String, completion: @escaping ([RealOutfit]) -> Void) {
+        // "\(header)/\(gender)/\(season)/\(weather)/\(temperatureWord)/"
+        let endpoint = header + "/outfits/"
+        print(endpoint)
+        AF.request(endpoint, method: .get).validate().responseData { response in
+            switch response.result {
+            case .success(let data):
+                let convertedString : String! = String(data: data, encoding: String.Encoding.utf8)
+                print(convertedString!)
+                let jsonDecoder = JSONDecoder()
+                if let weatherOutfitsData = try? jsonDecoder.decode(WeatherResponse.self, from: data) {
+                    let weatherOutfitsList = weatherOutfitsData.data
+                    completion(weatherOutfitsList)
+                }
+                
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+}

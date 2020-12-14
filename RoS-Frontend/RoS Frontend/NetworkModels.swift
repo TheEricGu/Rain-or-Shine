@@ -45,3 +45,18 @@ func unixToDate(unix: Double) -> Date {
     let date = Date(timeIntervalSince1970: unix)
     return date
 }
+
+// OUTFITS DATA
+
+struct WeatherResponse: Codable {
+    let success: Bool
+    let data: [RealOutfit]
+}
+
+struct RealOutfit: Codable {
+    let gender: String
+    let season: String
+    let weather: String
+    let temp: String
+    let url: String
+}
