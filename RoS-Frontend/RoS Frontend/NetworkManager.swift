@@ -18,7 +18,7 @@ class OpenWeatherManager {
             switch response.result {
             case .success(let data):
                 let jsonDecoder = JSONDecoder()
-                if let OWData = try? jsonDecoder.decode(Data.self, from: data) {
+                if let OWData = try? jsonDecoder.decode(WeatherData.self, from: data) {
                     let currentData = OWData.current
                     completion(currentData)
                 }
@@ -37,7 +37,7 @@ class OpenWeatherManager {
 //                print(convertedString)
                 let jsonDecoder = JSONDecoder()
 //                jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
-                if let OWData = try? jsonDecoder.decode(Data.self, from: data) {
+                if let OWData = try? jsonDecoder.decode(WeatherData.self, from: data) {
                     let hourlyData = OWData.hourly
                     completion(hourlyData)
                 }
@@ -48,7 +48,7 @@ class OpenWeatherManager {
         }
     }
     
-    static func getData(completion: @escaping (Data) -> Void) {
+    static func getData(completion: @escaping (WeatherData) -> Void) {
         AF.request(endpoint, method: .get).validate().responseData { response in
             switch response.result {
             case .success(let data):
@@ -56,7 +56,7 @@ class OpenWeatherManager {
 //                print(convertedString)
                 let jsonDecoder = JSONDecoder()
 //                jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
-                if let OWData = try? jsonDecoder.decode(Data.self, from: data) {
+                if let OWData = try? jsonDecoder.decode(WeatherData.self, from: data) {
                     let data = OWData
                     completion(data)
                 }

@@ -40,7 +40,10 @@ class OutfitViewController: UIViewController {
         // let photoURL = URL(string: outfit.imageName)
         // this downloads the image asynchronously if it's not cached yet
         // outfitImageView.kf.setImage(with: photoURL)
-        outfitImageView.image = UIImage(named: outfit.imageName)
+        guard let imageData = try? Data(contentsOf: URL(string: outfit.imageName)!) else {
+                        return
+                    }
+        outfitImageView.image = UIImage(data: imageData)
         outfitImageView.translatesAutoresizingMaskIntoConstraints = false
         outfitImageView.contentMode = .scaleAspectFill
         outfitImageView.layer.masksToBounds = true
