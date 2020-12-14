@@ -17,6 +17,7 @@ class SettingsViewController: UIViewController {
     let reuseIdentifier = "settingsCellReuse"
     let cellHeight: CGFloat = 50
     
+    let name = Settings(name: "Name: ", option: "Mathew Scullin")
     let gender = Settings(name: "Gender: ", option: "Female")
     let location = Settings(name: "Location: ", option: "Ithaca, NY")
     
@@ -27,7 +28,7 @@ class SettingsViewController: UIViewController {
         
         navigationItem.title = "Settings"
         self.view.backgroundColor = UIColor.white
-        settings = [gender, location]
+        settings = [name, gender, location]
         
         settingsTableView = UITableView()
         settingsTableView.translatesAutoresizingMaskIntoConstraints = false

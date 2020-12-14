@@ -6,7 +6,7 @@
 //
 import Foundation
 
-struct Filter: Codable {
+struct Filter: Codable, Equatable {
     var filterName: String
     var didSelect: Bool
 }

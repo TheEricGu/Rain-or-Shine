@@ -13,7 +13,7 @@ class OutfitViewController: UIViewController {
     private let weatherTags = UILabel()
     private let saveIcon = UIImageView()
     private let shareIcon = UIImageView()
-    private let likedHeart = UIImageView()
+    private let likedHeart = UIImageView() // TODO: GET LIKED PHOTOS ONLY AND STORE THEM SOMEWHERE
     
     init(outfit: Outfit) {
         super.init(nibName: nil, bundle: nil)
@@ -28,6 +28,13 @@ class OutfitViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         title = "Photo"
+        
+        if outfit.userPosted {
+            let rightBarButton = UIBarButtonItem(title: "Delete Post", style: UIBarButtonItem.Style.plain, target: self, action: #selector(OutfitViewController.myRightSideBarButtonItemTapped(_:)))
+                    self.navigationItem.rightBarButtonItem = rightBarButton
+            rightBarButton.image = UIImage(named: "trash_full.png")
+            rightBarButton.tintColor = UIColor(red: 0.04, green: 0.492, blue: 0.746, alpha: 1)
+        }
         
         // kingfisher stuff for later
         // let photoURL = URL(string: outfit.imageName)
@@ -117,6 +124,15 @@ class OutfitViewController: UIViewController {
         ])
         
     }
+    
+    // for post deletion
+    @objc func myRightSideBarButtonItemTapped(_ sender:UIBarButtonItem!){
+        // TO DO: HANDLE POST DELETION HERE
+        let alert = UIAlertController(title: "Are you sure you want to delete your post?", message: "This action cannot be undone.", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: nil))
+        alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
+        self.present(alert, animated: true)
+        }
 
 
 //    private func getRestaurant() {

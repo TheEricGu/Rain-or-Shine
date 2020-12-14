@@ -33,7 +33,7 @@ class WeatherViewController: UIViewController, UICollectionViewDelegate {
     var data: [Data] = []
     
     // set up outfits
-    let outfit1 = Outfit(imageName: "clothes1.jpeg", weatherTags: ["winter", "cloudy"], didLike: false)
+    let outfit1 = Outfit(imageName: "clothes1.jpeg", weatherTags: ["winter", "cloudy"], didLike: false, userPosted: false)
     var outfits: [Outfit] = []
     
     func getHourly() {

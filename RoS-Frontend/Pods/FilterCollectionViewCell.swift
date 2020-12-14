@@ -30,21 +30,16 @@ class FilterCollectionViewCell: UICollectionViewCell {
     func configure(filter: Filter) {
         filterLabel.text = filter.filterName
         // TODO: probably something about toggling filter selection here
+        if filter.didSelect {
+            filterLabel.backgroundColor = UIColor(red: 0.925, green: 0.431, blue: 0.298, alpha: 1)
+        }
+        else {
+            filterLabel.backgroundColor = .white
+        }
     }
     
     func filterBy(tag: String) {
         // TODO? 
-    }
-    
-    func pressFilter(){
-        filterLabel.backgroundColor = UIColor(red: 0.925, green: 0.431, blue: 0.298, alpha: 1)
-        // filterLabel.layer.cornerRadius = 10
-    }
-    
-    func unpressFilter(){
-        filterLabel.backgroundColor = .white
-//        self.layer.borderWidth = 1
-//        self.layer.cornerRadius = 10
     }
     
     required init?(coder: NSCoder) {

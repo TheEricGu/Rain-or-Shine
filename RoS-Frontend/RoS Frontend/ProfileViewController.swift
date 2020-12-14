@@ -19,7 +19,7 @@ class ProfileViewController: UIViewController {
     
     // TODO: USER POSTED OUTFITS ONLY??
     // set up outfits
-    let outfit1 = Outfit(imageName: "clothes1.jpeg", weatherTags: ["winter", "cloudy"], didLike: false)
+    let outfit1 = Outfit(imageName: "clothes1.jpeg", weatherTags: ["winter", "cloudy"], didLike: false, userPosted: true)
     var outfits: [Outfit] = []
 
     override func viewDidLoad() {

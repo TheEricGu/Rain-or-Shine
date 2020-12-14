@@ -22,10 +22,11 @@ class LikedViewController: UIViewController, UICollectionViewDelegate {
     // TODO: DETERMINE FILTERS?
     let filter1 = Filter(filterName: "Autumn", didSelect: false)
     var filters: [Filter] = []
+    var filtersPressed: [Filter] = []
     
     // set up outfits
     // TODO: GET LIKED OUTFITS ONLY! 
-    let outfit1 = Outfit(imageName: "clothes1.jpeg", weatherTags: ["winter", "cloudy"], didLike: true)
+    let outfit1 = Outfit(imageName: "clothes1.jpeg", weatherTags: ["winter", "cloudy"], didLike: true, userPosted: false)
     var outfits: [Outfit] = []
 
     override func viewDidLoad() {
@@ -157,20 +158,26 @@ extension LikedViewController: UICollectionViewDelegateFlowLayout {
         
         // TODO: FILTER TAPPING SHIT AND SORTING
         if collectionView == self.filterCollectionView {
-            var filter = filters[indexPath.row]
-            let cell = filterCollectionView.cellForItem(at: indexPath) as! FilterCollectionViewCell
+            let filter = filters[indexPath.row]
+//            let cell = filterCollectionView.cellForItem(at: indexPath) as! FilterCollectionViewCell
             
             if !filter.didSelect {
-                cell.pressFilter()
-                filter.didSelect = true
+                filters[indexPath.row].didSelect = true
+                filtersPressed.append(filters[indexPath.row])
+                // TODO: SORT OUTFITS TO DISPLAY ONLY THOSE THAT MATCH FILTER
+                
                 }
             else {
-                cell.unpressFilter()
-                filter.didSelect = false
-                // showResta.remove(at: indexPath.row)
-                //filterPressed.remove(at: indexPath.row)
+                filters[indexPath.row].didSelect = false
+                let remove = filters[indexPath.row]
+                for filter in filtersPressed {
+                    if filter ==  remove {
+                        filtersPressed.remove(at: filtersPressed.firstIndex(of: remove)!)
+                        // TODO: SORT OUTFITS? 
+                    }
+                }
             }
-        //filterCollectionView.reloadData()
+        filterCollectionView.reloadData()
         outfitsCollectionView.reloadData()
     }
 }
