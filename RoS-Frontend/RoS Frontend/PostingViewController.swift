@@ -67,7 +67,7 @@ class PostingViewController: UIViewController {
         view.addSubview(instructions)
         
         // filter
-        filters = [filter1,filter1,filter1,filter1,filter1,filter1,filter1]
+        filters = [filter1,filter1,filter1,filter1]
         let filterLayout = UICollectionViewFlowLayout()
         filterLayout.scrollDirection = .horizontal
         filterLayout.minimumInteritemSpacing = padding
@@ -124,9 +124,9 @@ class PostingViewController: UIViewController {
         
         // filter constraints
         NSLayoutConstraint.activate([filterCollectionView.topAnchor.constraint(equalTo: instructions.bottomAnchor, constant: 30),
-            filterCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
-            filterCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: padding),
-            filterCollectionView.heightAnchor.constraint(equalToConstant: 300)])
+             filterCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
+             filterCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
+            filterCollectionView.heightAnchor.constraint(equalToConstant: 50)])
         
         // close button constraints
         NSLayoutConstraint.activate([closeButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
@@ -171,33 +171,20 @@ extension PostingViewController: UICollectionViewDelegateFlowLayout {
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         // TODO: FILTER TAPPING SHIT AND SORTING
-        let filter = filters[indexPath.row]
-        let cell = collectionView.cellForItem(at: indexPath) as! FilterCollectionViewCell
-        
-//            if !filter.pressed {
-//                //tag.pressed.toggle()
-//                cell.pressFilter()
-//                filterPressed.append(tag)
-//                for resta in restaurants {
-//                    for filt in filterPressed {
-//                        if resta.tags.contains(filt.name) {
-//                            // if !showResta.contains(resta) {
-//                                showResta.append(resta)
-//                            }
-//                        }
-//                    }
-//                rcollectionView.reloadData()
-//                }
-//            else {
-//                tag.pressed.toggle()
-//                cell.unpressFilter()
-//                showResta.remove(at: indexPath.row)
-//                filterPressed.remove(at: indexPath.row)
-//            }
-//
-//        }
-//        }
-//    }
+        if collectionView == self.filterCollectionView {
+            var filter = filters[indexPath.row]
+//            let cell = filterCollectionView.cellForItem(at: indexPath) as! FilterCollectionViewCell
+            
+            if !filter.didSelect {
+                filters[indexPath.row].didSelect = true
+                }
+            else {
+                filters[indexPath.row].didSelect = false
+                // showResta.remove(at: indexPath.row)
+                //filterPressed.remove(at: indexPath.row)
+            }
+        filterCollectionView.reloadData()
+    }
         }
     }
 
