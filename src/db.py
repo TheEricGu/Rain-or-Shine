@@ -22,7 +22,6 @@ class Outfit(db.Model):
   __tablename__ = 'outfit'
 
   id = db.Column(db.Integer, primary_key=True)
-  name = db.Column(db.String, nullable=False)
   gender = db.Column(db.String, nullable=False)
   weather = db.Column(db.String, nullable=False)
   temp = db.Column(db.String, nullable=False)
@@ -37,7 +36,6 @@ class Outfit(db.Model):
   # image_data = db.Column(db.String, nullable=False)
 
   def __init__(self, **kwargs):
-    self.name = kwargs.get('name')
     self.gender = kwargs.get('gender')
     self.weather = kwargs.get('weather')
     self.temp = kwargs.get('temp')
@@ -46,7 +44,6 @@ class Outfit(db.Model):
   def serialize(self):
     return {
       'id': self.id,
-      'name': self.name,
       'gender': self.gender,
       'weather': self.weather,
       'temp': self.temp,
