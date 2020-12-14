@@ -65,7 +65,7 @@ class WeatherCollectionViewCell: UICollectionViewCell {
             degreeLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor)])
     }
     
-    func configure(hourly: RealHourly, data: Data) {
+    func configure(hourly: RealHourly, data: Data, index: Int) {
         let image = UIImage(named: hourly.weather[0].icon)!
         weatherImageView.image = image
         
@@ -75,7 +75,10 @@ class WeatherCollectionViewCell: UICollectionViewCell {
         formatter.dateFormat = "H"
         let intTime : Int! = Int(formatter.string(from: date))
         var finalTime = "you messed up"
-        if intTime > 12 {
+        if index == 0 {
+            finalTime = "Now"
+        }
+        else if intTime > 12 {
             finalTime = String(intTime - 12) + " PM"
         }
         else if intTime == 0 {
