@@ -156,6 +156,22 @@ extension LikedViewController: UICollectionViewDelegateFlowLayout {
         }
         
         // TODO: FILTER TAPPING SHIT AND SORTING
+        if collectionView == self.filterCollectionView {
+            var filter = filters[indexPath.row]
+            let cell = filterCollectionView.cellForItem(at: indexPath) as! FilterCollectionViewCell
+            
+            if !filter.didSelect {
+                cell.pressFilter()
+                filter.didSelect = true
+                }
+            else {
+                cell.unpressFilter()
+                filter.didSelect = false
+                // showResta.remove(at: indexPath.row)
+                //filterPressed.remove(at: indexPath.row)
+            }
+        //filterCollectionView.reloadData()
+        outfitsCollectionView.reloadData()
     }
 }
-
+}

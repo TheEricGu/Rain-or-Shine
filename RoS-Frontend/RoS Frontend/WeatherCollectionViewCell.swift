@@ -35,11 +35,13 @@ class WeatherCollectionViewCell: UICollectionViewCell {
         timeLabel = UILabel()
         timeLabel.translatesAutoresizingMaskIntoConstraints = false
         timeLabel.font = .boldSystemFont(ofSize: 16)
+        timeLabel.textAlignment = .center
         contentView.addSubview(timeLabel)
         
         degreeLabel = UILabel()
         degreeLabel.translatesAutoresizingMaskIntoConstraints = false
         degreeLabel.font = .systemFont(ofSize: 15)
+        degreeLabel.textAlignment = .center
         contentView.addSubview(degreeLabel)
         
         setupConstraints()
@@ -47,7 +49,7 @@ class WeatherCollectionViewCell: UICollectionViewCell {
     
     func setupConstraints() {
         // time label constraints
-        NSLayoutConstraint.activate([timeLabel.topAnchor.constraint(equalTo: contentView.topAnchor), timeLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor), timeLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+        NSLayoutConstraint.activate([timeLabel.topAnchor.constraint(equalTo: contentView.topAnchor),
             timeLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             timeLabel.topAnchor.constraint(equalTo: contentView.topAnchor)])
         
@@ -60,7 +62,6 @@ class WeatherCollectionViewCell: UICollectionViewCell {
         
         // degree label constraints
         NSLayoutConstraint.activate([degreeLabel.topAnchor.constraint(equalTo: weatherImageView.bottomAnchor),
-            degreeLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor), degreeLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             degreeLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor)])
     }
     
