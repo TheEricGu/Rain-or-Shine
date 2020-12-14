@@ -75,7 +75,9 @@ class OutfitsManager {
     
     static func getWeatherOutfits(gender: String, season: String, weather: String, temperatureWord: String, completion: @escaping ([RealOutfit]) -> Void) {
         // "\(header)/\(gender)/\(season)/\(weather)/\(temperatureWord)/"
-        let endpoint = header + "/outfits/"
+        print("getweatheroutfits is running")
+        print(gender + season + weather + temperatureWord)
+        let endpoint = "\(header)/outfits/\(gender)/\(season)/\(weather)/\(temperatureWord)/"
         print(endpoint)
         AF.request(endpoint, method: .get).validate().responseData { response in
             switch response.result {
@@ -93,4 +95,29 @@ class OutfitsManager {
             }
         }
     }
-}
+    
+    static func postOutfit(gender: String, season: String, weather: String, temperatureWord: String, image: UIImage) {
+        let endpoint = header + "/outfits/"
+//        print(endpoint)
+        let compressedImageData : Data! = image.jpegData(compressionQuality: 0.25)
+        let imageBase64 : String = compressedImageData.base64EncodedString(options: .lineLength64Characters)
+//        print(gender)
+//        print(season)
+//        print(weather)
+//        print(temperatureWord)
+        let parameters = [
+            "gender" : gender,
+            "season" : season,
+            "weather" : weather,
+            "temp": temperatureWord,
+            "image_data": ("data:image/jpeg;base64," + imageBase64)
+        ] as Parameters
+//        print(parameters)
+        AF.request(endpoint, method: .post, parameters: parameters, encoding: JSONEncoding.default)
+            .response { request in
+                let dataString = NSString(data: request.data!, encoding:String.Encoding.utf8.rawValue)
+                    print(dataString)
+            }
+        }
+        
+    }

@@ -203,6 +203,42 @@ class PostingViewController: UIViewController {
     
     @objc func dismissViewControllerAndPost() {
         // TODO: POST IMAGE AND ADD IT TO API
+        var gender = "female"
+        var season = "winter"
+        var weather = "cloudy"
+        var temperatureWord = "cold"
+        for filter in filtersPressed {
+            let name = filter.filterName
+            if (["Autumn", "Spring", "Summer", "Winter"].contains(name)) {
+                season = name.lowercased()
+            }
+            else if ("Freezing \n(Below 20°)" == name) {
+                temperatureWord = "freezing"
+            }
+            else if ("Cold \n(21°-40°)" == name) {
+                temperatureWord = "cold"
+            }
+            else if ("Chilly \n(41°-60°)" == name) {
+                temperatureWord = "chilly"
+            }
+            else if ("Moderate \n(61°-80°)" == name) {
+                temperatureWord = "moderate"
+            }
+            else if ("Warm \n(81°-90°)" == name) {
+                temperatureWord = "warm"
+            }
+            else if ("Hot \n(Above 90°)" == name) {
+                temperatureWord = "hot"
+            }
+            else if ["Female", "Male"].contains(name) {
+                gender = name.lowercased()
+            }
+            else {
+                weather = name.lowercased()
+            }
+        }
+        print(gender + season + weather + temperatureWord)
+        OutfitsManager.postOutfit(gender: gender, season: season, weather: weather, temperatureWord: temperatureWord, image: image)
         dismiss(animated: true, completion: nil)
     }
 }
@@ -273,7 +309,7 @@ extension PostingViewController: UICollectionViewDelegateFlowLayout {
             seasonsCollectionView.reloadData()
         }
 
-        if collectionView == self.tempsCollectionView {
+        else if collectionView == self.tempsCollectionView {
             let filter = tempFilters[indexPath.row]
             if !filter.didSelect {
                 tempFilters[indexPath.row].didSelect = true
