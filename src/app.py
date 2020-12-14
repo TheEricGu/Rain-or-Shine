@@ -38,7 +38,7 @@ def hello_world():
 def get_all_outfits():
     return success_response( [o.serialize() for o in Outfit.query.all()] )
 
-@app.route("/api/outfits/<string:gender>/<string:weather>/<string:temp>/")
+@app.route("/api/outfits/<string:gender>/<string:season><string:weather>/<string:temp>/")
 def get_outfits(gender, season, weather, temp):
     outfits = Outfit.query.filter_by(gender=gender, season=season, weather=weather, temp=temp)
     if outfits is None:
