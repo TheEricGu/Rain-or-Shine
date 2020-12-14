@@ -27,6 +27,11 @@ class OutfitViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+//        // RESET USER DEFAULTS TO TEST
+//        let domain = Bundle.main.bundleIdentifier!
+//        UserDefaults.standard.removePersistentDomain(forName: domain)
+//        UserDefaults.standard.synchronize()
+        
         view.backgroundColor = .white
         title = "Photo"
         
@@ -91,11 +96,6 @@ class OutfitViewController: UIViewController {
         
         // getOutfit()
         setupConstraints()
-        
-        // RESET USER DEFAULTS TO TEST
-        let domain = Bundle.main.bundleIdentifier!
-        UserDefaults.standard.removePersistentDomain(forName: domain)
-        UserDefaults.standard.synchronize()
         
     }
 

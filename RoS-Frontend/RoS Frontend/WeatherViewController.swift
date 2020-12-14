@@ -61,7 +61,8 @@ class WeatherViewController: UIViewController, UICollectionViewDelegate {
         }
     }
     func getOutfits(weather: String, temperatureWord: String) {
-        OutfitsManager.getWeatherOutfits(gender: UserDefaults.standard.string(forKey: "Gender")!, season: "winter", weather: weather, temperatureWord: temperatureWord) { weatherOutfitData in
+        self.outfits = []
+        OutfitsManager.getWeatherOutfits(gender: "female", season: "winter", weather: weather, temperatureWord: temperatureWord) { weatherOutfitData in
             for realOutfit in weatherOutfitData {
                 print(realOutfit.url)
                 let newOutfit : Outfit = Outfit(imageName: realOutfit.url, weatherTags: [realOutfit.gender, realOutfit.season, realOutfit.weather, realOutfit.temp], didLike: false, userPosted: false)
@@ -79,6 +80,7 @@ class WeatherViewController: UIViewController, UICollectionViewDelegate {
             self.iconName = currentData.weather[0].icon
             self.iconDescriptionText = currentData.weather[0].description
             self.currentTemp = String(format:"%.0f", currentData.temp)
+            self.feelsLike = "Feels like "
             self.feelsLike = self.feelsLike + String(format:"%.0f", currentData.feels_like)
             var temperatureWord = ""
             if (Int(self.currentTemp)! < 21) {
@@ -179,7 +181,7 @@ class WeatherViewController: UIViewController, UICollectionViewDelegate {
                     .font: UIFont.systemFont(ofSize: 24.0, weight: .bold),
                     .foregroundColor: UIColor.white,
                 ]
-                cityLabelLayer.string = NSAttributedString(string: "Ithaca", attributes: cityLabelAttributes)
+                cityLabelLayer.string = NSAttributedString(string: UserDefaults.standard.string(forKey: "Location")!, attributes: cityLabelAttributes)
                 cityLabelLayer.alignmentMode = .center
                 cityLabelLayer.alignmentMode = CATextLayerAlignmentMode.center;
                 cityLabelLayer.frame = CGRect(x: 0, y: 0, width: 350, height: 50)
@@ -264,6 +266,16 @@ class WeatherViewController: UIViewController, UICollectionViewDelegate {
         setupConstraints()
         
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        getData()
+        getCurrent()
+        do {
+            sleep(1)
+        }
+        getHourly()
+    }
+
     
     private func setupConstraints() {
         // header
