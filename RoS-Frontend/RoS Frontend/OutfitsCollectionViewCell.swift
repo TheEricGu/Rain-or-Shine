@@ -4,7 +4,7 @@
 //
 //  Created by Alyssa Zhang on 12/5/20.
 //
-
+import Foundation
 import UIKit
 
 class OutfitsCollectionViewCell: UICollectionViewCell {
@@ -22,10 +22,10 @@ class OutfitsCollectionViewCell: UICollectionViewCell {
         outfitImageView.layer.cornerRadius = 10
         contentView.addSubview(outfitImageView)
         
-        weatherTags = UILabel()
-        weatherTags.translatesAutoresizingMaskIntoConstraints = false
-        weatherTags.font = .systemFont(ofSize: 10)
-        contentView.addSubview(weatherTags)
+//        weatherTags = UILabel()
+//        weatherTags.translatesAutoresizingMaskIntoConstraints = false
+//        weatherTags.font = .systemFont(ofSize: 10)
+//        contentView.addSubview(weatherTags)
         
         likedHeart = UIImageView()
         likedHeart.translatesAutoresizingMaskIntoConstraints = false
@@ -35,7 +35,9 @@ class OutfitsCollectionViewCell: UICollectionViewCell {
         
         setupConstraints()
     }
-    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     func setupConstraints() {
         
         // image view constraints
@@ -47,23 +49,28 @@ class OutfitsCollectionViewCell: UICollectionViewCell {
             outfitImageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
         ])
         
-        // weather tags label constraints
-        NSLayoutConstraint.activate([weatherTags.topAnchor.constraint(equalTo: outfitImageView.bottomAnchor),
-            weatherTags.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            weatherTags.centerXAnchor.constraint(equalTo: contentView.centerXAnchor)])
+//        // weather tags label constraints
+//        NSLayoutConstraint.activate([weatherTags.topAnchor.constraint(equalTo: outfitImageView.bottomAnchor),
+//            weatherTags.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+//            weatherTags.centerXAnchor.constraint(equalTo: contentView.centerXAnchor)])
         
         // liked heart image view constraints
         NSLayoutConstraint.activate([likedHeart.topAnchor.constraint(equalTo: outfitImageView.bottomAnchor, constant: 2),
             likedHeart.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)])
     }
     
+
+    
     func configure(outfit: Outfit) {
-        outfitImageView.image = UIImage(named: outfit.imageName)
+//        outfitImageView.image = UIImage.imageWithData(outfit.imageName)
         
-        weatherTags.text = "" 
-        for tag in outfit.weatherTags{
-            weatherTags.text! += "#" + tag + " "
-            
+//        weatherTags.text = ""
+//        for tag in outfit.weatherTags{
+//            weatherTags.text! += "#" + tag + " "
+        guard let imageData = try? Data(contentsOf: URL(string: outfit.imageName)!) else {
+                        return
+                    }
+        outfitImageView.image = UIImage(data: imageData)
         if outfit.didLike {
             likedHeart.image = UIImage(named: "likedheart.png")
         }
@@ -76,9 +83,5 @@ class OutfitsCollectionViewCell: UICollectionViewCell {
     func filterBy(tag: String) {
         
     }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-}
+
 

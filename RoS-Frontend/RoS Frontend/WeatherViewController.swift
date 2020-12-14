@@ -30,7 +30,7 @@ class WeatherViewController: UIViewController, UICollectionViewDelegate {
     var feelsLike: String = "Feels like "
     var rainChance: String = "Rain "
     var windSpeed: String = "Wind "
-    var data: [Data] = []
+    var data: [WeatherData] = []
     
     // set up outfits
     let outfit1 = Outfit(imageName: "clothes1.jpeg", weatherTags: ["winter", "cloudy"], didLike: false, userPosted: false)
@@ -42,7 +42,7 @@ class WeatherViewController: UIViewController, UICollectionViewDelegate {
             let sliced = hourlyData[0...12]
             let data = Array(sliced)
             self.hourly = data
-            self.rainChance = "Rain " + String(hourlyData[0].pop * 100) + "%"
+            self.rainChance = "Rain " + String(format:"%.1f", hourlyData[0].pop * 100) + "%"
             self.windSpeed = "Wind " + String(format:"%.1f", hourlyData[0].wind_speed) + " mph"
             DispatchQueue.main.async {
                 self.weatherCollectionView.reloadData()
@@ -62,8 +62,15 @@ class WeatherViewController: UIViewController, UICollectionViewDelegate {
     }
     func getOutfits() {
         OutfitsManager.getWeatherOutfits(gender: "male", season: "fall", weather: "sunny", temperatureWord: "hot") { weatherOutfitData in
-            self.realOutfits = weatherOutfitData
+            for realOutfit in weatherOutfitData {
+                print(realOutfit.url)
+                let newOutfit : Outfit = Outfit(imageName: realOutfit.url, weatherTags: [realOutfit.gender, realOutfit.season, realOutfit.weather, realOutfit.temp], didLike: false, userPosted: false)
+                self.outfits.append(newOutfit)
+                DispatchQueue.main.async {
+                    self.outfitsCollectionView.reloadData()
+            }
         }
+    }
     }
     
     func getCurrent() {
@@ -184,7 +191,7 @@ class WeatherViewController: UIViewController, UICollectionViewDelegate {
         view.addSubview(weatherCollectionView)
         
         // outfits
-        outfits = [outfit1,outfit1,outfit1,outfit1,outfit1,outfit1,outfit1,outfit1,outfit1,outfit1]
+//        outfits = [outfit1,outfit1,outfit1,outfit1,outfit1,outfit1,outfit1,outfit1,outfit1,outfit1]
         let outfitsLayout = UICollectionViewFlowLayout()
         outfitsLayout.scrollDirection = .vertical
         outfitsLayout.minimumInteritemSpacing = padding

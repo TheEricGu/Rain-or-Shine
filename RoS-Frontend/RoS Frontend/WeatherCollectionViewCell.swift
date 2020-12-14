@@ -65,7 +65,7 @@ class WeatherCollectionViewCell: UICollectionViewCell {
             degreeLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor)])
     }
     
-    func configure(hourly: RealHourly, data: Data, index: Int) {
+    func configure(hourly: RealHourly, data: WeatherData, index: Int) {
         let image = UIImage(named: hourly.weather[0].icon)!
         weatherImageView.image = image
         

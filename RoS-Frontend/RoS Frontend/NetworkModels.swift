@@ -8,7 +8,7 @@
 import Foundation
 
 // outermost data
-struct Data: Codable {
+struct WeatherData: Codable {
     let current: Current
     let timezone_offset: Int
     var hourly: [RealHourly]
