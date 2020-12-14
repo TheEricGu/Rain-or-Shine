@@ -16,7 +16,7 @@ class WeatherViewController: UIViewController, UICollectionViewDelegate {
     let weatherCellReuseIdentifier = "weatherCellReuseIdentifier"
     let outfitsCellReuseIdentifier = "outfitsCellReuseIdentifier"
     
-    let padding: CGFloat = 4
+    let padding: CGFloat = 2
     let headerHeight: CGFloat = 50
     
     let headerID = "Header" // section header for outfits
@@ -219,18 +219,18 @@ class WeatherViewController: UIViewController, UICollectionViewDelegate {
             headerView.heightAnchor.constraint(equalToConstant: view.frame.height/4)
         ])
         
-        
         // weather collection view
         NSLayoutConstraint.activate([
-            weatherCollectionView.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: padding),
+            weatherCollectionView.topAnchor.constraint(equalTo: headerView.bottomAnchor),
             weatherCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
-            weatherCollectionView.heightAnchor.constraint(equalToConstant: 100),
+            weatherCollectionView.heightAnchor.constraint(equalToConstant: 95),
             weatherCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
+            weatherCollectionView.bottomAnchor.constraint(equalTo: outfitsCollectionView.topAnchor)
         ])
         
         // outfits collection view
         NSLayoutConstraint.activate([
-            outfitsCollectionView.topAnchor.constraint(equalTo: weatherCollectionView.bottomAnchor, constant: padding),
+            outfitsCollectionView.topAnchor.constraint(equalTo: weatherCollectionView.bottomAnchor),
             outfitsCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
             outfitsCollectionView.heightAnchor.constraint(equalToConstant: 500),
             outfitsCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),

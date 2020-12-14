@@ -13,7 +13,9 @@ class PostingViewController: UIViewController {
     weak var delegate: PostingHandler?
     var vcTitle: UILabel!
     var instructions: UILabel!
-    var filterCollectionView: UICollectionView!
+    var seasonsCollectionView: UICollectionView!
+    var tempsCollectionView: UICollectionView!
+    var weatherCollectionView: UICollectionView!
     var closeButton: UIButton!
     var postButton: UIButton!
     var image: UIImage!
@@ -25,8 +27,29 @@ class PostingViewController: UIViewController {
     
     // set up filter
     // TODO: DETERMINE FILTERS?
-    let filter1 = Filter(filterName: "Autumn", didSelect: false)
-    var filters: [Filter] = []
+    let autumn = Filter(filterName: "Autumn", didSelect: false)
+    let spring = Filter(filterName: "Spring", didSelect: false)
+    let summer = Filter(filterName: "Summer", didSelect: false)
+    let winter = Filter(filterName: "Winter", didSelect: false)
+    var seasonFilters: [Filter] = []
+    
+    let freezing = Filter(filterName: "Freezing \n(Below 20°)", didSelect: false)
+    let cold = Filter(filterName: "Cold \n(21°-40°)", didSelect: false)
+    let chilly = Filter(filterName: "Chilly \n(41°-60°)", didSelect: false)
+    let moderate = Filter(filterName: "Moderate \n(61°-80°)", didSelect: false)
+    let warm  = Filter(filterName: "Warm \n(81°-90°)", didSelect: false)
+    let hot = Filter(filterName: "Hot \n(Above 90°)", didSelect: false)
+    var tempFilters: [Filter] = []
+    
+    let thunderstorm = Filter(filterName: "Thunder", didSelect: false)
+    let drizzle = Filter(filterName: "Drizzle", didSelect: false)
+    let rain = Filter(filterName: "Rain", didSelect: false)
+    let snow = Filter(filterName: "Snow", didSelect: false)
+    let clear  = Filter(filterName: "Clear", didSelect: false)
+    let clouds = Filter(filterName: "Cloudy", didSelect: false)
+    var weatherFilters: [Filter] = []
+    
+    var filtersPressed: [Filter] = []
 
     init(delegate: PostingHandler?, image: UIImage!) {
         super.init(nibName: nil, bundle: nil)
@@ -67,21 +90,46 @@ class PostingViewController: UIViewController {
         view.addSubview(instructions)
         
         // filter
-        filters = [filter1,filter1,filter1,filter1]
+        seasonFilters = [autumn, spring, summer, winter]
         let filterLayout = UICollectionViewFlowLayout()
         filterLayout.scrollDirection = .horizontal
         filterLayout.minimumInteritemSpacing = padding
         filterLayout.minimumLineSpacing = padding
 
-        filterCollectionView = UICollectionView(frame: .zero, collectionViewLayout: filterLayout)
-        filterCollectionView.register(FilterCollectionViewCell.self, forCellWithReuseIdentifier: filterCellReuseIdentifier)
-        filterCollectionView.dataSource = self
-        filterCollectionView.delegate = self
-        filterCollectionView.translatesAutoresizingMaskIntoConstraints = false
-        filterCollectionView.backgroundColor = .white
-        filterCollectionView.showsVerticalScrollIndicator = false
-        filterCollectionView.showsHorizontalScrollIndicator = false
-        view.addSubview(filterCollectionView)
+        seasonsCollectionView = UICollectionView(frame: .zero, collectionViewLayout: filterLayout)
+        seasonsCollectionView.register(FilterCollectionViewCell.self, forCellWithReuseIdentifier: filterCellReuseIdentifier)
+        seasonsCollectionView.dataSource = self
+        seasonsCollectionView.delegate = self
+        seasonsCollectionView.translatesAutoresizingMaskIntoConstraints = false
+        seasonsCollectionView.backgroundColor = .white
+        seasonsCollectionView.showsVerticalScrollIndicator = false
+        seasonsCollectionView.showsHorizontalScrollIndicator = false
+        seasonsCollectionView.allowsMultipleSelection = true
+        view.addSubview(seasonsCollectionView)
+        
+        tempFilters = [freezing, cold, chilly, moderate, warm, hot]
+        tempsCollectionView = UICollectionView(frame: .zero, collectionViewLayout: filterLayout)
+        tempsCollectionView.register(FilterCollectionViewCell.self, forCellWithReuseIdentifier: filterCellReuseIdentifier)
+        tempsCollectionView.dataSource = self
+        tempsCollectionView.delegate = self
+        tempsCollectionView.translatesAutoresizingMaskIntoConstraints = false
+        tempsCollectionView.backgroundColor = .white
+        tempsCollectionView.showsVerticalScrollIndicator = false
+        tempsCollectionView.showsHorizontalScrollIndicator = false
+        tempsCollectionView.allowsMultipleSelection = true
+        view.addSubview(tempsCollectionView)
+        
+        weatherFilters = [thunderstorm, drizzle, rain, snow, clear, clouds]
+        weatherCollectionView = UICollectionView(frame: .zero, collectionViewLayout: filterLayout)
+        weatherCollectionView.register(FilterCollectionViewCell.self, forCellWithReuseIdentifier: filterCellReuseIdentifier)
+        weatherCollectionView.dataSource = self
+        weatherCollectionView.delegate = self
+        weatherCollectionView.translatesAutoresizingMaskIntoConstraints = false
+        weatherCollectionView.backgroundColor = .white
+        weatherCollectionView.showsVerticalScrollIndicator = false
+        weatherCollectionView.showsHorizontalScrollIndicator = false
+        weatherCollectionView.allowsMultipleSelection = true
+        view.addSubview(weatherCollectionView)
         
         // close button
         closeButton = UIButton()
@@ -123,10 +171,20 @@ class PostingViewController: UIViewController {
             instructions.leadingAnchor.constraint(equalTo: outfitImage.leadingAnchor, constant: 10)])
         
         // filter constraints
-        NSLayoutConstraint.activate([filterCollectionView.topAnchor.constraint(equalTo: instructions.bottomAnchor, constant: 30),
-             filterCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
-             filterCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
-            filterCollectionView.heightAnchor.constraint(equalToConstant: 50)])
+        NSLayoutConstraint.activate([seasonsCollectionView.topAnchor.constraint(equalTo: instructions.bottomAnchor, constant: 30),
+             seasonsCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
+             seasonsCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
+             seasonsCollectionView.heightAnchor.constraint(equalToConstant: 50)])
+        
+        NSLayoutConstraint.activate([tempsCollectionView.topAnchor.constraint(equalTo: seasonsCollectionView.bottomAnchor, constant: 5),
+             tempsCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
+             tempsCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
+             tempsCollectionView.heightAnchor.constraint(equalToConstant: 50)])
+        
+        NSLayoutConstraint.activate([weatherCollectionView.topAnchor.constraint(equalTo: tempsCollectionView.bottomAnchor, constant: 5),
+             weatherCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
+             weatherCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
+             weatherCollectionView.heightAnchor.constraint(equalToConstant: 50)])
         
         // close button constraints
         NSLayoutConstraint.activate([closeButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
@@ -137,7 +195,6 @@ class PostingViewController: UIViewController {
         NSLayoutConstraint.activate([postButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 15),
             postButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15)
             ])
-        
     }
     
     @objc func dismissViewController() {
@@ -152,39 +209,99 @@ class PostingViewController: UIViewController {
 
 extension PostingViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-            return filters.count
+        if collectionView == self.seasonsCollectionView{
+            return seasonFilters.count
+        }
+        else if collectionView == self.tempsCollectionView{
+            return tempFilters.count
+        }
+        else {
+            return weatherFilters.count
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: filterCellReuseIdentifier, for: indexPath) as! FilterCollectionViewCell
-        cell.configure(filter: filters[indexPath.item])
-        return cell
+        if collectionView == self.seasonsCollectionView{
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: filterCellReuseIdentifier, for: indexPath) as! FilterCollectionViewCell
+            cell.configure(filter: seasonFilters[indexPath.item])
+            return cell
+        }
+        else if collectionView == self.tempsCollectionView{
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: filterCellReuseIdentifier, for: indexPath) as! FilterCollectionViewCell
+            cell.configure(filter: tempFilters[indexPath.item])
+            return cell
+        }
+        else {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: filterCellReuseIdentifier, for: indexPath) as! FilterCollectionViewCell
+            cell.configure(filter: weatherFilters[indexPath.item])
+            return cell
+            }
     }
 }
 
     
 extension PostingViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let size = (collectionView.frame.width - 2 * padding) / 5.0
-        return CGSize(width: size, height: 50)
+        if collectionView == self.seasonsCollectionView{
+            let size = (collectionView.frame.width - 2 * padding) / 4.0
+            return CGSize(width: size, height: 50)
+        }
+        else if collectionView == self.tempsCollectionView{
+            let size = (collectionView.frame.width - 2 * padding) / 6.0
+            return CGSize(width: size, height: 50)
+        }
+        else {
+            let size = (collectionView.frame.width - 2 * padding) / 6.0
+            return CGSize(width: size, height: 50)
+        }
 }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         // TODO: FILTER TAPPING SHIT AND SORTING
-        if collectionView == self.filterCollectionView {
-            var filter = filters[indexPath.row]
-//            let cell = filterCollectionView.cellForItem(at: indexPath) as! FilterCollectionViewCell
-            
+        if collectionView == self.seasonsCollectionView {
+            let filter = seasonFilters[indexPath.row]
             if !filter.didSelect {
-                filters[indexPath.row].didSelect = true
+                seasonFilters[indexPath.row].didSelect = true
+                filtersPressed.append(seasonFilters[indexPath.row])
+                print(filtersPressed)
                 }
             else {
-                filters[indexPath.row].didSelect = false
-                // showResta.remove(at: indexPath.row)
-                //filterPressed.remove(at: indexPath.row)
+                seasonFilters[indexPath.row].didSelect = false
+                let remove = seasonFilters[indexPath.row]
+                filtersPressed.removeAll { $0.filterName == remove.filterName }
             }
-        filterCollectionView.reloadData()
-    }
+            seasonsCollectionView.reloadData()
         }
-    }
+
+        if collectionView == self.tempsCollectionView {
+            let filter = tempFilters[indexPath.row]
+            if !filter.didSelect {
+                tempFilters[indexPath.row].didSelect = true
+                filtersPressed.append(tempFilters[indexPath.row])
+                print(filtersPressed)
+                }
+            else {
+                tempFilters[indexPath.row].didSelect = false
+                let remove = tempFilters[indexPath.row]
+                filtersPressed.removeAll { $0.filterName == remove.filterName }
+            }
+            tempsCollectionView.reloadData()
+        }
+        
+        else {
+            let filter = weatherFilters[indexPath.row]
+            if !filter.didSelect {
+                weatherFilters[indexPath.row].didSelect = true
+                filtersPressed.append(weatherFilters[indexPath.row])
+                print(filtersPressed)
+                }
+            else {
+                weatherFilters[indexPath.row].didSelect = false
+                let remove = weatherFilters[indexPath.row]
+                filtersPressed.removeAll { $0.filterName == remove.filterName }
+            }
+            weatherCollectionView.reloadData()
+        }
+        }
+}
 

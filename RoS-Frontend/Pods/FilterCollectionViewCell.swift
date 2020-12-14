@@ -16,6 +16,7 @@ class FilterCollectionViewCell: UICollectionViewCell {
         filterLabel.translatesAutoresizingMaskIntoConstraints = false
         filterLabel.font = .systemFont(ofSize: 14)
         filterLabel.textAlignment = .center
+        filterLabel.numberOfLines = 0
         contentView.addSubview(filterLabel)
         
         setupConstraints()
@@ -32,9 +33,11 @@ class FilterCollectionViewCell: UICollectionViewCell {
         // TODO: probably something about toggling filter selection here
         if filter.didSelect {
             filterLabel.backgroundColor = UIColor(red: 0.925, green: 0.431, blue: 0.298, alpha: 1)
+            filterLabel.textColor = .white
         }
         else {
             filterLabel.backgroundColor = .white
+            filterLabel.textColor = .black
         }
     }
     
