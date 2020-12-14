@@ -54,7 +54,7 @@ class WeatherViewController: UIViewController, UICollectionViewDelegate {
                 rainLabelLayer.alignmentMode = .center
                 rainLabelLayer.alignmentMode = CATextLayerAlignmentMode.center;
                 rainLabelLayer.frame = CGRect(x: 69, y: 69, width: 350, height: 50)
-                rainLabelLayer.position = CGPoint(x: self.headerView.frame.maxX / 3, y: self.headerView.frame.maxY / 3 + 69)
+                rainLabelLayer.position = CGPoint(x: self.headerView.frame.maxX / 3, y: self.headerView.frame.maxY / 4 + 69)
                 self.headerView.layer.addSublayer(rainLabelLayer)
             }
         }
@@ -69,16 +69,21 @@ class WeatherViewController: UIViewController, UICollectionViewDelegate {
             self.feelsLike = self.feelsLike + String(format:"%.0f", currentData.feels_like)
             DispatchQueue.main.async {
                 self.headerView.backgroundColor = .white
-                let backgroundLayer = CAShapeLayer()
-                backgroundLayer.path = UIBezierPath(roundedRect: CGRect(x: 18, y: 20, width: self.headerView.frame.maxX - 38, height: 120), cornerRadius: 20).cgPath
-                backgroundLayer.fillColor = UIColor(red: 0.608, green: 0.813, blue: 0.929, alpha: 1).cgColor
-                self.headerView.layer.addSublayer(backgroundLayer)
+                let backgroundLayer1 = CAShapeLayer()
+                backgroundLayer1.path = UIBezierPath(roundedRect: CGRect(x: 12, y: 12, width: self.headerView.frame.maxX - 24, height: 125), cornerRadius: 20).cgPath
+                backgroundLayer1.fillColor = UIColor(red: 0.608, green: 0.813, blue: 0.929, alpha: 1).cgColor
+                self.headerView.layer.addSublayer(backgroundLayer1)
+                
+                let backgroundLayer2 = CAShapeLayer()
+                backgroundLayer2.path = UIBezierPath(roundedRect: CGRect(x: 12, y: 12, width: self.headerView.frame.maxX - 24, height: 125), cornerRadius: 20).cgPath
+                backgroundLayer2.fillColor = UIColor(red: 0.608, green: 0.813, blue: 0.929, alpha: 1).cgColor
+                self.headerView.layer.addSublayer(backgroundLayer2)
                 
                 let iconLayer = CALayer()
                 let iconImage = UIImage(named: (self.iconName + "med"))?.cgImage
                 iconLayer.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
                 iconLayer.contents = iconImage
-                iconLayer.position = CGPoint(x: self.headerView.frame.maxX / 3 * 2, y: self.headerView.frame.maxY / 3)
+                iconLayer.position = CGPoint(x: self.headerView.frame.maxX / 3 * 2, y: self.headerView.frame.maxY / 4)
                 self.headerView.layer.addSublayer(iconLayer)
                 
                 let iconLabelLayer = CATextLayer()
@@ -90,7 +95,7 @@ class WeatherViewController: UIViewController, UICollectionViewDelegate {
                 iconLabelLayer.alignmentMode = .center
                 iconLabelLayer.alignmentMode = CATextLayerAlignmentMode.center;
                 iconLabelLayer.frame = CGRect(x: 0, y: 0, width: 350, height: 50)
-                iconLabelLayer.position = CGPoint(x: self.headerView.frame.maxX / 3 * 2, y: self.headerView.frame.maxY / 3 + 54)
+                iconLabelLayer.position = CGPoint(x: self.headerView.frame.maxX / 3 * 2, y: self.headerView.frame.maxY / 4 + 54)
                 self.headerView.layer.addSublayer(iconLabelLayer)
                 
                 let tempLabelLayer = CATextLayer()
@@ -102,7 +107,7 @@ class WeatherViewController: UIViewController, UICollectionViewDelegate {
                 tempLabelLayer.alignmentMode = .center
                 tempLabelLayer.alignmentMode = CATextLayerAlignmentMode.center;
                 tempLabelLayer.frame = CGRect(x: 0, y: 0, width: 350, height: 50)
-                tempLabelLayer.position = CGPoint(x: self.headerView.frame.maxX / 3, y: self.headerView.frame.maxY / 3 + 20)
+                tempLabelLayer.position = CGPoint(x: self.headerView.frame.maxX / 3, y: self.headerView.frame.maxY / 4 + 20)
                 self.headerView.layer.addSublayer(tempLabelLayer)
                 
                 let feelsLabelLayer = CATextLayer()
@@ -114,19 +119,21 @@ class WeatherViewController: UIViewController, UICollectionViewDelegate {
                 feelsLabelLayer.alignmentMode = .center
                 feelsLabelLayer.alignmentMode = CATextLayerAlignmentMode.center;
                 feelsLabelLayer.frame = CGRect(x: 0, y: 0, width: 350, height: 50)
-                feelsLabelLayer.position = CGPoint(x: self.headerView.frame.maxX / 3, y: self.headerView.frame.maxY / 3 + 50)
+                feelsLabelLayer.position = CGPoint(x: self.headerView.frame.maxX / 3, y: self.headerView.frame.maxY / 4 + 50)
                 self.headerView.layer.addSublayer(feelsLabelLayer)
-//                let cityLabelLayer = CATextLayer()
-//                let cityLabelAttributes: [NSAttributedString.Key: Any] = [
-//                    .font: UIFont.systemFont(ofSize: 16.0, weight: .bold),
-//                    .foregroundColor: UIColor.white,
-//                ]
-//                cityLabelLayer.string = NSAttributedString(string: ADDCITYNAME, attributes: cityLabelAttributes)
-//                iconLabelLayer.alignmentMode = .center
-//                iconLabelLayer.alignmentMode = CATextLayerAlignmentMode.center;
-//                iconLabelLayer.frame = CGRect(x: 0, y: 0, width: 350, height: 50)
-//                iconLabelLayer.position = CGPoint(x: 270, y: 120)
-//                self.headerView.layer.addSublayer(iconLabelLayer)
+                
+                let cityLabelLayer = CATextLayer()
+                let cityLabelAttributes: [NSAttributedString.Key: Any] = [
+                    .font: UIFont.systemFont(ofSize: 24.0, weight: .bold),
+                    .foregroundColor: UIColor.white,
+                ]
+                cityLabelLayer.string = NSAttributedString(string: "Ithaca", attributes: cityLabelAttributes)
+                cityLabelLayer.alignmentMode = .center
+                cityLabelLayer.alignmentMode = CATextLayerAlignmentMode.center;
+                cityLabelLayer.frame = CGRect(x: 0, y: 0, width: 350, height: 50)
+                cityLabelLayer.position = CGPoint(x: self.headerView.frame.maxX / 3, y: self.headerView.frame.maxY / 4 - 7)
+                self.headerView.layer.addSublayer(cityLabelLayer)
+                
                 
                 
             }
@@ -145,14 +152,15 @@ class WeatherViewController: UIViewController, UICollectionViewDelegate {
     override func viewDidLoad() {
         getData()
         getCurrent()
+        do {
+            sleep(1)
+        }
         getHourly()
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.white
         navigationItem.title = "Weather" // TODO: Change to user's location
-        headerView.backgroundColor = .gray
         headerView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(headerView)
-        
         // weather
         let weatherLayout = UICollectionViewFlowLayout()
         weatherLayout.scrollDirection = .horizontal
@@ -201,7 +209,7 @@ class WeatherViewController: UIViewController, UICollectionViewDelegate {
             headerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             headerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             headerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            headerView.heightAnchor.constraint(equalToConstant: 150)
+            headerView.heightAnchor.constraint(equalToConstant: view.frame.height/4)
         ])
         
         
@@ -251,7 +259,7 @@ extension WeatherViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == self.weatherCollectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: weatherCellReuseIdentifier, for: indexPath) as! WeatherCollectionViewCell
-            cell.configure(hourly: hourly[indexPath.item], data: data[0])
+            cell.configure(hourly: hourly[indexPath.item], data: data[0], index: indexPath.row)
             return cell
         }
         else {
