@@ -10,7 +10,7 @@ Success Response:
     "data": [
         {
             "id": 1,
-            "name": "Primoz Roglic",
+            "season": "summer",
             "gender": "male",
             "weather": "sunny",
             "temp": "hot",
