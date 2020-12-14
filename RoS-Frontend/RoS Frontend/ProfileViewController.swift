@@ -27,7 +27,7 @@ class ProfileViewController: UIViewController {
         super.viewDidLoad()
         
         // nav bar
-        navigationItem.title = "[Put user's name here]"
+        navigationItem.title = "[Put user's name here]" // TODO!
 
         let rightBarButton = UIBarButtonItem(title: "Add Post", style: UIBarButtonItem.Style.plain, target: self, action: #selector(ProfileViewController.myRightSideBarButtonItemTapped(_:)))
                 self.navigationItem.rightBarButtonItem = rightBarButton
@@ -40,7 +40,25 @@ class ProfileViewController: UIViewController {
         leftBarButton.tintColor = UIColor(red: 0.04, green: 0.492, blue: 0.746, alpha: 1)
         
         // header
-        headerView.backgroundColor = .gray
+        let iconLayer = CALayer()
+        let iconImage = UIImage(named: "profileicon.png")?.cgImage
+        iconLayer.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
+        iconLayer.contents = iconImage
+        iconLayer.position = CGPoint(x: 212, y: 75)
+        self.headerView.layer.addSublayer(iconLayer)
+        
+        let locLabelLayer = CATextLayer()
+        let iconLabelAttributes: [NSAttributedString.Key: Any] = [
+            .font: UIFont.systemFont(ofSize: 16.0, weight: .semibold),
+            .foregroundColor: UIColor(red: 0.04, green: 0.492, blue: 0.746, alpha: 1)
+        ]
+        locLabelLayer.string = NSAttributedString(string: "Ithaca, NY") // PUT LOCATION HERE
+        locLabelLayer.alignmentMode = .center
+        locLabelLayer.alignmentMode = CATextLayerAlignmentMode.center;
+        locLabelLayer.frame = CGRect(x: 0, y: 0, width: 350, height: 50)
+        locLabelLayer.position = CGPoint(x: 212, y: 160)
+        self.headerView.layer.addSublayer(locLabelLayer)
+        
         headerView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(headerView)
         
@@ -50,6 +68,7 @@ class ProfileViewController: UIViewController {
         outfitsLayout.scrollDirection = .vertical
         outfitsLayout.minimumInteritemSpacing = padding
         outfitsLayout.minimumLineSpacing = padding
+        // outfitsLayout.headerReferenceSize = CGSize(CGSize(width: self.outfitsCollectionView.frame.size.width, height: 100))
         
         outfitsCollectionView = UICollectionView(frame: .zero, collectionViewLayout: outfitsLayout)
         outfitsCollectionView.register(OutfitsCollectionViewCell.self, forCellWithReuseIdentifier: outfitsCellReuseIdentifier)
@@ -60,6 +79,9 @@ class ProfileViewController: UIViewController {
         outfitsCollectionView.showsVerticalScrollIndicator = false
         view.addSubview(outfitsCollectionView)
         
+        outfitsCollectionView.register(UICollectionReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: self.headerID)
+        let flow = outfitsCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
+        flow.headerReferenceSize = CGSize(width: 30,height: 30)
         
         setupConstraints()
     }
@@ -82,11 +104,23 @@ class ProfileViewController: UIViewController {
             outfitsCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)])
     }
     
+    // for section header
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        var v : UICollectionReusableView! = nil
+        if kind == UICollectionView.elementKindSectionHeader {
+            v = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: self.headerID, for: indexPath)
+            if v.subviews.count == 0 {
+                v.addSubview(UILabel(frame:CGRect(x: 0,y: 0,width: 150,height: 30)))
+            }
+            let lab = v.subviews[0] as! UILabel
+            lab.text = "Your Posts"
+            lab.textAlignment = .left
+        }
+        return v
+}
+    
     // for nav bar
     @objc func myRightSideBarButtonItemTapped(_ sender:UIBarButtonItem!){
-//        let postingViewController = PostingViewController()
-//        present(postingViewController, animated: true, completion: nil)
-        // TO DO: HANDLE POSTING HERE????
         PostingHandler.shared.showPostingActionSheet(vc: self)
         }
     
@@ -94,21 +128,6 @@ class ProfileViewController: UIViewController {
         let settingsViewController = SettingsViewController()
         navigationController?.pushViewController(settingsViewController, animated: true)
         }
-    
-    // for section header
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-            var v : UICollectionReusableView! = nil
-            if kind == UICollectionView.elementKindSectionHeader {
-                v = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: self.headerID, for: indexPath)
-                if v.subviews.count == 0 {
-                    v.addSubview(UILabel(frame:CGRect(x: 0,y: 0,width: 100,height: 30)))
-                }
-                let lab = v.subviews[0] as! UILabel
-                lab.text = "Your Posts"
-                lab.textAlignment = .center
-            }
-            return v
-}
 }
 
 extension ProfileViewController: UICollectionViewDataSource {
