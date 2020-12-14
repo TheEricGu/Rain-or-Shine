@@ -61,6 +61,7 @@ class WeatherViewController: UIViewController, UICollectionViewDelegate {
         }
     }
     func getOutfits(weather: String, temperatureWord: String) {
+        self.outfits = []
         OutfitsManager.getWeatherOutfits(gender: "female", season: "winter", weather: weather, temperatureWord: temperatureWord) { weatherOutfitData in
             for realOutfit in weatherOutfitData {
                 print(realOutfit.url)
@@ -79,6 +80,7 @@ class WeatherViewController: UIViewController, UICollectionViewDelegate {
             self.iconName = currentData.weather[0].icon
             self.iconDescriptionText = currentData.weather[0].description
             self.currentTemp = String(format:"%.0f", currentData.temp)
+            self.feelsLike = "Feels like "
             self.feelsLike = self.feelsLike + String(format:"%.0f", currentData.feels_like)
             var temperatureWord = ""
             if (Int(self.currentTemp)! < 21) {
@@ -264,6 +266,16 @@ class WeatherViewController: UIViewController, UICollectionViewDelegate {
         setupConstraints()
         
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        getData()
+        getCurrent()
+        do {
+            sleep(1)
+        }
+        getHourly()
+    }
+
     
     private func setupConstraints() {
         // header
