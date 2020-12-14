@@ -61,7 +61,7 @@ class WeatherViewController: UIViewController, UICollectionViewDelegate {
         }
     }
     func getOutfits(weather: String, temperatureWord: String) {
-        OutfitsManager.getWeatherOutfits(gender: "female", season: "winter", weather: weather, temperatureWord: temperatureWord) { weatherOutfitData in
+        OutfitsManager.getWeatherOutfits(gender: UserDefaults.standard.string(forKey: "Gender")!, season: "winter", weather: weather, temperatureWord: temperatureWord) { weatherOutfitData in
             for realOutfit in weatherOutfitData {
                 print(realOutfit.url)
                 let newOutfit : Outfit = Outfit(imageName: realOutfit.url, weatherTags: [realOutfit.gender, realOutfit.season, realOutfit.weather, realOutfit.temp], didLike: false, userPosted: false)

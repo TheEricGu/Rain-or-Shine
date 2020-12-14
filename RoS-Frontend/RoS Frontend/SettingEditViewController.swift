@@ -88,6 +88,16 @@ class SettingEditViewController: UIViewController {
 
     @objc func dismissViewControllerAndSaveText() {
         // If let statements can also chain boolean checks after them, like a normal if statement.
+        if settingName == "Name" {
+            UserDefaults.standard.set(setSetting, forKey: "Name")
+        }
+        else if settingName == "Gender" {
+            UserDefaults.standard.set(setSetting, forKey: "Gender")
+        }
+        else {
+            UserDefaults.standard.set(setSetting, forKey: "Location")
+        }
+        
         if let settingText = settingTextField.text, settingText != "" {
             if settingText.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
                 let alertController = UIAlertController(title: "Alert", message: "You cannot change setting to an empty string.", preferredStyle: .alert)

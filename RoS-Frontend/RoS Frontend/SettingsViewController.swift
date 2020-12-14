@@ -17,9 +17,9 @@ class SettingsViewController: UIViewController {
     let reuseIdentifier = "settingsCellReuse"
     let cellHeight: CGFloat = 50
     
-    let name = Settings(name: "Name: ", option: "Mathew Scullin")
-    let gender = Settings(name: "Gender: ", option: "Female")
-    let location = Settings(name: "Location: ", option: "Ithaca, NY")
+    let name = Settings(name: "Name: ", option: UserDefaults.standard.string(forKey: "Name")!)
+    let gender = Settings(name: "Gender: ", option: UserDefaults.standard.string(forKey: "Gender")!)
+    let location = Settings(name: "Location: ", option: UserDefaults.standard.string(forKey: "Location")!)
     
     var settings: [Settings]!
 
