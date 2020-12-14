@@ -73,6 +73,7 @@
 		EE35B23E2585646700796489 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		EE35B2432585678D00796489 /* SettingEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingEditViewController.swift; sourceTree = "<group>"; };
 		EE35B2502585EE3500796489 /* PostingHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostingHandler.swift; sourceTree = "<group>"; };
+		EEBB64572587F9C400253837 /* RoS Frontend.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "RoS Frontend.entitlements"; sourceTree = "<group>"; };
 		EEC3E117257B4584009D2271 /* RoS Frontend.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "RoS Frontend.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EEC3E11A257B4584009D2271 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EEC3E11C257B4584009D2271 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -169,6 +170,7 @@
 		EEC3E119257B4584009D2271 /* RoS Frontend */ = {
 			isa = PBXGroup;
 			children = (
+				EEBB64572587F9C400253837 /* RoS Frontend.entitlements */,
 				EEC3E123257B4586009D2271 /* Assets.xcassets */,
 				EEC3E128257B4586009D2271 /* Info.plist */,
 				EEC3E11A257B4584009D2271 /* AppDelegate.swift */,
@@ -626,6 +628,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "RoS Frontend/RoS Frontend.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = S4G3QTH4KY;
 				INFOPLIST_FILE = "RoS Frontend/Info.plist";
@@ -646,6 +649,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "RoS Frontend/RoS Frontend.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = S4G3QTH4KY;
 				INFOPLIST_FILE = "RoS Frontend/Info.plist";

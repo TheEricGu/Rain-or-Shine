@@ -171,6 +171,15 @@ class WeatherViewController: UIViewController, UICollectionViewDelegate {
         }
         getHourly()
         super.viewDidLoad()
+        
+        // SET USER DEFAULTS FOR WHOLE APP HERE?
+        let defaults = UserDefaults.standard
+        defaults.set("Mathew Scullin", forKey: "Name")
+        defaults.set("female", forKey: "Gender")
+        defaults.set([], forKey: "Liked outfits")
+        defaults.set("Ithaca, NY", forKey: "Location")
+        // defaults.string(forKey: "Gender") THIS IS HOW YOU ACCESS USER DEFAULTS
+        
         self.view.backgroundColor = UIColor.white
         navigationItem.title = "Weather" // TODO: Change to user's location
         headerView.translatesAutoresizingMaskIntoConstraints = false

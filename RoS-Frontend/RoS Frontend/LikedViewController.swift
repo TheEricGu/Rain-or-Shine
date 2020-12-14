@@ -7,6 +7,8 @@
 
 import UIKit
 
+// TODO: CHANGE USER DEFAULTS: LIKED OUTFITS ARRAY ON FILTER TOGGLING
+
 class LikedViewController: UIViewController, UICollectionViewDelegate {
     private let searchBar = UISearchBar()
     var filterCollectionView: UICollectionView!
@@ -31,6 +33,7 @@ class LikedViewController: UIViewController, UICollectionViewDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+    
         navigationItem.title = "Liked Outfits"
         self.view.backgroundColor = UIColor.white
         
@@ -80,6 +83,10 @@ class LikedViewController: UIViewController, UICollectionViewDelegate {
         outfitsCollectionView.showsVerticalScrollIndicator = false
         outfitsCollectionView.showsHorizontalScrollIndicator = false
         view.addSubview(outfitsCollectionView)
+        
+        // user defaults
+        let defaults = UserDefaults.standard
+        //print(defaults.string(forKey: "Gender"))
         
         setupConstraints()
     }
