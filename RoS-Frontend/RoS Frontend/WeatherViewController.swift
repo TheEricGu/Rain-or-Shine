@@ -60,8 +60,8 @@ class WeatherViewController: UIViewController, UICollectionViewDelegate {
             }
         }
     }
-    func getOutfits() {
-        OutfitsManager.getWeatherOutfits(gender: "male", season: "fall", weather: "sunny", temperatureWord: "hot") { weatherOutfitData in
+    func getOutfits(weather: String, temperatureWord: String) {
+        OutfitsManager.getWeatherOutfits(gender: "female", season: "winter", weather: weather, temperatureWord: temperatureWord) { weatherOutfitData in
             for realOutfit in weatherOutfitData {
                 print(realOutfit.url)
                 let newOutfit : Outfit = Outfit(imageName: realOutfit.url, weatherTags: [realOutfit.gender, realOutfit.season, realOutfit.weather, realOutfit.temp], didLike: false, userPosted: false)
@@ -80,7 +80,45 @@ class WeatherViewController: UIViewController, UICollectionViewDelegate {
             self.iconDescriptionText = currentData.weather[0].description
             self.currentTemp = String(format:"%.0f", currentData.temp)
             self.feelsLike = self.feelsLike + String(format:"%.0f", currentData.feels_like)
-            self.getOutfits()
+            var temperatureWord = ""
+            if (Int(self.currentTemp)! < 21) {
+                temperatureWord = "freezing"
+            }
+            else if (Int(self.currentTemp)! < 40) {
+                temperatureWord = "cold"
+            }
+            else if (Int(self.currentTemp)! < 60) {
+                temperatureWord = "chilly"
+            }
+            else if (Int(self.currentTemp)! < 80) {
+                temperatureWord = "moderate"
+            }
+            else if (Int(self.currentTemp)! < 90) {
+                temperatureWord = "warm"
+            }
+            else {
+                temperatureWord = "hot"
+            }
+            var weatherWord = ""
+            if currentData.weather[0].main.lowercased() == "thunderstorm" {
+                weatherWord = "thunder"
+            }
+            else if currentData.weather[0].main.lowercased() == "drizzle" {
+                weatherWord = "drizzle"
+            }
+            else if currentData.weather[0].main.lowercased() == "rain" {
+                weatherWord = "rain"
+            }
+            else if currentData.weather[0].main.lowercased() == "snow" {
+                weatherWord = "snow"
+            }
+            else if currentData.weather[0].main.lowercased() == "clear" {
+                weatherWord = "clear"
+            }
+            else {
+                weatherWord = "cloudy"
+            }
+            self.getOutfits(weather: weatherWord, temperatureWord: temperatureWord)
             DispatchQueue.main.async {
                 self.headerView.backgroundColor = .white
                 let backgroundLayer1 = CAShapeLayer()
