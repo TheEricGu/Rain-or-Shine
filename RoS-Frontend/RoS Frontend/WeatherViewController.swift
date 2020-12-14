@@ -24,6 +24,12 @@ class WeatherViewController: UIViewController, UICollectionViewDelegate {
     // set up weather
     var hourly: [RealHourly] = []
     var current: [Current] = []
+    var iconName: String = "01d"
+    var iconDescriptionText: String = "foo"
+    var currentTemp: String = "foo temp"
+    var feelsLike: String = "Feels like "
+    var rainChance: String = "Rain "
+    var windSpeed: String = "Wind "
     var data: [Data] = []
     
     // set up outfits
@@ -35,8 +41,21 @@ class WeatherViewController: UIViewController, UICollectionViewDelegate {
             let sliced = hourlyData[0...12]
             let data = Array(sliced)
             self.hourly = data
+            self.rainChance = "Rain " + String(hourlyData[0].pop * 100) + "%"
+            self.windSpeed = "Wind " + String(format:"%.1f", hourlyData[0].wind_speed) + " mph"
             DispatchQueue.main.async {
                 self.weatherCollectionView.reloadData()
+                let rainLabelLayer = CATextLayer()
+                let rainLabelAttributes: [NSAttributedString.Key: Any] = [
+                    .font: UIFont.systemFont(ofSize: 10.0, weight: .regular),
+                    .foregroundColor: UIColor.white,
+                ]
+                rainLabelLayer.string = NSAttributedString(string: (self.rainChance + " | " + self.windSpeed), attributes: rainLabelAttributes)
+                rainLabelLayer.alignmentMode = .center
+                rainLabelLayer.alignmentMode = CATextLayerAlignmentMode.center;
+                rainLabelLayer.frame = CGRect(x: 69, y: 69, width: 350, height: 50)
+                rainLabelLayer.position = CGPoint(x: self.headerView.frame.maxX / 3, y: self.headerView.frame.maxY / 3 + 69)
+                self.headerView.layer.addSublayer(rainLabelLayer)
             }
         }
     }
@@ -44,8 +63,72 @@ class WeatherViewController: UIViewController, UICollectionViewDelegate {
     func getCurrent() {
         OpenWeatherManager.getCurrent { currentData in
             self.current = [currentData]
+            self.iconName = currentData.weather[0].icon
+            self.iconDescriptionText = currentData.weather[0].description
+            self.currentTemp = String(format:"%.0f", currentData.temp)
+            self.feelsLike = self.feelsLike + String(format:"%.0f", currentData.feels_like)
             DispatchQueue.main.async {
-                self.weatherCollectionView.reloadData()
+                self.headerView.backgroundColor = .white
+                let backgroundLayer = CAShapeLayer()
+                backgroundLayer.path = UIBezierPath(roundedRect: CGRect(x: 18, y: 20, width: self.headerView.frame.maxX - 38, height: 120), cornerRadius: 20).cgPath
+                backgroundLayer.fillColor = UIColor(red: 0.608, green: 0.813, blue: 0.929, alpha: 1).cgColor
+                self.headerView.layer.addSublayer(backgroundLayer)
+                
+                let iconLayer = CALayer()
+                let iconImage = UIImage(named: (self.iconName + "med"))?.cgImage
+                iconLayer.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
+                iconLayer.contents = iconImage
+                iconLayer.position = CGPoint(x: self.headerView.frame.maxX / 3 * 2, y: self.headerView.frame.maxY / 3)
+                self.headerView.layer.addSublayer(iconLayer)
+                
+                let iconLabelLayer = CATextLayer()
+                let iconLabelAttributes: [NSAttributedString.Key: Any] = [
+                    .font: UIFont.systemFont(ofSize: 13.0, weight: .semibold),
+                    .foregroundColor: UIColor.white,
+                ]
+                iconLabelLayer.string = NSAttributedString(string: self.iconDescriptionText, attributes: iconLabelAttributes)
+                iconLabelLayer.alignmentMode = .center
+                iconLabelLayer.alignmentMode = CATextLayerAlignmentMode.center;
+                iconLabelLayer.frame = CGRect(x: 0, y: 0, width: 350, height: 50)
+                iconLabelLayer.position = CGPoint(x: self.headerView.frame.maxX / 3 * 2, y: self.headerView.frame.maxY / 3 + 54)
+                self.headerView.layer.addSublayer(iconLabelLayer)
+                
+                let tempLabelLayer = CATextLayer()
+                let tempLabelAttributes: [NSAttributedString.Key: Any] = [
+                    .font: UIFont.systemFont(ofSize: 24.0, weight: .semibold),
+                    .foregroundColor: UIColor.orange,
+                ]
+                tempLabelLayer.string = NSAttributedString(string: self.currentTemp + "°", attributes: tempLabelAttributes)
+                tempLabelLayer.alignmentMode = .center
+                tempLabelLayer.alignmentMode = CATextLayerAlignmentMode.center;
+                tempLabelLayer.frame = CGRect(x: 0, y: 0, width: 350, height: 50)
+                tempLabelLayer.position = CGPoint(x: self.headerView.frame.maxX / 3, y: self.headerView.frame.maxY / 3 + 20)
+                self.headerView.layer.addSublayer(tempLabelLayer)
+                
+                let feelsLabelLayer = CATextLayer()
+                let feelsLabelAttributes: [NSAttributedString.Key: Any] = [
+                    .font: UIFont.systemFont(ofSize: 13.0, weight: .regular),
+                    .foregroundColor: UIColor.orange,
+                ]
+                feelsLabelLayer.string = NSAttributedString(string: self.feelsLike + "°", attributes: feelsLabelAttributes)
+                feelsLabelLayer.alignmentMode = .center
+                feelsLabelLayer.alignmentMode = CATextLayerAlignmentMode.center;
+                feelsLabelLayer.frame = CGRect(x: 0, y: 0, width: 350, height: 50)
+                feelsLabelLayer.position = CGPoint(x: self.headerView.frame.maxX / 3, y: self.headerView.frame.maxY / 3 + 50)
+                self.headerView.layer.addSublayer(feelsLabelLayer)
+//                let cityLabelLayer = CATextLayer()
+//                let cityLabelAttributes: [NSAttributedString.Key: Any] = [
+//                    .font: UIFont.systemFont(ofSize: 16.0, weight: .bold),
+//                    .foregroundColor: UIColor.white,
+//                ]
+//                cityLabelLayer.string = NSAttributedString(string: ADDCITYNAME, attributes: cityLabelAttributes)
+//                iconLabelLayer.alignmentMode = .center
+//                iconLabelLayer.alignmentMode = CATextLayerAlignmentMode.center;
+//                iconLabelLayer.frame = CGRect(x: 0, y: 0, width: 350, height: 50)
+//                iconLabelLayer.position = CGPoint(x: 270, y: 120)
+//                self.headerView.layer.addSublayer(iconLabelLayer)
+                
+                
             }
         }
     }
@@ -61,8 +144,8 @@ class WeatherViewController: UIViewController, UICollectionViewDelegate {
     
     override func viewDidLoad() {
         getData()
-        getHourly()
         getCurrent()
+        getHourly()
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.white
         navigationItem.title = "Weather" // TODO: Change to user's location
@@ -120,6 +203,7 @@ class WeatherViewController: UIViewController, UICollectionViewDelegate {
             headerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             headerView.heightAnchor.constraint(equalToConstant: 150)
         ])
+        
         
         // weather collection view
         NSLayoutConstraint.activate([

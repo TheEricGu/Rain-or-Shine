@@ -37,6 +37,8 @@ struct RealHourly: Codable {
     let dt: Int
     let temp: Float
     let weather: [Weather]
+    let pop: Float
+    let wind_speed: Float
 }
 
 func unixToDate(unix: Double) -> Date {
