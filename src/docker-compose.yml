@@ -1,0 +1,7 @@
+version: '3'
+
+services:
+  RoS:
+    image: xsy3/RoS
+    ports:
+      - '5000:5000'
