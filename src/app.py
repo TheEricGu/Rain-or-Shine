@@ -39,8 +39,8 @@ def get_all_outfits():
     return success_response( [o.serialize() for o in Outfit.query.all()] )
 
 @app.route("/api/outfits/<string:gender>/<string:weather>/<string:temp>/")
-def get_outfits(gender, weather, temp):
-    outfits = Outfit.query.filter_by(gender=gender, weather=weather, temp=temp)
+def get_outfits(gender, season, weather, temp):
+    outfits = Outfit.query.filter_by(gender=gender, season=season, weather=weather, temp=temp)
     if outfits is None:
         return failure_response('Outfit not found')
     return success_response( [o.serialize() for o in outfits] )
@@ -48,12 +48,13 @@ def get_outfits(gender, weather, temp):
 @app.route("/api/outfits/", methods=["POST"])
 def create_outfit():
     body = json.loads(request.data)
-    body_arr = ["gender", "weather", "temp", "image_data"]
+    body_arr = ["gender", "season", "weather", "temp", "image_data"]
     for x in body_arr:
         if body.get(x) is None:
             return failure_response(f'{x} not found')
     new_outfit = Outfit(
         gender=body.get("gender"), 
+        season=body.get("season"),
         weather=body.get("weather"), 
         temp=body.get("temp"), 
         image_data=body.get("image_data"))
