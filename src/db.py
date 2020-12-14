@@ -22,8 +22,8 @@ class Outfit(db.Model):
   __tablename__ = 'outfit'
 
   id = db.Column(db.Integer, primary_key=True)
-  name = db.Column(db.String, nullable=False)
   gender = db.Column(db.String, nullable=False)
+  season = db.Column(db.String, nullable=False)
   weather = db.Column(db.String, nullable=False)
   temp = db.Column(db.String, nullable=False)
 
@@ -37,8 +37,8 @@ class Outfit(db.Model):
   # image_data = db.Column(db.String, nullable=False)
 
   def __init__(self, **kwargs):
-    self.name = kwargs.get('name')
     self.gender = kwargs.get('gender')
+    self.season = kwargs.get('season')
     self.weather = kwargs.get('weather')
     self.temp = kwargs.get('temp')
     self.create(kwargs.get("image_data"))
@@ -46,8 +46,8 @@ class Outfit(db.Model):
   def serialize(self):
     return {
       'id': self.id,
-      'name': self.name,
       'gender': self.gender,
+      'season': self.season,
       'weather': self.weather,
       'temp': self.temp,
       "url": f"{self.base_url}/{self.salt}.{self.extension}",
