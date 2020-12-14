@@ -25,11 +25,8 @@ class LikedViewController: UIViewController, UICollectionViewDelegate {
     let filter1 = Filter(filterName: "Autumn", didSelect: false)
     var filters: [Filter] = []
     var filtersPressed: [Filter] = []
-    
-    // set up outfits
-    // TODO: GET LIKED OUTFITS ONLY! 
-    let outfit1 = Outfit(imageName: "clothes1.jpeg", weatherTags: ["winter", "cloudy"], didLike: true, userPosted: false)
     var outfits: [Outfit] = []
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,7 +65,10 @@ class LikedViewController: UIViewController, UICollectionViewDelegate {
         view.addSubview(filterCollectionView)
 
         // outfits
-        outfits = [outfit1,outfit1,outfit1,outfit1,outfit1,outfit1,outfit1,outfit1,outfit1,outfit1]
+        // set up outfits
+        // TODO: GET LIKED OUTFITS ONLY!
+        outfits = UserDefaults.standard.structArrayData(Outfit.self, forKey: "LikedOutfits")
+        print(outfits)
         let outfitsLayout = UICollectionViewFlowLayout()
         outfitsLayout.scrollDirection = .vertical
         outfitsLayout.minimumInteritemSpacing = padding
@@ -84,11 +84,8 @@ class LikedViewController: UIViewController, UICollectionViewDelegate {
         outfitsCollectionView.showsHorizontalScrollIndicator = false
         view.addSubview(outfitsCollectionView)
         
-        // user defaults
-        let defaults = UserDefaults.standard
-        //print(defaults.string(forKey: "Gender"))
-        
         setupConstraints()
+        outfitsCollectionView.reloadData()
     }
     
     private func setupConstraints() {
