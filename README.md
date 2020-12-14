@@ -48,7 +48,6 @@ Request:
     "temp": "hot",
     "image_data": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAAAXRSTlMAQObYZgAAAApJREFUCNdjYAAAAAIAAeIhvDMAAAAASUVORK5CYII="
 }`  
-
 Success Response:  
 `{
   "success": true,
