@@ -166,7 +166,7 @@ extension PostingHandler: UIImagePickerControllerDelegate, UINavigationControlle
         }
         currentVC?.dismiss(animated: true, completion: nil)
         //pull up posting vc and put image into it
-        var pickedImage = (info[UIImagePickerController.InfoKey.originalImage.rawValue] as? UIImage)!
+        let pickedImage = (info[UIImagePickerController.InfoKey.originalImage.rawValue] as? UIImage)!
         let postingViewController = PostingViewController(delegate: self, image: pickedImage)
         currentVC?.present(postingViewController, animated: true, completion: nil)
     }

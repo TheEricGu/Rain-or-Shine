@@ -34,13 +34,13 @@ class WeatherCollectionViewCell: UICollectionViewCell {
         
         timeLabel = UILabel()
         timeLabel.translatesAutoresizingMaskIntoConstraints = false
-        timeLabel.font = .boldSystemFont(ofSize: 16)
+        timeLabel.font = .boldSystemFont(ofSize: 12)
         timeLabel.textAlignment = .center
         contentView.addSubview(timeLabel)
         
         degreeLabel = UILabel()
         degreeLabel.translatesAutoresizingMaskIntoConstraints = false
-        degreeLabel.font = .systemFont(ofSize: 15)
+        degreeLabel.font = .systemFont(ofSize: 12)
         degreeLabel.textAlignment = .center
         contentView.addSubview(degreeLabel)
         

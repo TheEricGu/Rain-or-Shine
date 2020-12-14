@@ -159,26 +159,17 @@ extension LikedViewController: UICollectionViewDelegateFlowLayout {
         // TODO: FILTER TAPPING SHIT AND SORTING
         if collectionView == self.filterCollectionView {
             let filter = filters[indexPath.row]
-//            let cell = filterCollectionView.cellForItem(at: indexPath) as! FilterCollectionViewCell
-            
             if !filter.didSelect {
                 filters[indexPath.row].didSelect = true
                 filtersPressed.append(filters[indexPath.row])
-                // TODO: SORT OUTFITS TO DISPLAY ONLY THOSE THAT MATCH FILTER
-                
+                print(filtersPressed)
                 }
             else {
                 filters[indexPath.row].didSelect = false
                 let remove = filters[indexPath.row]
-                for filter in filtersPressed {
-                    if filter ==  remove {
-                        filtersPressed.remove(at: filtersPressed.firstIndex(of: remove)!)
-                        // TODO: SORT OUTFITS? 
-                    }
-                }
+                filtersPressed.removeAll { $0.filterName == remove.filterName }
             }
-        filterCollectionView.reloadData()
-        outfitsCollectionView.reloadData()
+            filterCollectionView.reloadData()
+        }
     }
-}
 }
