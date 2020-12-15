@@ -216,7 +216,7 @@ class WeatherViewController: UIViewController, UICollectionViewDelegate {
         // SET USER DEFAULTS FOR WHOLE APP HERE?
         let defaults = UserDefaults.standard
         defaults.set("Mathew Scullin", forKey: "Name")
-        defaults.set("female", forKey: "Gender")
+        defaults.set("Male", forKey: "Gender")
         let likedArray: [Outfit] = []
         defaults.setStructArray(likedArray, forKey: "Liked outfits")
         let postedArray: [Outfit] = []

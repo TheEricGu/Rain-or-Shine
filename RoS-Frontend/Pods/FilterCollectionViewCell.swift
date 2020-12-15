@@ -14,9 +14,12 @@ class FilterCollectionViewCell: UICollectionViewCell {
         
         filterLabel = UILabel()
         filterLabel.translatesAutoresizingMaskIntoConstraints = false
-        filterLabel.font = .systemFont(ofSize: 14)
+        filterLabel.font = .systemFont(ofSize: 10)
         filterLabel.textAlignment = .center
         filterLabel.numberOfLines = 0
+        filterLabel.layer.borderColor = UIColor(red: 0.925, green: 0.431, blue: 0.298, alpha: 1).cgColor
+        filterLabel.layer.borderWidth = 0.5
+        filterLabel.layer.cornerRadius = 3
         contentView.addSubview(filterLabel)
         
         setupConstraints()
@@ -39,10 +42,6 @@ class FilterCollectionViewCell: UICollectionViewCell {
             filterLabel.backgroundColor = .white
             filterLabel.textColor = .black
         }
-    }
-    
-    func filterBy(tag: String) {
-        // TODO? 
     }
     
     required init?(coder: NSCoder) {
