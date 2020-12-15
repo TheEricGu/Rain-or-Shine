@@ -240,14 +240,14 @@ class PostingViewController: UIViewController {
         print(gender + season + weather + temperatureWord)
         OutfitsManager.postOutfit(gender: gender, season: season, weather: weather, temperatureWord: temperatureWord, image: image)
         let imageData : Data! = image.pngData()
-        let imageBase64String = "data:image/jpeg;base64," + imageData.base64EncodedString(options: .lineLength64Characters)
+        let imageBase64String = "data" + imageData.base64EncodedString(options: .lineLength64Characters)
         let outfit = Outfit(imageName: imageBase64String, weatherTags: ["test"], didLike: false, userPosted: true)
         let postedArray = UserDefaults.standard.structArrayData(Outfit.self, forKey: "PostedOutfits")
         var newArray: [Outfit] = []
         newArray = postedArray
         newArray.append(outfit)
         UserDefaults.standard.setStructArray(newArray, forKey: "PostedOutfits")
-        print(UserDefaults.standard.structArrayData(Outfit.self, forKey: "PostedOutfits"))
+//        print(UserDefaults.standard.structArrayData(Outfit.self, forKey: "PostedOutfits"))
         dismiss(animated: true, completion: nil)
     }
 }

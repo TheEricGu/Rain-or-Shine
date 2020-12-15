@@ -68,14 +68,17 @@ class OutfitsCollectionViewCell: UICollectionViewCell {
 //        weatherTags.text = ""
 //        for tag in outfit.weatherTags{
 //            weatherTags.text! += "#" + tag + " "
-//        let range = 0...4
-//        if String(outfit.imageName[range]) == "data" {
-//            
-//        }
+        let str = outfit.imageName
+        if String(str.prefix(4)) == "data" {
+            let imageData : Data! = Data(base64Encoded: String(str.suffix(from: str.index(str.startIndex, offsetBy: 4))), options: .ignoreUnknownCharacters)
+            outfitImageView.image = UIImage(data: imageData)
+        }
+        else {
         guard let imageData = try? Data(contentsOf: URL(string: outfit.imageName)!) else {
                         return
                     }
-        outfitImageView.image = UIImage(data: imageData)
+            outfitImageView.image = UIImage(data: imageData) }
+
         if outfit.didLike {
             likedHeart.image = UIImage(named: "likedheart.png")
         }
