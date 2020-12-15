@@ -88,6 +88,67 @@ class LikedViewController: UIViewController, UICollectionViewDelegate {
         outfitsCollectionView.reloadData()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        navigationItem.title = "Liked Outfits"
+        self.view.backgroundColor = UIColor.white
+        
+        // search bar
+        searchBar.backgroundColor = .white
+        searchBar.backgroundImage = UIImage()
+        searchBar.translatesAutoresizingMaskIntoConstraints = false
+        searchBar.placeholder = "Search liked outfits by tags"
+        searchBar.searchTextField.backgroundColor = UIColor(red: 0.945, green: 0.945, blue: 0.949, alpha: 1)
+        searchBar.searchTextField.textColor = .black
+        searchBar.searchTextField.font = .systemFont(ofSize: 14)
+        searchBar.searchTextField.clearButtonMode = .never
+        searchBar.layer.cornerRadius = 15
+        searchBar.layer.masksToBounds = true
+        view.addSubview(searchBar)
+        
+        // filter
+        filters = [filter1,filter1,filter1,filter1,filter1,filter1,filter1]
+        let filterLayout = UICollectionViewFlowLayout()
+        filterLayout.scrollDirection = .horizontal
+        filterLayout.minimumInteritemSpacing = padding
+        filterLayout.minimumLineSpacing = padding
+
+        filterCollectionView = UICollectionView(frame: .zero, collectionViewLayout: filterLayout)
+        filterCollectionView.register(FilterCollectionViewCell.self, forCellWithReuseIdentifier: filterCellReuseIdentifier)
+        filterCollectionView.dataSource = self
+        filterCollectionView.delegate = self
+        filterCollectionView.translatesAutoresizingMaskIntoConstraints = false
+        filterCollectionView.backgroundColor = .white
+        filterCollectionView.showsVerticalScrollIndicator = false
+        filterCollectionView.showsHorizontalScrollIndicator = false
+        view.addSubview(filterCollectionView)
+
+        // outfits
+        // set up outfits
+        // TODO: GET LIKED OUTFITS ONLY!
+        outfits = UserDefaults.standard.structArrayData(Outfit.self, forKey: "LikedOutfits")
+        print(outfits)
+        let outfitsLayout = UICollectionViewFlowLayout()
+        outfitsLayout.scrollDirection = .vertical
+        outfitsLayout.minimumInteritemSpacing = padding
+        outfitsLayout.minimumLineSpacing = padding
+
+        outfitsCollectionView = UICollectionView(frame: .zero, collectionViewLayout: outfitsLayout)
+        outfitsCollectionView.register(OutfitsCollectionViewCell.self, forCellWithReuseIdentifier: outfitsCellReuseIdentifier)
+        outfitsCollectionView.dataSource = self
+        outfitsCollectionView.delegate = self
+        outfitsCollectionView.translatesAutoresizingMaskIntoConstraints = false
+        outfitsCollectionView.backgroundColor = .white
+        outfitsCollectionView.showsVerticalScrollIndicator = false
+        outfitsCollectionView.showsHorizontalScrollIndicator = false
+        view.addSubview(outfitsCollectionView)
+        
+        setupConstraints()
+        outfitsCollectionView.reloadData()
+        
+
+    }
     private func setupConstraints() {
         NSLayoutConstraint.activate([
             searchBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
