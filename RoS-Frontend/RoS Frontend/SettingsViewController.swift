@@ -70,14 +70,37 @@ extension SettingsViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let setting = settings[indexPath.row]
-        let editSettingVC = SettingEditViewController(delegate: self, settingName: setting.name, setSetting: setting.option)
-        self.present(editSettingVC, animated: true, completion: nil)
+        
+        if setting.name == "Name: " {
+            let editSettingVC = SettingEditViewController(delegate: self, settingName: setting.name, setSetting: UserDefaults.standard.string(forKey: "Name"))
+            self.present(editSettingVC, animated: true, completion: nil)
+        }
+        else if setting.name == "Gender: " {
+            let editSettingVC = SettingEditViewController(delegate: self, settingName: setting.name, setSetting: UserDefaults.standard.string(forKey: "Gender"))
+            self.present(editSettingVC, animated: true, completion: nil)
+        }
+        else if setting.name == "Location: "{
+            let editSettingVC = SettingEditViewController(delegate: self, settingName: setting.name, setSetting: UserDefaults.standard.string(forKey: "Location"))
+            self.present(editSettingVC, animated: true, completion: nil)
+        }
+//        let editSettingVC = SettingEditViewController(delegate: self, settingName: setting.name, setSetting: setting.option)
+//        self.present(editSettingVC, animated: true, completion: nil)
     }
 }
 
 extension SettingsViewController: SaveNewInfoDelegate {
     func saveNewInfo(newInfo: String?, didSelectRowAt indexPath: IndexPath) {
         let setting = settings[indexPath.row]
+        if setting.name == "Name: " {
+            UserDefaults.standard.set(newInfo, forKey: "Name")
+        }
+        else if setting.name == "Gender: " {
+            UserDefaults.standard.set(newInfo, forKey: "Gender")
+        }
+        else if setting.name == "Location: "{
+            UserDefaults.standard.set(newInfo, forKey: "Location")
+        }
+        
         setting.option = newInfo!
         settingsTableView.reloadData()
     }

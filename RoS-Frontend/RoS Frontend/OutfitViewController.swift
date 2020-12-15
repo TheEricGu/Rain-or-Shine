@@ -42,10 +42,6 @@ class OutfitViewController: UIViewController {
             rightBarButton.tintColor = UIColor(red: 0.04, green: 0.492, blue: 0.746, alpha: 1)
         }
         
-        // kingfisher stuff for later
-        // let photoURL = URL(string: outfit.imageName)
-        // this downloads the image asynchronously if it's not cached yet
-        // outfitImageView.kf.setImage(with: photoURL)
         guard let imageData = try? Data(contentsOf: URL(string: outfit.imageName)!) else {
                         return
                     }
@@ -97,6 +93,67 @@ class OutfitViewController: UIViewController {
         // getOutfit()
         setupConstraints()
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if outfit.userPosted {
+            let rightBarButton = UIBarButtonItem(title: "Delete Post", style: UIBarButtonItem.Style.plain, target: self, action: #selector(OutfitViewController.myRightSideBarButtonItemTapped(_:)))
+                    self.navigationItem.rightBarButtonItem = rightBarButton
+            rightBarButton.image = UIImage(named: "trash_full.png")
+            rightBarButton.tintColor = UIColor(red: 0.04, green: 0.492, blue: 0.746, alpha: 1)
+        }
+        
+        guard let imageData = try? Data(contentsOf: URL(string: outfit.imageName)!) else {
+                        return
+                    }
+        outfitImageView.image = UIImage(data: imageData)
+        outfitImageView.translatesAutoresizingMaskIntoConstraints = false
+        outfitImageView.contentMode = .scaleAspectFill
+        outfitImageView.layer.masksToBounds = true
+        outfitImageView.layer.cornerRadius = 10
+        view.addSubview(outfitImageView)
+        
+        // weather tags
+        weatherTags.text = ""
+        for tag in outfit.weatherTags{
+            weatherTags.text! += "#" + tag + " "
+        }
+        weatherTags.translatesAutoresizingMaskIntoConstraints = false
+        weatherTags.numberOfLines = 0
+        weatherTags.font = .boldSystemFont(ofSize: 20)
+        view.addSubview(weatherTags)
+        
+        // liked heart
+        if outfit.didLike {
+            likeButton.setImage(UIImage(named: "biglikedheart.png"), for: .normal)
+        }
+        else {
+            likeButton.setImage(UIImage(named: "bigunlikedheart.png"), for: .normal)
+        }
+        likeButton.translatesAutoresizingMaskIntoConstraints = false
+        likeButton.contentMode = .scaleAspectFill
+        likeButton.layer.masksToBounds = true
+        // when like button is pressed
+        likeButton.addTarget(self, action: #selector(toggleLike), for: .touchUpInside)
+        view.addSubview(likeButton)
+        
+        // share icon
+        shareIcon.image = UIImage(named: "share.png")
+        shareIcon.translatesAutoresizingMaskIntoConstraints = false
+        shareIcon.contentMode = .scaleAspectFill
+        shareIcon.layer.masksToBounds = true
+        view.addSubview(shareIcon)
+        
+        // download or save icon
+        saveIcon.image = UIImage(named: "download.png")
+        saveIcon.translatesAutoresizingMaskIntoConstraints = false
+        saveIcon.contentMode = .scaleAspectFill
+        saveIcon.layer.masksToBounds = true
+        view.addSubview(saveIcon)
+        
+        setupConstraints()
     }
 
     private func setupConstraints() {

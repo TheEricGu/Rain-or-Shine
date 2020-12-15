@@ -88,13 +88,13 @@ class SettingEditViewController: UIViewController {
 
     @objc func dismissViewControllerAndSaveText() {
         // If let statements can also chain boolean checks after them, like a normal if statement.
-        if settingName == "Name" {
+        if settingName == "Name: " {
             UserDefaults.standard.set(setSetting, forKey: "Name")
         }
-        else if settingName == "Gender" {
+        else if settingName == "Gender: " {
             UserDefaults.standard.set(setSetting, forKey: "Gender")
         }
-        else {
+        else if settingName == "Location: " {
             UserDefaults.standard.set(setSetting, forKey: "Location")
         }
         
