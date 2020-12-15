@@ -35,12 +35,12 @@ class OutfitViewController: UIViewController {
         view.backgroundColor = .white
         title = "Photo"
         
-        if outfit.userPosted {
-            let rightBarButton = UIBarButtonItem(title: "Delete Post", style: UIBarButtonItem.Style.plain, target: self, action: #selector(OutfitViewController.myRightSideBarButtonItemTapped(_:)))
-                    self.navigationItem.rightBarButtonItem = rightBarButton
-            rightBarButton.image = UIImage(named: "trash_full.png")
-            rightBarButton.tintColor = UIColor(red: 0.04, green: 0.492, blue: 0.746, alpha: 1)
-        }
+//        if outfit.userPosted {
+//            let rightBarButton = UIBarButtonItem(title: "Delete Post", style: UIBarButtonItem.Style.plain, target: self, action: #selector(OutfitViewController.myRightSideBarButtonItemTapped(_:)))
+//                    self.navigationItem.rightBarButtonItem = rightBarButton
+//            rightBarButton.image = UIImage(named: "trash_full.png")
+//            rightBarButton.tintColor = UIColor(red: 0.04, green: 0.492, blue: 0.746, alpha: 1)
+//        }
         
         // kingfisher stuff for later
         // let photoURL = URL(string: outfit.imageName)
@@ -118,11 +118,17 @@ class OutfitViewController: UIViewController {
             rightBarButton.image = UIImage(named: "trash_full.png")
             rightBarButton.tintColor = UIColor(red: 0.04, green: 0.492, blue: 0.746, alpha: 1)
         }
-        
+        let str = outfit.imageName
+        if String(str.prefix(4)) == "data" {
+            let imageData : Data! = Data(base64Encoded: String(str.suffix(from: str.index(str.startIndex, offsetBy: 4))), options: .ignoreUnknownCharacters)
+            outfitImageView.image = UIImage(data: imageData)
+        }
+        else {
         guard let imageData = try? Data(contentsOf: URL(string: outfit.imageName)!) else {
                         return
                     }
-        outfitImageView.image = UIImage(data: imageData)
+            outfitImageView.image = UIImage(data: imageData) }
+
         outfitImageView.translatesAutoresizingMaskIntoConstraints = false
         outfitImageView.contentMode = .scaleAspectFill
         outfitImageView.layer.masksToBounds = true
@@ -153,19 +159,19 @@ class OutfitViewController: UIViewController {
         likeButton.addTarget(self, action: #selector(toggleLike), for: .touchUpInside)
         view.addSubview(likeButton)
         
-        // share icon
-        shareIcon.image = UIImage(named: "share.png")
-        shareIcon.translatesAutoresizingMaskIntoConstraints = false
-        shareIcon.contentMode = .scaleAspectFill
-        shareIcon.layer.masksToBounds = true
-        view.addSubview(shareIcon)
-        
-        // download or save icon
-        saveIcon.image = UIImage(named: "download.png")
-        saveIcon.translatesAutoresizingMaskIntoConstraints = false
-        saveIcon.contentMode = .scaleAspectFill
-        saveIcon.layer.masksToBounds = true
-        view.addSubview(saveIcon)
+//        // share icon
+//        shareIcon.image = UIImage(named: "share.png")
+//        shareIcon.translatesAutoresizingMaskIntoConstraints = false
+//        shareIcon.contentMode = .scaleAspectFill
+//        shareIcon.layer.masksToBounds = true
+//        view.addSubview(shareIcon)
+//
+//        // download or save icon
+//        saveIcon.image = UIImage(named: "download.png")
+//        saveIcon.translatesAutoresizingMaskIntoConstraints = false
+//        saveIcon.contentMode = .scaleAspectFill
+//        saveIcon.layer.masksToBounds = true
+//        view.addSubview(saveIcon)
         
         setupConstraints()
     }
@@ -194,15 +200,15 @@ class OutfitViewController: UIViewController {
             likeButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding)
         ])
         
-        // share icon
-        NSLayoutConstraint.activate([shareIcon.topAnchor.constraint(equalTo: outfitImageView.bottomAnchor, constant: padding),
-            shareIcon.trailingAnchor.constraint(equalTo: likeButton.leadingAnchor, constant: -20)
-        ])
-        
-        // save icon
-        NSLayoutConstraint.activate([saveIcon.topAnchor.constraint(equalTo: outfitImageView.bottomAnchor, constant: padding),
-            saveIcon.trailingAnchor.constraint(equalTo: shareIcon.leadingAnchor, constant: -20)
-        ])
+//        // share icon
+//        NSLayoutConstraint.activate([shareIcon.topAnchor.constraint(equalTo: outfitImageView.bottomAnchor, constant: padding),
+//            shareIcon.trailingAnchor.constraint(equalTo: likeButton.leadingAnchor, constant: -20)
+//        ])
+//
+//        // save icon
+//        NSLayoutConstraint.activate([saveIcon.topAnchor.constraint(equalTo: outfitImageView.bottomAnchor, constant: padding),
+//            saveIcon.trailingAnchor.constraint(equalTo: shareIcon.leadingAnchor, constant: -20)
+//        ])
         
     }
     

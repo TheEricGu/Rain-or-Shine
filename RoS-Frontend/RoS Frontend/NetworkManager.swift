@@ -11,9 +11,18 @@ import Foundation
 
 class OpenWeatherManager {
 
-    private static let endpoint = "https://api.openweathermap.org/data/2.5/onecall?lat=42.440632&lon=-76.496613&exclude=minutely,daily,alerts&units=imperial&appid=31bdcbb61617fe23262f9f4d8cec3e09"
-    
-    static func getCurrent(completion: @escaping (Current) -> Void) {
+    private static let endpoint1 = "https://api.openweathermap.org/data/2.5/onecall?lat="
+    // 42.440632 ithaca lat
+    private static let endpoint2 = "&lon="
+    // -76.496613 ithaca long
+    private static let endpoint3 = "&exclude=minutely,daily,alerts&units=imperial&appid=31bdcbb61617fe23262f9f4d8cec3e09"
+    private static let ithacaEndpoint = "https://api.openweathermap.org/data/2.5/onecall?lat=42.440632&lon=-76.496613&exclude=minutely,daily,alerts&units=imperial&appid=31bdcbb61617fe23262f9f4d8cec3e09"
+    static func getCurrent(lat: Float, long: Float, completion: @escaping (Current) -> Void) {
+        var endpoint = endpoint1 + String(lat) + endpoint2 + String(long) + endpoint3
+        if lat == -6969 {
+            endpoint = ithacaEndpoint
+        }
+        print("this is current endpoint " + endpoint)
         AF.request(endpoint, method: .get).validate().responseData { response in
             switch response.result {
             case .success(let data):
@@ -29,7 +38,13 @@ class OpenWeatherManager {
         }
     }
     
-    static func getHourly(completion: @escaping ([RealHourly]) -> Void) {
+    static func getHourly(lat: Float, long: Float, completion: @escaping ([RealHourly]) -> Void) {
+        print("this is input latlong " + String(lat) + ", " + String(long))
+        var endpoint = endpoint1 + String(lat) + endpoint2 + String(long) + endpoint3
+        if lat == -6969 {
+            endpoint = ithacaEndpoint
+        }
+        print("this is current endpoint " + endpoint)
         AF.request(endpoint, method: .get).validate().responseData { response in
             switch response.result {
             case .success(let data):
@@ -48,7 +63,12 @@ class OpenWeatherManager {
         }
     }
     
-    static func getData(completion: @escaping (WeatherData) -> Void) {
+    static func getData(lat: Float, long: Float, completion: @escaping (WeatherData) -> Void) {
+        var endpoint = endpoint1 + String(lat) + endpoint2 + String(long) + endpoint3
+        if lat == -6969 {
+            endpoint = ithacaEndpoint
+        }
+        print("this is current endpoint " + endpoint)
         AF.request(endpoint, method: .get).validate().responseData { response in
             switch response.result {
             case .success(let data):
