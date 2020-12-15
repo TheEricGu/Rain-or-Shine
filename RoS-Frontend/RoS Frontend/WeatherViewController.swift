@@ -62,7 +62,8 @@ class WeatherViewController: UIViewController, UICollectionViewDelegate {
     func getOutfits(weather: String, temperatureWord: String) {
         self.outfits = []
         print(UserDefaults.standard.string(forKey: "Gender")!)
-        OutfitsManager.getWeatherOutfits(gender: UserDefaults.standard.string(forKey: "Gender")!, season: "winter", weather: weather, temperatureWord: temperatureWord) { weatherOutfitData in
+        let gender_lowercase = UserDefaults.standard.string(forKey: "Gender")!.lowercased()
+        OutfitsManager.getWeatherOutfits(gender: gender_lowercase, season: "winter", weather: weather, temperatureWord: temperatureWord) { weatherOutfitData in
             for realOutfit in weatherOutfitData {
                 print(realOutfit.url)
                 let newOutfit : Outfit = Outfit(imageName: realOutfit.url, weatherTags: [realOutfit.gender, realOutfit.season, realOutfit.weather, realOutfit.temp], didLike: false, userPosted: false)
@@ -276,6 +277,29 @@ class WeatherViewController: UIViewController, UICollectionViewDelegate {
             sleep(1)
         }
         getHourly()
+        
+        let outfitsLayout = UICollectionViewFlowLayout()
+        outfitsLayout.scrollDirection = .vertical
+        outfitsLayout.minimumInteritemSpacing = padding
+        outfitsLayout.minimumLineSpacing = padding
+        
+        outfitsCollectionView = UICollectionView(frame: .zero, collectionViewLayout: outfitsLayout)
+        outfitsCollectionView.register(OutfitsCollectionViewCell.self, forCellWithReuseIdentifier: outfitsCellReuseIdentifier)
+        outfitsCollectionView.dataSource = self
+        outfitsCollectionView.delegate = self
+        outfitsCollectionView.translatesAutoresizingMaskIntoConstraints = false
+        outfitsCollectionView.backgroundColor = .white
+        outfitsCollectionView.showsHorizontalScrollIndicator = false
+        outfitsCollectionView.showsVerticalScrollIndicator = false
+
+        view.addSubview(outfitsCollectionView)
+        
+        // for section header
+        outfitsCollectionView.register(UICollectionReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: self.headerID)
+        let flow = outfitsCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
+        flow.headerReferenceSize = CGSize(width: 30,height: 30)
+        
+        setupConstraints()
     }
 
     
