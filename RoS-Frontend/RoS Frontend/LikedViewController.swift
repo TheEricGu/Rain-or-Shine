@@ -85,44 +85,28 @@ class LikedViewController: UIViewController, UICollectionViewDelegate {
         view.addSubview(outfitsCollectionView)
         
         setupConstraints()
-        outfitsCollectionView.reloadData()
+//        outfitsCollectionView.reloadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        navigationItem.title = "Liked Outfits"
-        self.view.backgroundColor = UIColor.white
-        
-        // search bar
-        searchBar.backgroundColor = .white
-        searchBar.backgroundImage = UIImage()
-        searchBar.translatesAutoresizingMaskIntoConstraints = false
-        searchBar.placeholder = "Search liked outfits by tags"
-        searchBar.searchTextField.backgroundColor = UIColor(red: 0.945, green: 0.945, blue: 0.949, alpha: 1)
-        searchBar.searchTextField.textColor = .black
-        searchBar.searchTextField.font = .systemFont(ofSize: 14)
-        searchBar.searchTextField.clearButtonMode = .never
-        searchBar.layer.cornerRadius = 15
-        searchBar.layer.masksToBounds = true
-        view.addSubview(searchBar)
-        
-        // filter
-        filters = [filter1,filter1,filter1,filter1,filter1,filter1,filter1]
-        let filterLayout = UICollectionViewFlowLayout()
-        filterLayout.scrollDirection = .horizontal
-        filterLayout.minimumInteritemSpacing = padding
-        filterLayout.minimumLineSpacing = padding
+//
+//        // filter
+//        filters = [filter1,filter1,filter1,filter1,filter1,filter1,filter1]
+//        let filterLayout = UICollectionViewFlowLayout()
+//        filterLayout.scrollDirection = .horizontal
+//        filterLayout.minimumInteritemSpacing = padding
+//        filterLayout.minimumLineSpacing = padding
 
-        filterCollectionView = UICollectionView(frame: .zero, collectionViewLayout: filterLayout)
-        filterCollectionView.register(FilterCollectionViewCell.self, forCellWithReuseIdentifier: filterCellReuseIdentifier)
-        filterCollectionView.dataSource = self
-        filterCollectionView.delegate = self
-        filterCollectionView.translatesAutoresizingMaskIntoConstraints = false
-        filterCollectionView.backgroundColor = .white
-        filterCollectionView.showsVerticalScrollIndicator = false
-        filterCollectionView.showsHorizontalScrollIndicator = false
-        view.addSubview(filterCollectionView)
+//        filterCollectionView = UICollectionView(frame: .zero, collectionViewLayout: filterLayout)
+//        filterCollectionView.register(FilterCollectionViewCell.self, forCellWithReuseIdentifier: filterCellReuseIdentifier)
+//        filterCollectionView.dataSource = self
+//        filterCollectionView.delegate = self
+//        filterCollectionView.translatesAutoresizingMaskIntoConstraints = false
+//        filterCollectionView.backgroundColor = .white
+//        filterCollectionView.showsVerticalScrollIndicator = false
+//        filterCollectionView.showsHorizontalScrollIndicator = false
+//        view.addSubview(filterCollectionView)
 
         // outfits
         // set up outfits

@@ -203,13 +203,13 @@ class WeatherViewController: UIViewController, UICollectionViewDelegate {
     }
     
     override func viewDidLoad() {
-        getData()
-        getCurrent()
-        do {
-            sleep(1)
-        }
-        getHourly()
-        super.viewDidLoad()
+//        getData()
+//        getCurrent()
+//        do {
+//            sleep(1)
+//        }
+//        getHourly()
+//        super.viewDidLoad()
         
         // SET USER DEFAULTS FOR WHOLE APP HERE?
         let defaults = UserDefaults.standard

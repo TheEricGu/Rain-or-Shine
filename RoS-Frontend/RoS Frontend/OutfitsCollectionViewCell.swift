@@ -68,6 +68,10 @@ class OutfitsCollectionViewCell: UICollectionViewCell {
 //        weatherTags.text = ""
 //        for tag in outfit.weatherTags{
 //            weatherTags.text! += "#" + tag + " "
+//        let range = 0...4
+//        if String(outfit.imageName[range]) == "data" {
+//            
+//        }
         guard let imageData = try? Data(contentsOf: URL(string: outfit.imageName)!) else {
                         return
                     }
