@@ -33,7 +33,6 @@ class WeatherViewController: UIViewController, UICollectionViewDelegate {
     var data: [WeatherData] = []
     
     // set up outfits
-    let outfit1 = Outfit(imageName: "clothes1.jpeg", weatherTags: ["winter", "cloudy"], didLike: false, userPosted: false)
     var outfits: [Outfit] = []
     var realOutfits: [RealOutfit] = []
     
@@ -62,7 +61,7 @@ class WeatherViewController: UIViewController, UICollectionViewDelegate {
     }
     func getOutfits(weather: String, temperatureWord: String) {
         self.outfits = []
-        OutfitsManager.getWeatherOutfits(gender: "female", season: "winter", weather: weather, temperatureWord: temperatureWord) { weatherOutfitData in
+        OutfitsManager.getWeatherOutfits(gender: UserDefaults.standard.string(forKey: "Gender")!, season: "winter", weather: weather, temperatureWord: temperatureWord) { weatherOutfitData in
             for realOutfit in weatherOutfitData {
                 print(realOutfit.url)
                 let newOutfit : Outfit = Outfit(imageName: realOutfit.url, weatherTags: [realOutfit.gender, realOutfit.season, realOutfit.weather, realOutfit.temp], didLike: false, userPosted: false)
@@ -216,8 +215,10 @@ class WeatherViewController: UIViewController, UICollectionViewDelegate {
         let defaults = UserDefaults.standard
         defaults.set("Mathew Scullin", forKey: "Name")
         defaults.set("female", forKey: "Gender")
-        var likedArray: [Outfit] = []
+        let likedArray: [Outfit] = []
         defaults.setStructArray(likedArray, forKey: "Liked outfits")
+        let postedArray: [Outfit] = []
+        defaults.setStructArray(postedArray, forKey: "Posted outfits")
         defaults.set("Ithaca, NY", forKey: "Location")
         // defaults.string(forKey: "Gender") THIS IS HOW YOU ACCESS USER DEFAULTS
         

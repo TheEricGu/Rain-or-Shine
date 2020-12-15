@@ -239,6 +239,13 @@ class PostingViewController: UIViewController {
         }
         print(gender + season + weather + temperatureWord)
         OutfitsManager.postOutfit(gender: gender, season: season, weather: weather, temperatureWord: temperatureWord, image: image)
+        let outfit = Outfit(imageName: "https://cs1998-rainorshine.s3-us-east-2.amazonaws.com/DB1DFLBHMJ4IF36S.jpg", weatherTags: ["test"], didLike: false, userPosted: true)
+        let postedArray = UserDefaults.standard.structArrayData(Outfit.self, forKey: "PostedOutfits")
+        var newArray: [Outfit] = []
+        newArray = postedArray
+        newArray.append(outfit)
+        UserDefaults.standard.setStructArray(newArray, forKey: "PostedOutfits")
+        print(UserDefaults.standard.structArrayData(Outfit.self, forKey: "PostedOutfits"))
         dismiss(animated: true, completion: nil)
     }
 }
