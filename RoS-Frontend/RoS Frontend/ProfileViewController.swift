@@ -125,7 +125,7 @@ class ProfileViewController: UIViewController {
         
         // outfits
         outfits = UserDefaults.standard.structArrayData(Outfit.self, forKey: "PostedOutfits")
-        print(outfits)
+//        print(outfits)
         let outfitsLayout = UICollectionViewFlowLayout()
         outfitsLayout.scrollDirection = .vertical
         outfitsLayout.minimumInteritemSpacing = padding

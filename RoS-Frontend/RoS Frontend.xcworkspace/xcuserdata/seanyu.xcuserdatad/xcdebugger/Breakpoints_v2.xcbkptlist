@@ -142,8 +142,8 @@
             filePath = "RoS Frontend/WeatherViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "66"
-            endingLineNumber = "66"
+            startingLineNumber = "67"
+            endingLineNumber = "67"
             landmarkName = "getOutfits(weather:temperatureWord:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -462,8 +462,8 @@
             filePath = "RoS Frontend/WeatherViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "67"
-            endingLineNumber = "67"
+            startingLineNumber = "68"
+            endingLineNumber = "68"
             landmarkName = "getOutfits(weather:temperatureWord:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -478,8 +478,8 @@
             filePath = "RoS Frontend/WeatherViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "68"
-            endingLineNumber = "68"
+            startingLineNumber = "69"
+            endingLineNumber = "69"
             landmarkName = "getOutfits(weather:temperatureWord:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -494,8 +494,8 @@
             filePath = "RoS Frontend/WeatherViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "65"
-            endingLineNumber = "65"
+            startingLineNumber = "66"
+            endingLineNumber = "66"
             landmarkName = "getOutfits(weather:temperatureWord:)"
             landmarkType = "7">
             <Locations>
@@ -527,6 +527,70 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "65"
                   endingLineNumber = "65"
+                  offsetFromSymbolStart = "266">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "C948ADF1-1B4D-41D5-8E47-BE08BBE0174D"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "RoS Frontend/WeatherViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "64"
+            endingLineNumber = "64"
+            landmarkName = "getOutfits(weather:temperatureWord:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E08601C1-273A-46AD-9D9D-FFB6B8171CB4"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "RoS Frontend/WeatherViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "65"
+            endingLineNumber = "65"
+            landmarkName = "getOutfits(weather:temperatureWord:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "E08601C1-273A-46AD-9D9D-FFB6B8171CB4 - 427b5564e1c011cd"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "RoS_Frontend.WeatherViewController.getOutfits(weather: Swift.String, temperatureWord: Swift.String) -&gt; ()"
+                  moduleName = "RoS Frontend"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/seanyu/Desktop/Rain-or-Shine/RoS-Frontend/RoS%20Frontend/WeatherViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "65"
+                  endingLineNumber = "65"
+                  offsetFromSymbolStart = "889">
+               </Location>
+               <Location
+                  uuid = "E08601C1-273A-46AD-9D9D-FFB6B8171CB4 - befd8a61b3665c57"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Array&lt;RoS_Frontend.RealOutfit&gt;) -&gt; () in RoS_Frontend.WeatherViewController.getOutfits(weather: Swift.String, temperatureWord: Swift.String) -&gt; ()"
+                  moduleName = "RoS Frontend"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/seanyu/Desktop/Rain-or-Shine/RoS-Frontend/RoS%20Frontend/WeatherViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "66"
+                  endingLineNumber = "66"
                   offsetFromSymbolStart = "266">
                </Location>
             </Locations>

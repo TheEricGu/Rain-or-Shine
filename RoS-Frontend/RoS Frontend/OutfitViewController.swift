@@ -42,10 +42,24 @@ class OutfitViewController: UIViewController {
             rightBarButton.tintColor = UIColor(red: 0.04, green: 0.492, blue: 0.746, alpha: 1)
         }
         
-        guard let imageData = try? Data(contentsOf: URL(string: outfit.imageName)!) else {
-                        return
-                    }
-        outfitImageView.image = UIImage(data: imageData)
+        // kingfisher stuff for later
+        // let photoURL = URL(string: outfit.imageName)
+        // this downloads the image asynchronously if it's not cached yet
+        // outfitImageView.kf.setImage(with: photoURL)
+        let str = outfit.imageName
+        print(String(str.prefix(4)))
+        if String(str.prefix(4)) == "data" {
+//            print("suff")
+//            print(String(str.suffix(from: str.index(str.startIndex, offsetBy: 4))))
+            let imageData : Data! = Data(base64Encoded: String(str.suffix(from: str.index(str.startIndex, offsetBy: 4))), options: .ignoreUnknownCharacters)
+            outfitImageView.image = UIImage(data: imageData)
+        }
+        else {
+            guard let imageData = try? Data(contentsOf: URL(string: outfit.imageName)!) else {
+                            return
+                        }
+            outfitImageView.image = UIImage(data: imageData)
+        }
         outfitImageView.translatesAutoresizingMaskIntoConstraints = false
         outfitImageView.contentMode = .scaleAspectFill
         outfitImageView.layer.masksToBounds = true
