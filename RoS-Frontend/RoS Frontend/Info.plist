@@ -53,6 +53,12 @@
 	</array>
 	<key>NSCameraUsageDescription</key>
 	<string>&quot;Rain or Shine&quot; would like to access your camera</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>&quot;Rain or Shine&quot; woud like to use your location</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>&quot;Rain or Shine&quot; wants to know your current location</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>&quot;Rain or Shine&quot; would like to use your location</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>&quot;Rain or Shine&quot; would like to access your photo</string>
 	<key>UISupportedInterfaceOrientations~ipad</key>

@@ -87,6 +87,7 @@ class ProfileViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.headerView.layer.sublayers?.popLast()
         
         navigationItem.title = UserDefaults.standard.string(forKey: "Name")
 

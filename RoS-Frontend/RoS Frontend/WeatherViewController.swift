@@ -6,8 +6,9 @@
 //
 
 import UIKit
+import CoreLocation
 
-class WeatherViewController: UIViewController, UICollectionViewDelegate {
+class WeatherViewController: UIViewController, UICollectionViewDelegate, CLLocationManagerDelegate {
     
     private let headerView = UIView()
     var weatherCollectionView: UICollectionView!
@@ -31,13 +32,28 @@ class WeatherViewController: UIViewController, UICollectionViewDelegate {
     var rainChance: String = "Rain "
     var windSpeed: String = "Wind "
     var data: [WeatherData] = []
-    
+    var locManager = CLLocationManager()
     // set up outfits
     var outfits: [Outfit] = []
     var realOutfits: [RealOutfit] = []
     
+    var lat : Float = -6969.0
+    var long : Float = 69
+    
     func getHourly() {
-        OpenWeatherManager.getHourly { hourlyData in
+        var lat:Float = -6969.0
+        var long:Float = -69.0
+        print("location " + UserDefaults.standard.string(forKey: "Location")!)
+        if UserDefaults.standard.string(forKey: "Location")! == "Manila" {
+            lat = 14.5995
+            long = 120.9842
+        }
+        else if UserDefaults.standard.string(forKey: "Location")! == "Current" {
+            lat = Float(self.lat)
+            long = Float(self.long)
+        }
+        
+        OpenWeatherManager.getHourly(lat: lat, long: long) { hourlyData in
             let sliced = hourlyData[0...12]
             let data = Array(sliced)
             self.hourly = data
@@ -68,6 +84,9 @@ class WeatherViewController: UIViewController, UICollectionViewDelegate {
                 print(realOutfit.url)
                 let newOutfit : Outfit = Outfit(imageName: realOutfit.url, weatherTags: [realOutfit.gender, realOutfit.season, realOutfit.weather, realOutfit.temp], didLike: false, userPosted: false)
                 self.outfits.append(newOutfit)
+                if self.outfits == [] {
+                    self.outfits = [Outfit(imageName: "https://cs1998-rainorshine.s3-us-east-2.amazonaws.com/SDRHL6H7W06KIFOG.jpg", weatherTags: ["empty"], didLike: false, userPosted: false)]
+                }
                 DispatchQueue.main.async {
                     self.outfitsCollectionView.reloadData()
             }
@@ -76,7 +95,18 @@ class WeatherViewController: UIViewController, UICollectionViewDelegate {
     }
     
     func getCurrent() {
-        OpenWeatherManager.getCurrent { currentData in
+        var lat:Float = -6969.0
+        var long:Float = -69.0
+        print("location " + UserDefaults.standard.string(forKey: "Location")!)
+        if UserDefaults.standard.string(forKey: "Location")! == "Manila" {
+            lat = 14.5995
+            long = 120.9842
+        }
+        else if UserDefaults.standard.string(forKey: "Location")! == "Current" {
+            lat = Float(self.lat)
+            long = Float(self.long)
+        }
+        OpenWeatherManager.getCurrent(lat:lat, long:long) { currentData in
             self.current = [currentData]
             self.iconName = currentData.weather[0].icon
             self.iconDescriptionText = currentData.weather[0].description
@@ -196,7 +226,18 @@ class WeatherViewController: UIViewController, UICollectionViewDelegate {
     }
     
     func getData() {
-        OpenWeatherManager.getData { data in
+        var lat:Float = -6969.0
+        var long:Float = -69.0
+        print("location " + UserDefaults.standard.string(forKey: "Location")!)
+        if UserDefaults.standard.string(forKey: "Location")! == "Manila" {
+            lat = 14.5995
+            long = 120.9842
+        }
+        else if UserDefaults.standard.string(forKey: "Location")! == "Current" {
+            lat = Float(self.lat)
+            long = Float(self.long)
+        }
+        OpenWeatherManager.getData(lat:lat, long:long) { data in
             self.data = [data]
             DispatchQueue.main.async {
                 self.weatherCollectionView.reloadData()
@@ -211,7 +252,7 @@ class WeatherViewController: UIViewController, UICollectionViewDelegate {
 //            sleep(1)
 //        }
 //        getHourly()
-//        super.viewDidLoad()
+        super.viewDidLoad()
         
         // SET USER DEFAULTS FOR WHOLE APP HERE?
         let defaults = UserDefaults.standard
@@ -221,8 +262,25 @@ class WeatherViewController: UIViewController, UICollectionViewDelegate {
         defaults.setStructArray(likedArray, forKey: "Liked outfits")
         let postedArray: [Outfit] = []
         defaults.setStructArray(postedArray, forKey: "Posted outfits")
-        defaults.set("Ithaca, NY", forKey: "Location")
+        defaults.set("Ithaca", forKey: "Location")
         // defaults.string(forKey: "Gender") THIS IS HOW YOU ACCESS USER DEFAULTS
+        
+        self.locManager.requestAlwaysAuthorization()
+        self.locManager.requestWhenInUseAuthorization()
+        if CLLocationManager.locationServicesEnabled() {
+            locManager.delegate = self
+            locManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+            locManager.startUpdatingLocation()
+        }
+        func locManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+            let location = locations.last! as CLLocation
+            self.lat = Float(location.coordinate.latitude)
+            self.long = Float(location.coordinate.longitude)
+            print("latlong")
+            print(self.lat)
+            print(self.long)
+        }
+        
         
         self.view.backgroundColor = UIColor.white
         navigationItem.title = "Weather" // TODO: Change to user's location
@@ -243,8 +301,9 @@ class WeatherViewController: UIViewController, UICollectionViewDelegate {
         weatherCollectionView.showsHorizontalScrollIndicator = false
         view.addSubview(weatherCollectionView)
         
+        let outfit1 = Outfit(imageName: "https://cs1998-rainorshine.s3-us-east-2.amazonaws.com/SDRHL6H7W06KIFOG.jpg", weatherTags: ["troll"], didLike: false, userPosted: false)
         // outfits
-//        outfits = [outfit1,outfit1,outfit1,outfit1,outfit1,outfit1,outfit1,outfit1,outfit1,outfit1]
+        outfits = [outfit1,outfit1]
         let outfitsLayout = UICollectionViewFlowLayout()
         outfitsLayout.scrollDirection = .vertical
         outfitsLayout.minimumInteritemSpacing = padding
@@ -274,25 +333,25 @@ class WeatherViewController: UIViewController, UICollectionViewDelegate {
         getData()
         getCurrent()
         do {
-            sleep(1)
+            usleep(300000)
         }
         getHourly()
         
-        let outfitsLayout = UICollectionViewFlowLayout()
-        outfitsLayout.scrollDirection = .vertical
-        outfitsLayout.minimumInteritemSpacing = padding
-        outfitsLayout.minimumLineSpacing = padding
-        
-        outfitsCollectionView = UICollectionView(frame: .zero, collectionViewLayout: outfitsLayout)
-        outfitsCollectionView.register(OutfitsCollectionViewCell.self, forCellWithReuseIdentifier: outfitsCellReuseIdentifier)
-        outfitsCollectionView.dataSource = self
-        outfitsCollectionView.delegate = self
-        outfitsCollectionView.translatesAutoresizingMaskIntoConstraints = false
-        outfitsCollectionView.backgroundColor = .white
-        outfitsCollectionView.showsHorizontalScrollIndicator = false
-        outfitsCollectionView.showsVerticalScrollIndicator = false
-
-        view.addSubview(outfitsCollectionView)
+//        let outfitsLayout = UICollectionViewFlowLayout()
+//        outfitsLayout.scrollDirection = .vertical
+//        outfitsLayout.minimumInteritemSpacing = padding
+//        outfitsLayout.minimumLineSpacing = padding
+//
+//        outfitsCollectionView = UICollectionView(frame: .zero, collectionViewLayout: outfitsLayout)
+//        outfitsCollectionView.register(OutfitsCollectionViewCell.self, forCellWithReuseIdentifier: outfitsCellReuseIdentifier)
+//        outfitsCollectionView.dataSource = self
+//        outfitsCollectionView.delegate = self
+//        outfitsCollectionView.translatesAutoresizingMaskIntoConstraints = false
+//        outfitsCollectionView.backgroundColor = .white
+//        outfitsCollectionView.showsHorizontalScrollIndicator = false
+//        outfitsCollectionView.showsVerticalScrollIndicator = false
+//
+//        view.addSubview(outfitsCollectionView)
         
         // for section header
         outfitsCollectionView.register(UICollectionReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: self.headerID)

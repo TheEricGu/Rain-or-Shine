@@ -60,3 +60,4 @@ struct RealOutfit: Codable {
     let temp: String
     let url: String
 }
+
