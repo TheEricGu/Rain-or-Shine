@@ -45,10 +45,4 @@ struct Outfit: Codable, Equatable {
     // var image: UIImage!
 }
 
-//struct postedOutfit: Codable, Equatable {
-//    var imageName: String
-//    var weatherTags: [String]
-//    var didLike: Bool
-//    var userPosted: Bool
-//    var image: UIImage!
-//}
+

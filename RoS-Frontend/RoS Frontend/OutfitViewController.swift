@@ -195,7 +195,7 @@ class OutfitViewController: UIViewController {
     @objc func toggleLike() {
         // if liking outfit
         if !outfit.didLike {
-            self.outfit.didLike = true
+            outfit.didLike = true
             let likedArray = UserDefaults.standard.structArrayData(Outfit.self, forKey: "LikedOutfits")
             
             var newArray: [Outfit] = []
@@ -207,10 +207,10 @@ class OutfitViewController: UIViewController {
         }
         
         // if unliking outfit
-        else {
-            self.outfit.didLike = false
+        else if outfit.didLike{
+            outfit.didLike = false
             var likedArray = UserDefaults.standard.structArrayData(Outfit.self, forKey: "LikedOutfits")
-            likedArray.removeAll { $0 == self.outfit }
+            likedArray.removeAll { $0.imageName == outfit.imageName }
             UserDefaults.standard.setStructArray(likedArray, forKey: "LikedOutfits")
             print(UserDefaults.standard.structArrayData(Outfit.self, forKey: "LikedOutfits"))
         }

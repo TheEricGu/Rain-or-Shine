@@ -11,7 +11,7 @@ import UIKit
 
 class LikedViewController: UIViewController, UICollectionViewDelegate {
     private let searchBar = UISearchBar()
-    var filterCollectionView: UICollectionView!
+   // var filterCollectionView: UICollectionView!
     var outfitsCollectionView: UICollectionView!
    
     let filterCellReuseIdentifier = "filterCellReuseIdentifier"
@@ -54,15 +54,15 @@ class LikedViewController: UIViewController, UICollectionViewDelegate {
         filterLayout.minimumInteritemSpacing = padding
         filterLayout.minimumLineSpacing = padding
 
-        filterCollectionView = UICollectionView(frame: .zero, collectionViewLayout: filterLayout)
-        filterCollectionView.register(FilterCollectionViewCell.self, forCellWithReuseIdentifier: filterCellReuseIdentifier)
-        filterCollectionView.dataSource = self
-        filterCollectionView.delegate = self
-        filterCollectionView.translatesAutoresizingMaskIntoConstraints = false
-        filterCollectionView.backgroundColor = .white
-        filterCollectionView.showsVerticalScrollIndicator = false
-        filterCollectionView.showsHorizontalScrollIndicator = false
-        view.addSubview(filterCollectionView)
+//        filterCollectionView = UICollectionView(frame: .zero, collectionViewLayout: filterLayout)
+//        filterCollectionView.register(FilterCollectionViewCell.self, forCellWithReuseIdentifier: filterCellReuseIdentifier)
+//        filterCollectionView.dataSource = self
+//        filterCollectionView.delegate = self
+//        filterCollectionView.translatesAutoresizingMaskIntoConstraints = false
+//        filterCollectionView.backgroundColor = .white
+//        filterCollectionView.showsVerticalScrollIndicator = false
+//        filterCollectionView.showsHorizontalScrollIndicator = false
+//        view.addSubview(filterCollectionView)
 
         // outfits
         // set up outfits
@@ -141,17 +141,17 @@ class LikedViewController: UIViewController, UICollectionViewDelegate {
             searchBar.heightAnchor.constraint(equalToConstant: 40)
         ])
        
-        // filter collection view
-        NSLayoutConstraint.activate([
-            filterCollectionView.topAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: padding),
-            filterCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
-            filterCollectionView.heightAnchor.constraint(equalToConstant: 50),
-            filterCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding)
-        ])
+//        // filter collection view
+//        NSLayoutConstraint.activate([
+//            filterCollectionView.topAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: padding),
+//            filterCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
+//            filterCollectionView.heightAnchor.constraint(equalToConstant: 50),
+//            filterCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding)
+//        ])
        
         // outfits collection view
         NSLayoutConstraint.activate([
-            outfitsCollectionView.topAnchor.constraint(equalTo: filterCollectionView.bottomAnchor, constant: padding),
+            outfitsCollectionView.topAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: padding),
             outfitsCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
             outfitsCollectionView.heightAnchor.constraint(equalToConstant: 650),
             outfitsCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
@@ -162,25 +162,25 @@ class LikedViewController: UIViewController, UICollectionViewDelegate {
 
 extension LikedViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if collectionView == self.filterCollectionView {
-            return filters.count
-        }
-        else {
+//        if collectionView == self.filterCollectionView {
+//            return filters.count
+//        }
+ //       else {
             return outfits.count
-        }
+ //       }
     }
    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if collectionView == self.filterCollectionView {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: filterCellReuseIdentifier, for: indexPath) as! FilterCollectionViewCell
-            cell.configure(filter: filters[indexPath.item])
-            return cell
-        }
-        else {
+//        if collectionView == self.filterCollectionView {
+//            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: filterCellReuseIdentifier, for: indexPath) as! FilterCollectionViewCell
+//            cell.configure(filter: filters[indexPath.item])
+//            return cell
+//        }
+//        else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: outfitsCellReuseIdentifier, for: indexPath) as! OutfitsCollectionViewCell
             cell.configure(outfit: outfits[indexPath.item])
             return cell
-       }
+       //}
     }
 }
 
@@ -188,14 +188,14 @@ extension LikedViewController: UICollectionViewDataSource {
 extension LikedViewController: UICollectionViewDelegateFlowLayout {
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        if collectionView == self.filterCollectionView {
-            let size = (collectionView.frame.width - 2 * padding) / 6.0
-            return CGSize(width: size, height: 50)
-        }
-        else {
+//        if collectionView == self.filterCollectionView {
+//            let size = (collectionView.frame.width - 2 * padding) / 6.0
+//            return CGSize(width: size, height: 50)
+//        }
+//        else {
             let size = (collectionView.frame.width - 2 * padding) / 3.0
             return CGSize(width: size, height: 200)
-        }
+        //}
 }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -205,20 +205,20 @@ extension LikedViewController: UICollectionViewDelegateFlowLayout {
             navigationController?.pushViewController(outfitViewController, animated: true)
         }
        
-        // TODO: FILTER TAPPING SHIT AND SORTING
-        if collectionView == self.filterCollectionView {
-            let filter = filters[indexPath.row]
-            if !filter.didSelect {
-                filters[indexPath.row].didSelect = true
-                filtersPressed.append(filters[indexPath.row])
-                print(filtersPressed)
-                }
-            else {
-                filters[indexPath.row].didSelect = false
-                let remove = filters[indexPath.row]
-                filtersPressed.removeAll { $0.filterName == remove.filterName }
-            }
-            filterCollectionView.reloadData()
-        }
+       // TODO: FILTER TAPPING SHIT AND SORTING
+//        if collectionView == self.filterCollectionView {
+//            let filter = filters[indexPath.row]
+//            if !filter.didSelect {
+//                filters[indexPath.row].didSelect = true
+//                filtersPressed.append(filters[indexPath.row])
+//                print(filtersPressed)
+//                }
+//            else {
+//                filters[indexPath.row].didSelect = false
+//                let remove = filters[indexPath.row]
+//                filtersPressed.removeAll { $0.filterName == remove.filterName }
+//            }
+//            filterCollectionView.reloadData()
+//        }
     }
 }
