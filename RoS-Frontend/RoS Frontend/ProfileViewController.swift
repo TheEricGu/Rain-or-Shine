@@ -23,7 +23,8 @@ class ProfileViewController: UIViewController {
     var outfits: [Outfit] = []
 
     override func viewDidLoad() {
-        self.view.backgroundColor = UIColor.white
+        // self.view.backgroundColor = UIColor.white
+        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "clouds.jpg")!)
         super.viewDidLoad()
         
         // nav bar
@@ -74,7 +75,7 @@ class ProfileViewController: UIViewController {
         outfitsCollectionView.dataSource = self
         outfitsCollectionView.delegate = self
         outfitsCollectionView.translatesAutoresizingMaskIntoConstraints = false
-        outfitsCollectionView.backgroundColor = .white
+        outfitsCollectionView.backgroundColor = UIColor.clear
         outfitsCollectionView.showsVerticalScrollIndicator = false
         view.addSubview(outfitsCollectionView)
         
@@ -137,7 +138,7 @@ class ProfileViewController: UIViewController {
         outfitsCollectionView.dataSource = self
         outfitsCollectionView.delegate = self
         outfitsCollectionView.translatesAutoresizingMaskIntoConstraints = false
-        outfitsCollectionView.backgroundColor = .white
+        outfitsCollectionView.backgroundColor = UIColor.clear
         outfitsCollectionView.showsVerticalScrollIndicator = false
         view.addSubview(outfitsCollectionView)
         

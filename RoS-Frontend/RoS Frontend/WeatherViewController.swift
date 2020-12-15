@@ -153,7 +153,7 @@ class WeatherViewController: UIViewController, UICollectionViewDelegate, CLLocat
             }
             self.getOutfits(weather: weatherWord, temperatureWord: temperatureWord)
             DispatchQueue.main.async {
-                self.headerView.backgroundColor = .white
+                self.headerView.backgroundColor = UIColor.clear
                 let backgroundLayer1 = CAShapeLayer()
                 backgroundLayer1.path = UIBezierPath(roundedRect: CGRect(x: 12, y: 12, width: self.headerView.frame.maxX - 24, height: self.headerView.frame.maxY/2), cornerRadius: 20).cgPath
                 backgroundLayer1.fillColor = UIColor(red: 0.608, green: 0.813, blue: 0.929, alpha: 1).cgColor
@@ -253,6 +253,7 @@ class WeatherViewController: UIViewController, UICollectionViewDelegate, CLLocat
 //        }
 //        getHourly()
         super.viewDidLoad()
+        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "clouds.jpg")!)
         
         // SET USER DEFAULTS FOR WHOLE APP HERE?
         let defaults = UserDefaults.standard
@@ -282,7 +283,7 @@ class WeatherViewController: UIViewController, UICollectionViewDelegate, CLLocat
         }
         
         
-        self.view.backgroundColor = UIColor.white
+//        self.view.backgroundColor = UIColor.white
         navigationItem.title = "Weather" // TODO: Change to user's location
         headerView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(headerView)
@@ -297,7 +298,7 @@ class WeatherViewController: UIViewController, UICollectionViewDelegate, CLLocat
         weatherCollectionView.dataSource = self
         weatherCollectionView.delegate = self
         weatherCollectionView.translatesAutoresizingMaskIntoConstraints = false
-        weatherCollectionView.backgroundColor = .white
+        weatherCollectionView.backgroundColor = UIColor.clear
         weatherCollectionView.showsHorizontalScrollIndicator = false
         view.addSubview(weatherCollectionView)
         
@@ -314,7 +315,7 @@ class WeatherViewController: UIViewController, UICollectionViewDelegate, CLLocat
         outfitsCollectionView.dataSource = self
         outfitsCollectionView.delegate = self
         outfitsCollectionView.translatesAutoresizingMaskIntoConstraints = false
-        outfitsCollectionView.backgroundColor = .white
+        outfitsCollectionView.backgroundColor = UIColor.clear
         outfitsCollectionView.showsHorizontalScrollIndicator = false
         outfitsCollectionView.showsVerticalScrollIndicator = false
 
