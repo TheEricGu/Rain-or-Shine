@@ -19,7 +19,7 @@ class ProfileViewController: UIViewController {
     
     // TODO: USER POSTED OUTFITS ONLY??
     // set up outfits
-    let outfit1 = Outfit(imageName: "clothes1.jpeg", weatherTags: ["winter", "cloudy"], didLike: false, userPosted: true)
+    
     var outfits: [Outfit] = []
 
     override func viewDidLoad() {
@@ -63,12 +63,73 @@ class ProfileViewController: UIViewController {
         view.addSubview(headerView)
         
         // outfits
-        outfits = [outfit1,outfit1,outfit1,outfit1,outfit1,outfit1,outfit1,outfit1,outfit1,outfit1]
+        outfits = UserDefaults.standard.structArrayData(Outfit.self, forKey: "PostedOutfits")
         let outfitsLayout = UICollectionViewFlowLayout()
         outfitsLayout.scrollDirection = .vertical
         outfitsLayout.minimumInteritemSpacing = padding
         outfitsLayout.minimumLineSpacing = padding
- 
+        
+        outfitsCollectionView = UICollectionView(frame: .zero, collectionViewLayout: outfitsLayout)
+        outfitsCollectionView.register(OutfitsCollectionViewCell.self, forCellWithReuseIdentifier: outfitsCellReuseIdentifier)
+        outfitsCollectionView.dataSource = self
+        outfitsCollectionView.delegate = self
+        outfitsCollectionView.translatesAutoresizingMaskIntoConstraints = false
+        outfitsCollectionView.backgroundColor = .white
+        outfitsCollectionView.showsVerticalScrollIndicator = false
+        view.addSubview(outfitsCollectionView)
+        
+        outfitsCollectionView.register(UICollectionReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: self.headerID)
+        let flow = outfitsCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
+        flow.headerReferenceSize = CGSize(width: 30,height: 30)
+        
+        setupConstraints()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        navigationItem.title = UserDefaults.standard.string(forKey: "Name")
+
+        let rightBarButton = UIBarButtonItem(title: "Add Post", style: UIBarButtonItem.Style.plain, target: self, action: #selector(ProfileViewController.myRightSideBarButtonItemTapped(_:)))
+                self.navigationItem.rightBarButtonItem = rightBarButton
+        rightBarButton.image = UIImage(named: "addicon.png")
+        rightBarButton.tintColor = UIColor(red: 0.04, green: 0.492, blue: 0.746, alpha: 1)
+        
+        let leftBarButton = UIBarButtonItem(title: "Settings", style: UIBarButtonItem.Style.done, target: self, action: #selector(ProfileViewController.myLeftSideBarButtonItemTapped(_:)))
+                self.navigationItem.leftBarButtonItem = leftBarButton
+        leftBarButton.image = UIImage(named: "settings.png")
+        leftBarButton.tintColor = UIColor(red: 0.04, green: 0.492, blue: 0.746, alpha: 1)
+        
+        // header
+        let iconLayer = CALayer()
+        let iconImage = UIImage(named: "profileicon.png")?.cgImage
+        iconLayer.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
+        iconLayer.contents = iconImage
+        iconLayer.position = CGPoint(x: 212, y: 75)
+        self.headerView.layer.addSublayer(iconLayer)
+        
+        let locLabelLayer = CATextLayer()
+        let iconLabelAttributes: [NSAttributedString.Key: Any] = [
+            .font: UIFont.systemFont(ofSize: 16.0, weight: .semibold),
+            .foregroundColor: UIColor(red: 0.04, green: 0.492, blue: 0.746, alpha: 1)
+        ]
+        locLabelLayer.string = NSAttributedString(string: UserDefaults.standard.string(forKey: "Location")!)
+        locLabelLayer.alignmentMode = .center
+        locLabelLayer.alignmentMode = CATextLayerAlignmentMode.center;
+        locLabelLayer.frame = CGRect(x: 0, y: 0, width: 350, height: 50)
+        locLabelLayer.position = CGPoint(x: 212, y: 160)
+        self.headerView.layer.addSublayer(locLabelLayer)
+        
+        headerView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(headerView)
+        
+        // outfits
+        outfits = UserDefaults.standard.structArrayData(Outfit.self, forKey: "PostedOutfits")
+        print(outfits)
+        let outfitsLayout = UICollectionViewFlowLayout()
+        outfitsLayout.scrollDirection = .vertical
+        outfitsLayout.minimumInteritemSpacing = padding
+        outfitsLayout.minimumLineSpacing = padding
         
         outfitsCollectionView = UICollectionView(frame: .zero, collectionViewLayout: outfitsLayout)
         outfitsCollectionView.register(OutfitsCollectionViewCell.self, forCellWithReuseIdentifier: outfitsCellReuseIdentifier)

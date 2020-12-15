@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 extension UserDefaults {
     open func setStruct<T: Codable>(_ value: T?, forKey defaultName: String){
@@ -40,5 +41,14 @@ struct Outfit: Codable, Equatable {
     var imageName: String
     var weatherTags: [String]
     var didLike: Bool
-    var userPosted: Bool 
+    var userPosted: Bool
+    // var image: UIImage!
 }
+
+//struct postedOutfit: Codable, Equatable {
+//    var imageName: String
+//    var weatherTags: [String]
+//    var didLike: Bool
+//    var userPosted: Bool
+//    var image: UIImage!
+//}

@@ -33,7 +33,6 @@ class WeatherViewController: UIViewController, UICollectionViewDelegate {
     var data: [WeatherData] = []
     
     // set up outfits
-    let outfit1 = Outfit(imageName: "clothes1.jpeg", weatherTags: ["winter", "cloudy"], didLike: false, userPosted: false)
     var outfits: [Outfit] = []
     var realOutfits: [RealOutfit] = []
     
@@ -216,8 +215,10 @@ class WeatherViewController: UIViewController, UICollectionViewDelegate {
         let defaults = UserDefaults.standard
         defaults.set("Mathew Scullin", forKey: "Name")
         defaults.set("female", forKey: "Gender")
-        var likedArray: [Outfit] = []
+        let likedArray: [Outfit] = []
         defaults.setStructArray(likedArray, forKey: "Liked outfits")
+        let postedArray: [Outfit] = []
+        defaults.setStructArray(postedArray, forKey: "Posted outfits")
         defaults.set("Ithaca, NY", forKey: "Location")
         // defaults.string(forKey: "Gender") THIS IS HOW YOU ACCESS USER DEFAULTS
         
